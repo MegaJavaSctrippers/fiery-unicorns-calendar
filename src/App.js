@@ -3,9 +3,9 @@ import React from 'react'
 function App() {
   return (
     <div className="App">
-     hey
+      <h2>Hey</h2>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
