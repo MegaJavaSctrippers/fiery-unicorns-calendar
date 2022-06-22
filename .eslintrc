@@ -42,7 +42,8 @@
         {
           "allow": [
             "warn",
-            "error"
+            "error",
+            "log"
           ]
         }
       ],
