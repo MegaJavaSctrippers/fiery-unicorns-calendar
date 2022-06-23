@@ -76,7 +76,7 @@ function SignUp() {
         <div className="col-lg-6 d-flex">
           <form onSubmit={register} className={classNames(style.register)}>
             <h2>Добро пожаловать!</h2>
-            {/* <div className="d-flex align-items-center mb-3">
+            {/* <div className="d-flex align-items-center mb-2">
               <div className={style.logo_box}>
                 <img src={icons.userLogo} alt="" />
               </div>

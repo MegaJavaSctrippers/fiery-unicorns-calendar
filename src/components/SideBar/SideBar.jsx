@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { DatePicker, Space } from 'antd'
 import classNames from 'classnames'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,11 +8,14 @@ import style from './SideBar.module.scss'
 import icons from '../../assets/icons'
 import { setSelectedDate } from '../../redux-toolkit/dateReducer'
 import 'moment/locale/ru'
+import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 
 function SideBar() {
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dispatch = useDispatch()
+
+  const [modal, setModal] = useState(false)
 
   return (
     <div className={style.sidebar}>
@@ -22,10 +25,15 @@ function SideBar() {
       </div>
 
       <div className={style.content}>
-        <button className={style.create_btn} type="button">
+        <button
+          className={style.create_btn}
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
           Создать
         </button>
-
+        <CreateEvent />
         <Space direction="vertical">
           <DatePicker
             open="true"

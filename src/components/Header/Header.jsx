@@ -1,8 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Select, Space } from 'antd'
+import { Select, Space, Popover } from 'antd'
 import moment from 'moment'
-import classNames from 'classnames'
 import icons from '../../assets/icons'
 import {
   setDateType,
@@ -15,6 +14,35 @@ import style from './Header.module.scss'
 const { Option } = Select
 
 function Header() {
+  const content = (
+    <div className={style.search_dropdown}>
+      <div className={style.search_header}>
+        <img src={icons.search} alt="" />
+        <input placeholder="Поиск" />
+        <img src={icons.clear} alt="" />
+      </div>
+
+      <ul className={style.search_menu}>
+        <li>Все</li>
+        <li>
+          <img src={icons.folder} alt="" />
+          Название
+        </li>
+        <li>
+          <img src={icons.clock} alt="" />
+          Дата
+        </li>
+        <li>
+          <img src={icons.profile} alt="" />
+          Сотрудник
+        </li>
+        <li>
+          <img src={icons.job} alt="" />
+          Должность
+        </li>
+      </ul>
+    </div>
+  )
   const dispatch = useDispatch()
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
@@ -62,48 +90,11 @@ function Header() {
       </div>
 
       <div className={style.box}>
-        <div className="dropdown">
-          <div
-            className={classNames(style.search_box, 'dropdown-toggle')}
-            data-bs-toggle="dropdown"
-            id="dropdownSearch"
-            aria-expanded="false"
-          >
+        <Popover placement="bottomRight" content={content} trigger="click">
+          <div className={style.search_box}>
             <img src={icons.search} alt="" />
           </div>
-          <form
-            className={classNames('dropdown-menu', style.search_dropdown)}
-            aria-labelledby="dropdownSearch"
-          >
-            <div>
-              <div className={style.search_header}>
-                <img src={icons.search} alt="" />
-                <input placeholder="Поиск" />
-                <img src={icons.clear} alt="" />
-              </div>
-
-              <ul className={style.search_menu}>
-                <li>Все</li>
-                <li>
-                  <img src={icons.folder} alt="" />
-                  Название
-                </li>
-                <li>
-                  <img src={icons.clock} alt="" />
-                  Дата
-                </li>
-                <li>
-                  <img src={icons.profile} alt="" />
-                  Сотрудник
-                </li>
-                <li>
-                  <img src={icons.job} alt="" />
-                  Должность
-                </li>
-              </ul>
-            </div>
-          </form>
-        </div>
+        </Popover>
         <div className={style.push_box}>
           <img src={icons.push} alt="" />
         </div>

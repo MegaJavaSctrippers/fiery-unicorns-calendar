@@ -1,0 +1,85 @@
+.calendar{
+  background: #fff;
+  margin-top: 24px;
+  margin-left: 24px;
+  
+  .calendar_content{
+    height: calc(100vh - 112px);
+    overflow-y: auto;
+
+    .days, .single_days{
+      width: 14%;
+      padding-left: 16px;
+      height:72px;
+      border-right: 1px solid rgba(35, 35, 35, 0.1);
+      border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+      box-sizing: border-box;
+    }
+    .single_days{
+      width: 93%;
+    }
+    .hours{
+      width: 7%;
+      display: flex;
+      align-items: center;
+      height: 72px;
+      justify-content: center;
+      border-right: 1px solid rgba(35, 35, 35, 0.1);
+      border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+      box-sizing: border-box;
+    }
+
+  }
+  .calendar_header{
+    background: #4B84F4;
+    height: 40px;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    margin-right:12px;
+    
+    .clock_calendar{
+      width: 7%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      border-right: 1px solid rgba(35, 35, 35, 0.1);
+    }
+    .day{
+      border: none !important;
+      padding-left: 16px;
+      
+        h4{
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 14px;
+          font-weight: 400;
+        }
+        span{
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 20px;
+  
+        }
+      }
+    .week{
+      width:14%;
+      padding-left:16px;
+      border-right: 1px solid rgba(35, 35, 35, 0.1);
+      
+      h4{
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 14px;
+        font-weight: 400;
+        
+      }
+      span{
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 20px;
+
+      }
+    }
+  }
+ 
+}

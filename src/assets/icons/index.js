@@ -5,6 +5,7 @@ import arrowLeft from './arrowLeft.svg'
 import arrowRight from './arrowRight.svg'
 import clear from './clear.svg'
 import clock from './clock.svg'
+import clockCalendar from './clock.png'
 import folder from './folder.svg'
 import job from './job.svg'
 import profile from './profile.svg'
@@ -32,6 +33,7 @@ const icons = {
   avatar,
   userLogo,
   redX,
+  clockCalendar,
 }
 
 export default icons

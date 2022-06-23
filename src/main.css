@@ -122,12 +122,24 @@ button{
   border:1px solid red !important;
 }
 .error{
-  font-size: 12px;
+  font-size: 14px !important;
   margin-bottom: 20px;
   color:red !important;
   display: block;
+}
+.ant-popover-arrow{
+  display: none !important;
+}
+.ant-popover{
+  top:33px !important;
+}
+.ant-popover-inner{
+  border-radius: 8px !important;
+}
+.ant-popover-inner-content{
+  padding: 12px 0;
 
-  
+  border-radius:8px !important;
 }
 
 button[disabled=disabled], button:disabled {

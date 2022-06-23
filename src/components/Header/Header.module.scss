@@ -28,64 +28,11 @@
     margin-right: 10px;
   }
 
+  
   .box{
     display: flex;
     align-items: center;
 
-    .search_dropdown{
-      width: 461px;
-    }
-
-    .search_menu {
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      border-bottom: 1px solid rgba(35, 35, 35, 0.1);
-      img{
-        margin-right: 5px;
-      }
-
-      li{
-        list-style-type: none;
-        font-size:14px;
-        display: flex;
-        align-items: floor($number: 0);
-        color: rgba(46, 46, 46, 0.6);
-        cursor:pointer;
-        border-bottom: 1.5px solid transparent;
-        padding-bottom:8px;
-      }
-      li:hover{
-        color:#2E2E2E;
-        border-bottom: 1.5px solid #232323;
-
-      }
-    }
-    .search_header{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding:5px  17px;
-      padding-right: 20px;
-      margin-bottom: 10px;
-
-      img{
-        cursor: pointer;
-      }
-      input{
-        width: 100%;
-        padding: 0 10px;
-        border:none;
-        font-size: 14px;
-
-      }
-      input::placeholder{
-        color: rgba(46, 46, 46, 0.5);
-
-      }
-    }
     .search_box{
       border: 1px solid rgba(46, 46, 46, 0.2);
       border-radius: 8px;
@@ -123,3 +70,60 @@
     }
   }
 }
+
+.search_dropdown{
+  width: 461px;
+  height:308px;
+  border-radius: 8px;
+  .search_menu {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+    img{
+      margin-right: 5px;
+    }
+  
+    li{
+      list-style-type: none;
+      font-size:14px;
+      display: flex;
+      align-items: floor($number: 0);
+      color: rgba(46, 46, 46, 0.6);
+      cursor:pointer;
+      border-bottom: 1.5px solid transparent;
+      padding-bottom:8px;
+    }
+    li:hover{
+      color:#2E2E2E;
+      border-bottom: 1.5px solid #232323;
+  
+    }
+  }
+}
+
+.search_header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding:5px  17px;
+      padding-right: 20px;
+      margin-bottom: 10px;
+
+      img{
+        cursor: pointer;
+      }
+      input{
+        width: 100%;
+        padding: 0 10px;
+        border:none;
+        font-size: 14px;
+
+      }
+      input::placeholder{
+        color: rgba(46, 46, 46, 0.5);
+
+      }
+    }
