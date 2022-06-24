@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { DatePicker, Space } from 'antd'
 import classNames from 'classnames'
 import { useSelector, useDispatch } from 'react-redux'
@@ -15,8 +15,6 @@ function SideBar() {
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dispatch = useDispatch()
 
-  const [modal, setModal] = useState(false)
-
   return (
     <div className={style.sidebar}>
       <div className={style.header}>
@@ -26,10 +24,10 @@ function SideBar() {
 
       <div className={style.content}>
         <button
-          className={style.create_btn}
           type="button"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#create-event"
+          className={style.create_btn}
         >
           Создать
         </button>

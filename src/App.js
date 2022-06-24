@@ -1,9 +1,9 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import './main.css'
 import Homepage from './pages/Homepage/Homepage'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
+import './main.css'
 
 function App() {
   return (

@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
-import moment from 'moment'
 import style from './Calendar.module.scss'
 import icons from '../../assets/icons'
+import CalendarHeader from '../CalendarHeader/CalendarHeader'
+import CalendarItem from '../CalendarItem/CalendarItem'
 
 function CalendarPage() {
   const week = useSelector((state) => state.date.week)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dateType = useSelector((state) => state.date.dateType)
 
-  const [days, setDays] = useState([
+  const [hours] = useState([
     '09:00',
     '10:00',
     '11:00',
@@ -23,33 +24,30 @@ function CalendarPage() {
   ])
   return (
     <div className={style.calendar}>
+      {/* Calendar Header */}
+
       <div className={style.calendar_header}>
         <div className={style.clock_calendar}>
           <img src={icons.clockCalendar} alt="" />
         </div>
         {dateType === 'date' ? (
-          <div className={style.day}>
-            <h4>{moment(selectedDate).format('dd')}</h4>
-            <span>{moment(selectedDate).format('D')}</span>
-          </div>
+          <CalendarHeader day={selectedDate} />
         ) : (
           week.map((item) => (
             <div key={item} className={style.week}>
-              <h4>{moment(item).format('dd')}</h4>
-              <span>{moment(item).format('D')}</span>
+              <CalendarHeader day={item} />
             </div>
           ))
         )}
       </div>
+
+      {/*  Calendar content schedule of meetings */}
+
       <div className={style.calendar_content}>
-        {days.map((hours) => (
-          <div className="d-flex align-items-center" key={hours}>
-            <div className={style.hours}>{hours}</div>
-            {dateType === 'week' ? (
-              week.map((days) => <div className={style.days} key={days} />)
-            ) : (
-              <div className={style.single_days} />
-            )}
+        {hours.map((hour) => (
+          <div className="d-flex align-items-center" key={hour}>
+            <div className={style.hours}>{hour}</div>
+            <CalendarItem hour={hour} />
           </div>
         ))}
       </div>

@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Select, Space, Popover } from 'antd'
 import moment from 'moment'
+import { Select, Space, Popover } from 'antd'
+import style from './Header.module.scss'
 import icons from '../../assets/icons'
 import {
   setDateType,
@@ -9,7 +10,6 @@ import {
   addDate,
   subrtactDate,
 } from '../../redux-toolkit/dateReducer'
-import style from './Header.module.scss'
 
 const { Option } = Select
 
