@@ -57,7 +57,11 @@ function Header() {
           Сегодня
         </button>
         <Space>
-          <Select value={dateType} onChange={(value) => dispatch(setDateType(value))}>
+          <Select
+            className="select_type"
+            value={dateType}
+            onChange={(value) => dispatch(setDateType(value))}
+          >
             <Option value="date">День</Option>
             <Option value="week">Неделя</Option>
             <Option value="month">Месяц</Option>

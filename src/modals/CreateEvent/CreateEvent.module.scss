@@ -1,0 +1,87 @@
+.create_event{
+  
+  .create_content{
+    padding: 12px 18px;
+    padding-bottom: 24px;
+    
+    .create_header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      
+      h2{
+        font-size: 19px;
+      }
+    }
+    .create_body{
+    .save{
+      background: #4B84F4;
+      border-radius: 10px;
+      color:#fff;
+      font-size: 14px;
+      height: 40px;
+      width: 150px;
+    }
+    .dates{
+      margin-bottom: 10px;
+    }
+    .building{
+      width: 100% !important;
+    }
+    .invite_box{
+      border: 1px solid rgba(46, 46, 46, 0.2);
+      border-radius: 8px;
+      height:100px;
+      padding:8px;
+      margin-bottom: 10px;
+      .invite_user{
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+        div{
+          line-height: 15px;
+        }
+        img{
+          margin-right:10px;
+
+        }
+        h4{
+          font-size: 14px;
+          margin-bottom: 0;
+
+        }
+        span{
+          color: rgba(46, 46, 46, 0.5);
+          font-size: 13px;
+          
+        }
+      }
+    }
+    .label_span{
+      color: rgba(46, 46, 46, 0.5);
+      font-weight: 300;
+      margin-bottom: 6px;
+      display: block;
+      font-size: 14px;
+    }
+    label{
+      display: block;
+      color: rgba(46, 46, 46, 0.5);
+      font-weight: 300;
+      font-size: 14px;
+      margin-bottom: 10px;
+      
+      input{
+        border: 1px solid rgba(46, 46, 46, 0.2);
+        border-radius: 8px;
+        height: 40px;
+        width: 100%;
+        margin-top: 6px;
+        padding-left: 10px;
+        color:#000;
+      }
+     }
+    }
+  }
+}
