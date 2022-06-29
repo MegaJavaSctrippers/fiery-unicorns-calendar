@@ -6,12 +6,7 @@ import style from './CreateEvent.module.scss'
 import icons from '../../assets/icons'
 
 const { Option } = Select
-const content = (
-  <div>
-    <p>Content</p>
-    <p>Content</p>
-  </div>
-)
+
 function CreateEvent() {
   const [hours] = useState([
     '09:00',
@@ -35,9 +30,7 @@ function CreateEvent() {
       <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: '600px' }}>
         <div className={classNames('modal-content', style.create_content)}>
           <div className={style.create_header}>
-            <h2 className="modal-title" id="exampleModalLabel">
-              Новое событие
-            </h2>
+            <h2 id="exampleModalLabel">Новое событие</h2>
             <button
               type="button"
               className="btn-close"
@@ -101,6 +94,13 @@ function CreateEvent() {
 
             <span className={style.label_span}>Участники (1)</span>
             <div className={style.invite_box}>
+              <div className={style.invite_user}>
+                <img src={icons.avatar} alt="" />
+                <div>
+                  <h4>Jenny Wilson</h4>
+                  <span>Intern</span>
+                </div>
+              </div>
               <div className={style.invite_user}>
                 <img src={icons.avatar} alt="" />
                 <div>

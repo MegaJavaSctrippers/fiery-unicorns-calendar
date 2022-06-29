@@ -9,12 +9,15 @@ import clockCalendar from './clock.png'
 import folder from './folder.svg'
 import job from './job.svg'
 import profile from './profile.svg'
-import push from './push.png'
+import push from './push.svg'
 import search from './search.png'
 import signupBg from './signupBg.png'
 import avatar from './avatar.png'
 import userLogo from './userLogo.png'
 import redX from './redX.svg'
+import accept from './accept.svg'
+import cancel from './cancel.svg'
+import resend from './resend.svg'
 
 const icons = {
   calendar,
@@ -34,6 +37,9 @@ const icons = {
   userLogo,
   redX,
   clockCalendar,
+  accept,
+  cancel,
+  resend,
 }
 
 export default icons

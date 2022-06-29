@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import { Select, Space, Popover } from 'antd'
+import Notification from '../../modals/Notification/Notification'
 import style from './Header.module.scss'
 import icons from '../../assets/icons'
 import {
@@ -99,9 +100,10 @@ function Header() {
             <img src={icons.search} alt="" />
           </div>
         </Popover>
-        <div className={style.push_box}>
+        <div className={style.push_box} data-bs-toggle="modal" data-bs-target="#notification">
           <img src={icons.push} alt="" />
         </div>
+        <Notification />
         <div className={style.user_box}>
           <img src={icons.avatar} alt="" />
         </div>
