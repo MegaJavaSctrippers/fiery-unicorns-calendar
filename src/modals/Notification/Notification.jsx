@@ -32,8 +32,8 @@ function Notification() {
             <span style={{ width: '18%' }}>Отдел</span>
             <span style={{ width: '12%' }}>Статус</span>
           </div>
-          {week.map(() => (
-            <div className={style.notification_content}>
+          {week.map((item) => (
+            <div key={item} className={style.notification_content}>
               <div className={style.content_item} style={{ width: '30%' }}>
                 <h2>Совещание</h2>
                 Darrell Steward

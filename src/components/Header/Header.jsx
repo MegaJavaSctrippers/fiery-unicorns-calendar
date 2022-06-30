@@ -5,6 +5,12 @@ import { Select, Space, Popover } from 'antd'
 import Notification from '../../modals/Notification/Notification'
 import style from './Header.module.scss'
 import icons from '../../assets/icons'
+import { ReactComponent as PushIcon } from '../../assets/icons/push.svg'
+import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
+import { ReactComponent as FolderIcon } from '../../assets/icons/folder.svg'
+import { ReactComponent as ClockIcon } from '../../assets/icons/clock.svg'
+import { ReactComponent as ProfileIcon } from '../../assets/icons/profile.svg'
+import { ReactComponent as JobIcon } from '../../assets/icons/job.svg'
 import {
   setDateType,
   setSelectedDate,
@@ -26,19 +32,19 @@ function Header() {
       <ul className={style.search_menu}>
         <li>Все</li>
         <li>
-          <img src={icons.folder} alt="" />
+          <FolderIcon className={style.search_svg} />
           Название
         </li>
         <li>
-          <img src={icons.clock} alt="" />
+          <ClockIcon className={style.search_svg} />
           Дата
         </li>
         <li>
-          <img src={icons.profile} alt="" />
+          <ProfileIcon className={style.search_svg} />
           Сотрудник
         </li>
         <li>
-          <img src={icons.job} alt="" />
+          <JobIcon className={style.search_svg} />
           Должность
         </li>
       </ul>
@@ -97,11 +103,11 @@ function Header() {
       <div className={style.box}>
         <Popover placement="bottomRight" content={content} trigger="click">
           <div className={style.search_box}>
-            <img src={icons.search} alt="" />
+            <SearchIcon className={style.search_icon} />
           </div>
         </Popover>
         <div className={style.push_box} data-bs-toggle="modal" data-bs-target="#notification">
-          <img src={icons.push} alt="" />
+          <PushIcon className={style.push_icon} />
         </div>
         <Notification />
         <div className={style.user_box}>
