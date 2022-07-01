@@ -9,6 +9,9 @@ function CalendarItem(props) {
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const { hour } = props
+
+  // Fake meetings data
+
   const [data] = useState([
     {
       name: 'Friends meeting',
@@ -53,6 +56,7 @@ function CalendarItem(props) {
           <div className={style.days} key={days}>
             {data.map((item) => (
               <span key={item.name}>
+                {/* show meetings if the hour and date are the same */}
                 {item.date === moment(days).format('YYYY-MM-DD') && item.hours === hour
                   ? item.name
                   : null}

@@ -24,8 +24,6 @@ function CalendarPage() {
   ])
   return (
     <div className={style.calendar}>
-      {/* Calendar Header */}
-
       <div className={style.calendar_header}>
         <div className={style.clock_calendar}>
           <img src={icons.clockCalendar} alt="" />
