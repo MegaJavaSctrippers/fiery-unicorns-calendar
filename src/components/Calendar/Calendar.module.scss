@@ -7,6 +7,7 @@
     height: calc(100vh - 112px);
     overflow-y: auto;
     scrollbar-width:none;
+    -webkit-scrollbar-width:none;
 
     .days, .single_days{
       width: 14%;

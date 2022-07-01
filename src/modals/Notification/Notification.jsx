@@ -1,11 +1,10 @@
 import React from 'react'
 import classNames from 'classnames'
-import { useSelector } from 'react-redux'
 import style from './Notification.module.scss'
 import icons from '../../assets/icons'
 
 function Notification() {
-  const week = useSelector((state) => state.date.week)
+  const week = [1, 2, 3, 4, 5, 6, 7]
   return (
     <div
       className={classNames('modal fade', style.notification)}

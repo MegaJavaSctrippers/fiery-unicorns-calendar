@@ -14,8 +14,8 @@ function CalendarItem(props) {
 
   const [data] = useState([
     {
-      name: 'Friends meeting',
-      date: moment('2022-06-15').format('YYYY-MM-DD'),
+      name: 'Romantic meeting with my second girlfriend',
+      date: moment('2022-07-01').format('YYYY-MM-DD'),
       hours: '10:00',
     },
     {
@@ -24,8 +24,8 @@ function CalendarItem(props) {
       hours: '13:00',
     },
     {
-      name: 'Boss meeting',
-      date: moment('2022-06-14').format('YYYY-MM-DD'),
+      name: 'Romantic meeting with my third girlfriend',
+      date: moment('2022-06-29').format('YYYY-MM-DD'),
       hours: '11:00',
     },
     {
