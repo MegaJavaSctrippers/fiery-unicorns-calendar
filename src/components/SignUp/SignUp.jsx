@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
+import { useNavigate } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
 
 const { Option } = Select
 
 function SignUp() {
+  const navigate = useNavigate()
   const [formData, setFormData] = useState({
     name: '',
     department: '',
@@ -26,6 +28,11 @@ function SignUp() {
   }
   const register = (e) => {
     e.preventDefault()
+    if (password !== confirmPassword) {
+      alert('Passwords are not same')
+    } else {
+      navigate('/')
+    }
   }
   const enabled = Object.values(formData).every((item) => item.length > 0)
 
@@ -88,7 +95,10 @@ function SignUp() {
                   name="password"
                   onChange={handleChange}
                 />
-                <button type="button" onClick={() => setType({ password: !type.password })}>
+                <button
+                  type="button"
+                  onClick={() => setType({ ...type, password: !type.password })}
+                >
                   {type.password ? (
                     <img src={icons.showEyeSVG} alt="" />
                   ) : (
@@ -109,7 +119,7 @@ function SignUp() {
                 />
                 <button
                   type="button"
-                  onClick={() => setType({ confirmPassword: !type.confirmPassword })}
+                  onClick={() => setType({ ...type, confirmPassword: !type.confirmPassword })}
                 >
                   {type.confirmPassword ? (
                     <img src={icons.showEyeSVG} alt="" />
