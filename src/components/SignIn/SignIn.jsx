@@ -10,7 +10,7 @@ function SignIn() {
     email: '',
     password: '',
   })
-
+  const [type, setType] = useState(false)
   const [error, setError] = useState(false)
   const { email, password } = formData
 
@@ -42,7 +42,22 @@ function SignIn() {
             </label>
             <label htmlFor="password">
               Пароль
-              <input onChange={handleChange} type="text" id="password" name="password" />
+              <div className={style.password}>
+                <input
+                  type={type ? 'text' : 'password'}
+                  id="password"
+                  value={password}
+                  name="password"
+                  onChange={handleChange}
+                />
+                <button type="button" onClick={() => setType(!type)}>
+                  {type ? (
+                    <img src={icons.showEyeSVG} alt="" />
+                  ) : (
+                    <img src={icons.hideEyeSVG} alt="" />
+                  )}
+                </button>
+              </div>
             </label>
             <a href="/" className={style.auth_link}>
               Забыли пароль?

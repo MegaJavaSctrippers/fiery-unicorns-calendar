@@ -52,13 +52,13 @@ function Notification() {
               </div>
               <div style={{ width: '12%' }} className={style.content_img}>
                 <div>
-                  <img src={icons.accept} alt="" />
+                  <img src={icons.acceptSVG} alt="" />
                 </div>
                 <div>
-                  <img src={icons.resend} alt="" />
+                  <img src={icons.resendSVG} alt="" />
                 </div>
                 <div>
-                  <img src={icons.cancel} alt="" />
+                  <img src={icons.cancelSVG} alt="" />
                 </div>
               </div>
             </div>

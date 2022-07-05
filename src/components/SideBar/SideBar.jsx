@@ -18,7 +18,7 @@ function SideBar() {
   return (
     <div className={style.sidebar}>
       <div className={style.header}>
-        <img className={style.logo} src={icons.calendar} alt="" />
+        <img className={style.logo} src={icons.calendarSVG} alt="" />
         <h2 className={style.title}>Calendar</h2>
       </div>
 
@@ -54,7 +54,7 @@ function SideBar() {
           <div className={style.labels_header}>
             <h2 className={style.labels_title}>Мои метки</h2>
             <div className={style.labels_add}>
-              <img src={icons.plus} alt="" />
+              <img src={icons.plusSVG} alt="" />
             </div>
           </div>
 

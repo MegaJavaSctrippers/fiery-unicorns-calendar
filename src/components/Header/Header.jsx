@@ -24,9 +24,9 @@ function Header() {
   const content = (
     <div className={style.search_dropdown}>
       <div className={style.search_header}>
-        <img src={icons.search} alt="" />
+        <img src={icons.searchSVG} alt="" />
         <input placeholder="Поиск" />
-        <img src={icons.clear} alt="" />
+        <img src={icons.clearSVG} alt="" />
       </div>
 
       <ul className={style.search_menu}>
@@ -77,11 +77,11 @@ function Header() {
 
         <div className="d-flex align-items-center">
           <button type="button" className={style.prevIcon} onClick={() => dispatch(subrtactDate())}>
-            <img src={icons.arrowLeft} alt="" />
+            <img src={icons.arrowLeftSVG} alt="" />
           </button>
 
           <button type="button" className={style.nextIcon} onClick={() => dispatch(addDate())}>
-            <img src={icons.arrowRight} alt="" />
+            <img src={icons.arrowRightSVG} alt="" />
           </button>
         </div>
 

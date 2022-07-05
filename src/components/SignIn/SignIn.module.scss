@@ -20,7 +20,7 @@
 }
 .login{
   width:50%;
-  margin: 150px auto;
+  margin: auto;
   span{
     color: #2E2E2E;
     opacity: 0.5;
@@ -51,7 +51,6 @@
   label{
     width: 100%;
     color: #2E2E2E;
-    opacity: 0.5;
     font-size: 14px;
     font-weight: 300;
     font-family: 'Roboto';
@@ -62,11 +61,31 @@
       border: 1px solid rgba(0,0,0,0.1);
       border-radius: 8px;
       background:none;
-      height: 40px;
+      height: 38px;
       padding-left: 10px;
       color:#000;
       
     }
+    .password{
+      border: 1px solid rgba(46, 46, 46, 0.2) !important;
+      border-radius: 8px;
+      background:none;
+      height: 37px;
+      display: flex;
+      align-items: center;
+      padding-right: 10px;
+      img{
+        cursor: pointer;
+        opacity: .6;
+      }
+      input{
+        height:100%;
+        margin: 0;
+        border:none !important;
+        padding-right: 10px;
+      }
+    }
+  
     
     
   }
@@ -75,12 +94,13 @@
     background: #4B84F4;
     color:#fff;
     border-radius: 8px;
-    height: 45px;
+    height: 43px;
     width: 100%;
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 500;
-    margin-top: 8px;
+    font-family: 'Roboto';
+    margin-top: 16px;
   }
   .auth_link{
     color:#4B84F4;
@@ -90,6 +110,7 @@
   p{
 
     margin-top: 4px;
+    font-family:'Roboto';
     span{
       color: #2E2E2E;
       opacity: 0.5;

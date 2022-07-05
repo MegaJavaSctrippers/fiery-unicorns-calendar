@@ -26,8 +26,9 @@ function CalendarPage() {
     <div className={style.calendar}>
       <div className={style.calendar_header}>
         <div className={style.clock_calendar}>
-          <img src={icons.clockCalendar} alt="" />
+          <img src={icons.clockCalendarSVG} alt="" />
         </div>
+
         {dateType === 'date' ? (
           <CalendarHeader day={selectedDate} />
         ) : (
