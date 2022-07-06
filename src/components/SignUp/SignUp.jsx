@@ -43,9 +43,10 @@ function SignUp() {
           <form onSubmit={register} className={classNames(style.register)}>
             <h2>Добро пожаловать!</h2>
             <div className="d-flex align-items-center mb-2">
-              <div className={style.logo_box}>
+              <label htmlFor="avatar" className={style.logo_box}>
                 <img src={icons.userLogoSVG} alt="" />
-              </div>
+                <input type="file" id="avatar" style={{ display: 'none' }} />
+              </label>
               <span className={style.user_text}>Добавьте фото профиля</span>
             </div>
 
