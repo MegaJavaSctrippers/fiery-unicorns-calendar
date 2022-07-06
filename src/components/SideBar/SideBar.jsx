@@ -11,9 +11,12 @@ import 'moment/locale/ru'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 
 function SideBar() {
-  const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dispatch = useDispatch()
+
+  const selectDate = (value) => {
+    dispatch(setSelectedDate(moment(value).format()))
+  }
 
   return (
     <div className={style.sidebar}>
@@ -39,13 +42,13 @@ function SideBar() {
             style={{ visibility: 'hidden' }}
             superNextIcon={false}
             superPrevIcon={false}
+            mode="date"
             size="small"
             showToday={false}
-            picker={dateType}
             locale={locale}
             value={moment(selectedDate)}
             onChange={(value) => {
-              dispatch(setSelectedDate(moment(value).format()))
+              selectDate(value)
             }}
           />
         </Space>

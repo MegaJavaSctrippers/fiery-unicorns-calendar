@@ -29,8 +29,7 @@ function SignUp() {
   const register = (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-      // eslint-disable-next-line no-alert
-      alert('Passwords are not same')
+      console.log('password are not same')
     } else {
       navigate('/')
     }

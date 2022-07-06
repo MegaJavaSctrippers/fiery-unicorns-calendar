@@ -20,6 +20,25 @@ function CreateEvent() {
     '17:00',
     '18:00',
   ])
+  const [repeat] = useState([
+    'Не повторят',
+    'Ежедневно',
+    'По будням (Пн-Пт)',
+    'Еженедельно (среда)',
+    'Ежемесячно (1ая среда)',
+    'Ежегодно (2 сент.)',
+  ])
+  const hourOption = hours.map((hour) => (
+    <Option key={hour} value={hour}>
+      {hour}
+    </Option>
+  ))
+
+  const repeatOption = repeat.map((item) => (
+    <Option key={item} value={item}>
+      {item}
+    </Option>
+  ))
   return (
     <div
       className={classNames('modal fade', style.create_event)}
@@ -58,36 +77,23 @@ function CreateEvent() {
                   dropdownClassName="create_date"
                   format="YYYY-MM-DD dddd"
                   showToday={false}
+                  mode="date"
                 />
               </Space>
               <Space>
                 <Select showArrow={false} defaultValue="09:00" className="general_select">
-                  {hours.map((hour) => (
-                    <Option key={hour} value={hour}>
-                      {hour}
-                    </Option>
-                  ))}
+                  {hourOption}
                 </Select>
               </Space>
               -
               <Space>
                 <Select showArrow={false} defaultValue="18:00" className="general_select">
-                  {hours.map((hour) => (
-                    <Option key={hour} value={hour}>
-                      {hour}
-                    </Option>
-                  ))}
+                  {hourOption}
                 </Select>
               </Space>
               <Space>
                 <Select defaultValue="Не повторять" className="general_select select_repeat">
-                  <Option value="1">Не повторять</Option>
-                  <Option value="2">Ежедневно</Option>
-                  <Option value="3">По будням (Пн-Пт)</Option>
-                  <Option value="4">Еженедельно (среда)</Option>
-                  <Option value="5">Еженедельно (среда)</Option>
-                  <Option value="6">Ежемесячно (1ая среда)</Option>
-                  <Option value="7">Ежегодно (2 сент.)</Option>
+                  {repeatOption}
                 </Select>
               </Space>
             </div>
