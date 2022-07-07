@@ -27,25 +27,33 @@ function CalendarPage() {
       <CalendarHeader day={item} />
     </div>
   ))
-  const dayHeader = <CalendarHeader day={selectedDate} />
+  const dayHeader = (
+    <div className={style.day}>
+      <CalendarHeader day={selectedDate} />
+    </div>
+  )
+
   const calendarContent = hours.map((hour) => (
     <div className="d-flex align-items-center" key={hour}>
       <div className={style.hours}>{hour}</div>
       <CalendarItem hour={hour} />
     </div>
   ))
+
   return (
     <div className={style.calendar}>
       <div className={style.calendar_header}>
-        <div className={style.clock_calendar}>
-          <img src={icons.clockCalendarSVG} alt="" />
-        </div>
+        {dateType !== 'month' ? (
+          <div className={style.clock_calendar}>
+            <img src={icons.clockCalendarSVG} alt="" />
+          </div>
+        ) : null}
         {dateType === 'date' ? dayHeader : weekHeader}
       </div>
 
-      {/*  Calendar content schedule of meetings */}
-
-      <div className={style.calendar_content}>{calendarContent}</div>
+      {dateType !== 'month' ? (
+        <div className={style.calendar_content}>{calendarContent}</div>
+      ) : null}
     </div>
   )
 }

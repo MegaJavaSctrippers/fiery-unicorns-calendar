@@ -1,7 +1,7 @@
 import moment from 'moment'
 
 export const setWeek = (dateType, selectedDate) => {
-  if (dateType === 'week') {
+  if (dateType === 'week' || dateType === 'month') {
     const arr = []
     const startWeek = moment(selectedDate).startOf('week').format()
     for (let i = 0; i < 7; i += 1) {
