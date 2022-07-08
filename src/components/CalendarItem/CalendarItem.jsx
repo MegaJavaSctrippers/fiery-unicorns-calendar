@@ -14,38 +14,23 @@ function CalendarItem(props) {
 
   const [data] = useState([
     {
-      name: 'Romantic meeting with my second girlfriend',
-      date: moment('2022-07-01').format('YYYY-MM-DD'),
+      name: 'Romantic meeting with my first girlfriend',
+      date: moment('2022-07-08').format('YYYY-MM-DD'),
       hours: '10:00',
     },
     {
-      name: 'Job meeting',
-      date: moment('2022-06-14').format('YYYY-MM-DD'),
+      name: 'Romantic meeting with my second girlfriend',
+      date: moment('2022-07-08').format('YYYY-MM-DD'),
       hours: '13:00',
     },
     {
       name: 'Romantic meeting with my third girlfriend',
-      date: moment('2022-06-29').format('YYYY-MM-DD'),
+      date: moment('2022-07-05').format('YYYY-MM-DD'),
       hours: '11:00',
     },
     {
-      name: 'Conference with collegas',
-      date: moment('2022-06-16').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
-      name: 'Meeting with a team in megalab',
-      date: moment('2022-06-25').format('YYYY-MM-DD'),
-      hours: '11:00',
-    },
-    {
-      name: 'Romantic evening with my girlfriend',
-      date: moment('2022-06-15').format('YYYY-MM-DD'),
-      hours: '12:00',
-    },
-    {
-      name: 'Interview in megacom',
-      date: moment('2022-06-20').format('YYYY-MM-DD'),
+      name: 'Conference with fiery unicorns team',
+      date: moment('2022-07-16').format('YYYY-MM-DD'),
       hours: '10:00',
     },
   ])

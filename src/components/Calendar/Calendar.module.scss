@@ -2,7 +2,29 @@
   background: #fff;
   margin: 24px;
   margin-bottom: 0;
-  
+  .month{
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+    scrollbar-width:none;
+    -webkit-scrollbar-width:none;
+    .event_name{
+      font-size: 12px;
+      text-overflow: ellipsis;
+     overflow: hidden;
+     width: 120px;
+     white-space: nowrap;
+    }
+    .label{
+      display: inline-block;
+      background: #80DEA0;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+    }
+    .hour{
+      margin: 0 5px;
+    }
+  }
   .calendar_content{
     height: calc(100vh - 112px);
     overflow-y: auto;
@@ -15,7 +37,6 @@
       align-items: center;
       height: 72px;
       justify-content: center;
-      // border-right: 1px solid rgba(35, 35, 35, 0.1);
       border-bottom: 1px solid rgba(35, 35, 35, 0.1);
       box-sizing: border-box;
     }
@@ -35,7 +56,6 @@
       align-items: center;
       justify-content: center;
       height: 40px;
-      // border-right: 1px solid rgba(35, 35, 35, 0.1);
     }
   
     .week{
