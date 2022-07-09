@@ -36,23 +36,32 @@ function CalendarItem(props) {
   ])
   const calendarWeek = week.map((days) => (
     <div className={style.days} key={days}>
-      {data.map((item) => (
-        <span key={item.name}>
-          {/* show meetings if the hour and date are the same */}
-          {item.date === moment(days).format('YYYY-MM-DD') && item.hours === hour
-            ? item.name
-            : null}
-        </span>
-      ))}
+      {data.map((item) => {
+        if (item.date === moment(days).format('YYYY-MM-DD') && item.hours === hour) {
+          return (
+            <div>
+              <span className={style.label} />
+              <span className={style.event_name}>{item.name}</span>
+              <span className={style.event_time}>{item.hours}</span>
+            </div>
+          )
+        }
+        return null
+      })}
     </div>
   ))
-  const calendarDay = data.map((item) => (
-    <span key={item.name}>
-      {item.date === moment(selectedDate).format('YYYY-MM-DD') && item.hours === hour
-        ? item.name
-        : null}
-    </span>
-  ))
+  const calendarDay = data.map((item) => {
+    if (item.date === moment(selectedDate).format('YYYY-MM-DD') && item.hours === hour) {
+      return (
+        <div>
+          <span className={style.label} />
+          <span className={style.event_name_single}>{item.name}</span>
+          <span className={style.event_time}>{item.hours}</span>
+        </div>
+      )
+    }
+    return null
+  })
   return (
     <>
       {dateType === 'week' ? calendarWeek : <div className={style.single_days}>{calendarDay}</div>}
