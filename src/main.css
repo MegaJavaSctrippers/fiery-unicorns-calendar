@@ -113,15 +113,20 @@ button{
   width: 14%;
   overflow:hidden !important;
 }
+.calendar_table .ant-picker-calendar-date:hover{
+  background:none !important;
+}
 .calendar_table .ant-picker-calendar-date{
   padding: 0 !important;
   margin: 0 !important;
   text-align: left;
   padding-top: 4px !important;
-  padding-left: 16px !important;
   border:none !important;
   font-size: 14px !important;
   width:100% !important;
+}
+.calendar_table .ant-picker-calendar-date-value{
+  padding-left: 16px !important;
 }
 .calendar_table .ant-picker-cell{
   border-right: 1px solid rgba(35, 35, 35, 0.1) !important;
@@ -217,11 +222,16 @@ button{
 }
 /*  popover  */
 
+
+.ant-popover-placement-bottomRight{
+  top:33px !important;
+}
+
+.ant-popover-placement-rightTop{
+  padding-left: 4px !important;
+}
 .ant-popover-arrow{
   display: none !important;
-}
-.ant-popover{
-  top:33px !important;
 }
 .ant-popover-inner{
   border-radius: 8px !important;
@@ -230,6 +240,19 @@ button{
   padding: 12px 0;
   border-radius:8px !important;
 }
+.ant-popover-arrow-content::before{
+  background-color: #F8FAFF !important;
+  
+}
+.event_popup .ant-popover-inner-content{
+  padding: 0 !important;
+}
+
+.event_popup .ant-popover-inner{
+  background-color: #F8FAFF !important;
+  padding: 16px !important;
+  width: 328px;
+} 
 
 /* modal bootstrap */
 

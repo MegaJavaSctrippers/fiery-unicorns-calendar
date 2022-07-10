@@ -101,7 +101,12 @@ function Header() {
       </div>
 
       <div className={style.box}>
-        <Popover placement="bottomRight" content={content} trigger="click">
+        <Popover
+          className="header_popover"
+          placement="bottomRight"
+          content={content}
+          trigger="click"
+        >
           <div className={style.search_box}>
             <SearchIcon className={style.search_icon} />
           </div>

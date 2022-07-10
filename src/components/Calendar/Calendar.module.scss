@@ -2,17 +2,26 @@
   background: #fff;
   margin: 24px;
   margin-bottom: 0;
+ 
+ 
   .month{
     height: calc(100vh - 72px);
     overflow-y: auto;
     scrollbar-width:none;
     -webkit-scrollbar-width:none;
+    
     .event_name{
       font-size: 12px;
       text-overflow: ellipsis;
      overflow: hidden;
-     width: 125px;
+     width: 148px;
      white-space: nowrap;
+     border-radius: 4px;
+     padding-left: 16px !important;
+     &:hover{
+      background: rgba(75, 132, 244, 0.25) !important;
+      transition:0.5s;
+    }
     }
     .label{
       display: inline-block;
@@ -61,6 +70,7 @@
       height: 40px;
     }
   
+    
     .week{
       width:13.28%;
       padding-left:16px;
@@ -72,4 +82,14 @@
       }
   }
  
+}
+.event_popover{
+  span{
+    font-size: 14px;
+    color:#2E2E2E;
+  }
+  h3{
+    font-size: 14px !important;
+    margin-bottom: 10px !important;
+  }
 }

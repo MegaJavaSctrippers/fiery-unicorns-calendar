@@ -20,6 +20,8 @@ import cancelSVG from './cancel.svg'
 import resendSVG from './resend.svg'
 import showEyeSVG from './showEye.svg'
 import hideEyeSVG from './hideEye.svg'
+import locationSVG from './location.svg'
+import blueClockSVG from './blueClock.svg'
 
 const icons = {
   calendarSVG,
@@ -44,6 +46,8 @@ const icons = {
   resendSVG,
   showEyeSVG,
   hideEyeSVG,
+  locationSVG,
+  blueClockSVG,
 }
 
 export default icons
