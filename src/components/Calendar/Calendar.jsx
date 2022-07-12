@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Calendar, Button, Popover } from 'antd'
+import { Calendar, Popover } from 'antd'
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import moment from 'moment'
-import classNames from 'classnames'
 import style from './Calendar.module.scss'
 import icons from '../../assets/icons'
 import CalendarHeader from '../CalendarHeader/CalendarHeader'
@@ -41,6 +40,16 @@ function CalendarPage() {
       hours: '13:00',
     },
     {
+      name: 'Romantic meeting with my fourth girlfriend',
+      date: moment('2022-07-08').format('YYYY-MM-DD'),
+      hours: '14:00',
+    },
+    {
+      name: 'Romantic meeting with my fives girlfriend',
+      date: moment('2022-07-08').format('YYYY-MM-DD'),
+      hours: '16:00',
+    },
+    {
       name: 'Romantic meeting with my third girlfriend',
       date: moment('2022-07-12').format('YYYY-MM-DD'),
       hours: '11:00',
@@ -56,9 +65,24 @@ function CalendarPage() {
       hours: '10:00',
     },
     {
-      name: 'Megalab',
+      name: 'Megalab intern',
       date: moment('2022-07-04').format('YYYY-MM-DD'),
       hours: '10:00',
+    },
+    {
+      name: 'Megalab team',
+      date: moment('2022-07-04').format('YYYY-MM-DD'),
+      hours: '12:00',
+    },
+    {
+      name: 'Megalab meetup',
+      date: moment('2022-07-04').format('YYYY-MM-DD'),
+      hours: '13:00',
+    },
+    {
+      name: 'Megalab mountain',
+      date: moment('2022-07-04').format('YYYY-MM-DD'),
+      hours: '15:00',
     },
     {
       name: 'Football with friends',
@@ -90,7 +114,7 @@ function CalendarPage() {
       return (
         <div className={style.event_popover}>
           <h3>{data.name}</h3>
-          <div className="d-flex align-items-start mb-2">
+          <div className="d-flex align-items-start">
             <img alt="" src={icons.blueClockSVG} />
             <p className="m-0 mx-2">
               <span>{moment(data.date).format('YYYY-MM-DD dddd')}</span>
@@ -122,7 +146,8 @@ function CalendarPage() {
               <div className={style.event_name} key={item.name}>
                 <span className={style.label} />
                 <span className={style.hour}>{item.hours}</span>
-                {item.name}
+                {item.name.slice(0, 8)}
+                ...
               </div>
             </Popover>
           )
@@ -133,7 +158,7 @@ function CalendarPage() {
     return null
   }
   const selectDate = (value) => {
-    // dispatch(setDateType('date'))
+    dispatch(setDateType('date'))
     dispatch(setSelectedDate(moment(value).format()))
   }
 

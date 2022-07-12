@@ -111,8 +111,8 @@ button{
 
 .calendar_table .ant-picker-cell-in-view{
   width: 14%;
-  overflow:hidden !important;
 }
+
 .calendar_table .ant-picker-calendar-date:hover{
   background:none !important;
 }
@@ -228,7 +228,10 @@ button{
 }
 
 .ant-popover-placement-rightTop{
-  padding-left: 4px !important;
+  padding-left: 0 !important;
+}
+.ant-popover-placement-leftTop{
+  padding-right: 0 !important;
 }
 .ant-popover-arrow{
   display: none !important;
@@ -269,4 +272,22 @@ button{
 button[disabled=disabled], button:disabled {
   background: #0A253F !important;
   opacity: 0.2;
+}
+
+
+/* scroll bar style */
+
+::-webkit-scrollbar {
+  background: #CFCFCF;
+  border-radius: 8px;
+  width: 2px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #888; 
 }
