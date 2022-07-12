@@ -8,6 +8,14 @@
   display: flex;
   align-items: center;
   position: relative;
+
+  .week_data{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height:100%;
+    cursor: pointer;
+  }
   &:hover{
     background: #F9F9F9;
 

@@ -178,7 +178,6 @@ button{
 }
 .auth_select .ant-select-selector{
   border-color:rgba(46,46,46,0.1) !important;
-  margin-bottom: 8px !important;
 }
 
 .ant-select-selector:focus-visible{

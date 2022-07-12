@@ -110,7 +110,7 @@ function CalendarItem(props) {
               overlayClassName="event_popup"
               content={handleHover(item)}
             >
-              <div style={{ cursor: 'pointer' }}>
+              <div className={style.week_data}>
                 <span className={style.label} />
                 <span className={style.event_name}>{item.name}</span>
                 <span className={style.event_time}>{item.hours}</span>
