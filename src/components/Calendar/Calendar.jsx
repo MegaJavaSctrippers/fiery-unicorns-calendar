@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Calendar, Popover } from 'antd'
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import moment from 'moment'
@@ -7,14 +7,13 @@ import style from './Calendar.module.scss'
 import icons from '../../assets/icons'
 import CalendarHeader from '../CalendarHeader/CalendarHeader'
 import CalendarItem from '../CalendarItem/CalendarItem'
-import { setDateType, setSelectedDate } from '../../redux-toolkit/dateReducer'
+import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 
 function CalendarPage() {
   const week = useSelector((state) => state.date.week)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dateType = useSelector((state) => state.date.dateType)
-
-  const dispatch = useDispatch()
+  const data = useSelector((state) => state.date.events)
 
   const [hours] = useState([
     '09:00',
@@ -28,69 +27,6 @@ function CalendarPage() {
     '17:00',
     '18:00',
   ])
-  const [data] = useState([
-    {
-      name: 'Romantic meeting with my first girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
-      name: 'Romantic meeting with my second girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '13:00',
-    },
-    {
-      name: 'Romantic meeting with my fourth girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '14:00',
-    },
-    {
-      name: 'Romantic meeting with my fives girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '16:00',
-    },
-    {
-      name: 'Romantic meeting with my third girlfriend',
-      date: moment('2022-07-12').format('YYYY-MM-DD'),
-      hours: '11:00',
-    },
-    {
-      name: 'Meetup with a team',
-      date: moment('2022-07-20').format('YYYY-MM-DD'),
-      hours: '11:00',
-    },
-    {
-      name: 'Conference with fiery unicorns team',
-      date: moment('2022-07-16').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
-      name: 'Megalab intern',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
-      name: 'Megalab team',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '12:00',
-    },
-    {
-      name: 'Megalab meetup',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '13:00',
-    },
-    {
-      name: 'Megalab mountain',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '15:00',
-    },
-    {
-      name: 'Football with friends',
-      date: moment('2022-07-18').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-  ])
-
   const weekHeader = week.map((item) => (
     <div key={item} className={style.week}>
       <CalendarHeader day={item} />
@@ -131,35 +67,44 @@ function CalendarPage() {
     }
     return null
   }
+  const content = () => <CreateEvent />
+
   const dateCellRender = (value) => {
     if (value) {
-      return data.map((item) => {
-        if (item.date === moment(value).format('YYYY-MM-DD')) {
-          return (
-            <Popover
-              key={item.name}
-              trigger="hover"
-              placement="rightTop"
-              overlayClassName="event_popup"
-              content={handleHover(item)}
-            >
-              <div className={style.event_name} key={item.name}>
-                <span className={style.label} />
-                <span className={style.hour}>{item.hours}</span>
-                {item.name.slice(0, 8)}
-                ...
-              </div>
-            </Popover>
-          )
-        }
-        return null
-      })
+      return (
+        <Popover
+          overlayClassName="centered_popover"
+          content={content}
+          placement="right"
+          trigger="click"
+        >
+          <div className="bektemir">
+            {data.map((item) => {
+              if (item.date === moment(value).format('YYYY-MM-DD')) {
+                return (
+                  <Popover
+                    key={item.name}
+                    trigger="hover"
+                    placement="rightTop"
+                    overlayClassName="event_popup"
+                    content={handleHover(item)}
+                  >
+                    <div className={style.event_name} key={item.name}>
+                      <span className={style.label} />
+                      <span className={style.hour}>{item.hours}</span>
+                      {item.name}
+                      ...
+                    </div>
+                  </Popover>
+                )
+              }
+              return null
+            })}
+          </div>
+        </Popover>
+      )
     }
     return null
-  }
-  const selectDate = (value) => {
-    dispatch(setDateType('date'))
-    dispatch(setSelectedDate(moment(value).format()))
   }
 
   return (
@@ -178,15 +123,16 @@ function CalendarPage() {
 
       {dateType === 'month' ? (
         <div className={style.month}>
-          <Calendar
-            dateCellRender={dateCellRender}
-            className="calendar_table"
-            mode="month"
-            locale={locale}
-            value={moment(selectedDate)}
-            headerRender={() => false}
-            onSelect={(value) => selectDate(value)}
-          />
+          <Popover conntent={content}>
+            <Calendar
+              dateCellRender={dateCellRender}
+              className="calendar_table"
+              mode="month"
+              locale={locale}
+              value={moment(selectedDate)}
+              headerRender={() => false}
+            />
+          </Popover>
         </div>
       ) : null}
     </div>

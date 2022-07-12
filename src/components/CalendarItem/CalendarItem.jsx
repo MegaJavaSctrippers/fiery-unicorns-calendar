@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
@@ -9,73 +9,12 @@ import style from './CalendarItem.module.scss'
 function CalendarItem(props) {
   const week = useSelector((state) => state.date.week)
   const dateType = useSelector((state) => state.date.dateType)
+  const data = useSelector((state) => state.date.events)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const { hour } = props
 
   // Fake meetings data
 
-  const [data] = useState([
-    {
-      name: 'Romantic meeting with my first girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
-      name: 'Romantic meeting with my second girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '13:00',
-    },
-    {
-      name: 'Romantic meeting with my second girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '14:00',
-    },
-    {
-      name: 'Romantic meeting with my second girlfriend',
-      date: moment('2022-07-08').format('YYYY-MM-DD'),
-      hours: '16:00',
-    },
-    {
-      name: 'Romantic meeting with my third girlfriend',
-      date: moment('2022-07-12').format('YYYY-MM-DD'),
-      hours: '11:00',
-    },
-    {
-      name: 'Meetup with a team',
-      date: moment('2022-07-20').format('YYYY-MM-DD'),
-      hours: '11:00',
-    },
-    {
-      name: 'Conference with fiery unicorns team',
-      date: moment('2022-07-16').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
-      name: 'Megalab intern',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
-      name: 'Megalab team',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '12:00',
-    },
-    {
-      name: 'Megalab meetup',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '13:00',
-    },
-    {
-      name: 'Megalab mountain',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '15:00',
-    },
-    {
-      name: 'Football with friends',
-      date: moment('2022-07-18').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-  ])
   const handleHover = (data) => {
     if (data) {
       return (
@@ -125,7 +64,7 @@ function CalendarItem(props) {
   const calendarDay = data.map((item) => {
     if (item.date === moment(selectedDate).format('YYYY-MM-DD') && item.hours === hour) {
       return (
-        <div>
+        <div key={item.name}>
           <span className={style.label} />
           <span className={style.event_name_single}>{item.name}</span>
           <span className={style.event_time}>{item.hours}</span>

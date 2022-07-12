@@ -12,10 +12,10 @@
     
     .event_name{
       font-size: 12px;
-      // text-overflow: ellipsis;
-      // overflow: hidden;
+      text-overflow: ellipsis;
+      overflow: hidden;
       // width: 148px;
-      // white-space: nowrap;
+      white-space: nowrap;
       border-radius: 4px;
       padding-left: 16px !important;
      &:hover{

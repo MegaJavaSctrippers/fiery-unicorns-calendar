@@ -34,7 +34,6 @@ function SideBar() {
         >
           Создать
         </button>
-        <CreateEvent />
         <Space direction="vertical">
           <DatePicker
             open="true"

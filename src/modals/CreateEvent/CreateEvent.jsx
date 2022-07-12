@@ -40,14 +40,14 @@ function CreateEvent() {
     </Option>
   ))
   return (
-    <div
-      className={classNames('modal fade', style.create_event)}
-      id="create-event"
-      tabIndex="-1"
-      aria-hidden="false"
-    >
-      <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: '600px' }}>
-        <div className={classNames('modal-content', style.create_content)}>
+    <div className={style.create_event}>
+      {/* // className={classNames('modal fade', style.create_event)}
+      // id="create-event"
+      // tabIndex="-1"
+      // aria-hidden="false" */}
+
+      <div style={{ maxWidth: '550px' }}>
+        <div className={classNames('', style.create_content)}>
           <div className={style.create_header}>
             <h2 id="exampleModalLabel">Новое событие</h2>
             <button
@@ -97,9 +97,9 @@ function CreateEvent() {
                 </Select>
               </Space>
             </div>
-            <label htmlFor="user">
+            {/* <label htmlFor="user">
               <input id="user" placeholder="Поиск участников" />
-            </label>
+            </label> */}
             <span className={style.label_span}>Участники (1)</span>
             <div className={style.invite_box}>
               <div className={style.invite_user}>
