@@ -8,7 +8,6 @@ import style from './SideBar.module.scss'
 import icons from '../../assets/icons'
 import { setSelectedDate } from '../../redux-toolkit/dateReducer'
 import 'moment/locale/ru'
-import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 
 function SideBar() {
   const selectedDate = useSelector((state) => state.date.selectedDate)

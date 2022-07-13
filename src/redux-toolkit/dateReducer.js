@@ -6,6 +6,7 @@ const initialState = {
   dateType: 'date',
   selectedDate: moment().format(),
   week: [],
+  visible: false,
   events: [
     {
       name: 'Romantic meeting with my first girlfriend',
@@ -43,22 +44,7 @@ const initialState = {
       hours: '10:00',
     },
     {
-      name: 'Megalab intern',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '10:00',
-    },
-    {
       name: 'Megalab team',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '12:00',
-    },
-    {
-      name: 'Megalab person',
-      date: moment('2022-07-04').format('YYYY-MM-DD'),
-      hours: '12:00',
-    },
-    {
-      name: 'Megalab teamlead',
       date: moment('2022-07-04').format('YYYY-MM-DD'),
       hours: '12:00',
     },
@@ -84,6 +70,9 @@ export const dateSlice = createSlice({
   name: 'dateSlice',
   initialState,
   reducers: {
+    setVisible: (state, action) => {
+      state.visible = action.payload
+    },
     setDateType: (state, action) => {
       state.dateType = action.payload
       state.week = setWeek(state.dateType, state.selectedDate)
@@ -122,4 +111,5 @@ export const dateSlice = createSlice({
 })
 
 export const { setDateType, setToday, setSelectedDate, addDate, subrtactDate } = dateSlice.actions
+export const { setVisible } = dateSlice.actions
 export default dateSlice.reducer

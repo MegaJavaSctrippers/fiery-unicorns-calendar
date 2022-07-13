@@ -1,20 +1,22 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Calendar, Popover } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { Calendar } from 'antd'
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import moment from 'moment'
 import style from './Calendar.module.scss'
 import icons from '../../assets/icons'
 import CalendarHeader from '../CalendarHeader/CalendarHeader'
 import CalendarItem from '../CalendarItem/CalendarItem'
-import CreateEvent from '../../modals/CreateEvent/CreateEvent'
+import { setSelectedDate } from '../../redux-toolkit/dateReducer'
+import Invitation from '../../modals/Invitation/Inivitation'
+import CalendarParent from './CalendarParent'
 
 function CalendarPage() {
   const week = useSelector((state) => state.date.week)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dateType = useSelector((state) => state.date.dateType)
-  const data = useSelector((state) => state.date.events)
 
+  const dispatch = useDispatch()
   const [hours] = useState([
     '09:00',
     '10:00',
@@ -44,65 +46,10 @@ function CalendarPage() {
       <CalendarItem hour={hour} />
     </div>
   ))
-
-  const handleHover = (data) => {
-    if (data) {
-      return (
-        <div className={style.event_popover}>
-          <h3>{data.name}</h3>
-          <div className="d-flex align-items-start">
-            <img alt="" src={icons.blueClockSVG} />
-            <p className="m-0 mx-2">
-              <span>{moment(data.date).format('YYYY-MM-DD dddd')}</span>
-              <br />
-              <span>{data.hours}</span>
-            </p>
-          </div>
-          <div>
-            <img src={icons.locationSVG} alt="" />
-            <span> 1 этаж, 4 кабинет</span>
-          </div>
-        </div>
-      )
-    }
-    return null
-  }
-  const content = () => <CreateEvent />
-
+  const bool = true
   const dateCellRender = (value) => {
     if (value) {
-      return (
-        <Popover
-          overlayClassName="centered_popover"
-          content={content}
-          placement="right"
-          trigger="click"
-        >
-          <div className="bektemir">
-            {data.map((item) => {
-              if (item.date === moment(value).format('YYYY-MM-DD')) {
-                return (
-                  <Popover
-                    key={item.name}
-                    trigger="hover"
-                    placement="rightTop"
-                    overlayClassName="event_popup"
-                    content={handleHover(item)}
-                  >
-                    <div className={style.event_name} key={item.name}>
-                      <span className={style.label} />
-                      <span className={style.hour}>{item.hours}</span>
-                      {item.name}
-                      ...
-                    </div>
-                  </Popover>
-                )
-              }
-              return null
-            })}
-          </div>
-        </Popover>
-      )
+      return <CalendarParent visible={bool} value={value} />
     }
     return null
   }
@@ -123,16 +70,18 @@ function CalendarPage() {
 
       {dateType === 'month' ? (
         <div className={style.month}>
-          <Popover conntent={content}>
-            <Calendar
-              dateCellRender={dateCellRender}
-              className="calendar_table"
-              mode="month"
-              locale={locale}
-              value={moment(selectedDate)}
-              headerRender={() => false}
-            />
-          </Popover>
+          <Calendar
+            dateCellRender={dateCellRender}
+            className="calendar_table"
+            mode="month"
+            locale={locale}
+            value={moment(selectedDate)}
+            headerRender={() => false}
+            onSelect={(value) => {
+              dispatch(setSelectedDate(moment(value).format()))
+            }}
+          />
+          <Invitation />
         </div>
       ) : null}
     </div>

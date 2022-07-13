@@ -63,6 +63,16 @@
       display: block;
       font-size: 14px;
     }
+    .invite_btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+      background: #4B84F4;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+    }
     label{
       display: block;
       color: rgba(46, 46, 46, 0.5);

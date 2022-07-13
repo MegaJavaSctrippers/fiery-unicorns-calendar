@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
+import { useDispatch } from 'react-redux'
 import { DatePicker, Space, Select } from 'antd'
+import PropTypes from 'prop-types'
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import style from './CreateEvent.module.scss'
 import icons from '../../assets/icons'
+import { setVisible } from '../../redux-toolkit/dateReducer'
 
 const { Option } = Select
 
-function CreateEvent() {
+function CreateEvent({ showPopover, value }) {
+  const dispatch = useDispatch()
   const [hours] = useState([
     '09:00',
     '10:00',
@@ -41,20 +45,15 @@ function CreateEvent() {
   ))
   return (
     <div className={style.create_event}>
-      {/* // className={classNames('modal fade', style.create_event)}
-      // id="create-event"
-      // tabIndex="-1"
-      // aria-hidden="false" */}
-
-      <div style={{ maxWidth: '550px' }}>
-        <div className={classNames('', style.create_content)}>
+      <div style={{ maxWidth: '600px' }}>
+        <div className={classNames(style.create_content)}>
           <div className={style.create_header}>
             <h2 id="exampleModalLabel">Новое событие</h2>
             <button
               type="button"
               className="btn-close"
-              data-bs-dismiss="modal"
               aria-label="Close"
+              onClick={() => showPopover()}
             />
           </div>
           <div className={style.create_body}>
@@ -78,29 +77,38 @@ function CreateEvent() {
                   format="YYYY-MM-DD dddd"
                   showToday={false}
                   mode="date"
+                  value={value}
                 />
               </Space>
               <Space>
-                <Select showArrow={false} defaultValue="09:00" className="general_select">
+                <Select showArrow={false} defaultValue="09:00" className="general_select hour">
                   {hourOption}
                 </Select>
               </Space>
               -
               <Space>
-                <Select showArrow={false} defaultValue="18:00" className="general_select">
+                <Select showArrow={false} defaultValue="18:00" className="general_select hour">
                   {hourOption}
                 </Select>
               </Space>
               <Space>
                 <Select defaultValue="Не повторять" className="general_select select_repeat">
                   {repeatOption}
+                  <Option>
+                    <div>
+                      <span>Период повт. (неделя)</span>
+                      <input />
+                    </div>
+                  </Option>
                 </Select>
               </Space>
             </div>
-            {/* <label htmlFor="user">
-              <input id="user" placeholder="Поиск участников" />
-            </label> */}
-            <span className={style.label_span}>Участники (1)</span>
+            <div className="d-flex align-items-center justify-content-between">
+              <span className={style.label_span}>Участники (1)</span>
+              <div data-bs-toggle="modal" data-bs-target="#invitation" className={style.invite_btn}>
+                <img src={icons.whitePlusSVG} alt="" />
+              </div>
+            </div>
             <div className={style.invite_box}>
               <div className={style.invite_user}>
                 <img src={icons.avatar} alt="" />
@@ -160,5 +168,9 @@ function CreateEvent() {
       </div>
     </div>
   )
+}
+CreateEvent.propTypes = {
+  value: PropTypes.object.isRequired,
+  showPopover: PropTypes.func.isRequired,
 }
 export default CreateEvent

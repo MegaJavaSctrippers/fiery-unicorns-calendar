@@ -19,6 +19,7 @@ a, a:hover{
 }
 select:focus,input:focus,button:focus{
   outline: none;
+  box-shadow:none !important;
 }
 h1,h2,h3,h4{
   margin-bottom: 0 !important;
@@ -149,13 +150,14 @@ button{
 }
 
 .calendar_table .ant-picker-calendar-date-content{
-  height:65px !important;
+  height:78px !important;
 }
 .datepicker_input{
   border: 1px solid rgba(46, 46, 46, 0.2) !important;
   border-radius: 8px !important;
   height:37px !important;
   box-shadow:none !important;
+  width: 200px !important;
 }
 
 /* Selector style antd  */
@@ -180,14 +182,12 @@ button{
   overflow: auto;
   width: 100%;
   top:28px;
-  /* top:0;
-  left:0;
-  width: 100% !important;
-  padding-top:28px;
-  overflow: auto; */
+  
 
 }
-
+.general_select.hour{
+  margin: 0 5px;
+}
 .general_select .ant-select-selector{
   border: 1px solid rgba(46, 46, 46, 0.2) !important;
   border-radius: 8px !important;
@@ -211,7 +211,7 @@ button{
   margin-right: 10px !important;
 }
 .select_repeat{
-  width: 190px !important;
+  width: 170px !important;
 }
 .select_full_width, .ant-space-item, .select_full_width .ant-space-item .general_select{
   width: 100% !important;
@@ -245,7 +245,9 @@ button{
 }
 /*  popover  */
 
-
+.ant-popover{
+  z-index:1050 !important;
+}
 .ant-popover-placement-bottomRight{
   top:33px !important;
 }
@@ -256,7 +258,7 @@ button{
 .ant-popover-placement-rightTop{
   padding-left: 0 !important;
 }
-.ant-popover-placement-leftTop{
+.ant-popover-placement-leftTop, .ant-popover-placement-left{
   padding-right: 0 !important;
 }
 .ant-popover-arrow{
@@ -264,6 +266,15 @@ button{
 }
 .centered_popover .ant-popover-content{
   margin:50px 0;
+}
+.centered_popover:before{
+  content:'';
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background:#000;
+  opacity: 0;
+  left:0 !important;
 }
 .ant-popover-inner{
   border-radius: 8px !important;
