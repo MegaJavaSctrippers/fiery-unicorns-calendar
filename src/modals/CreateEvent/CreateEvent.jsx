@@ -1,17 +1,14 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import { useDispatch } from 'react-redux'
 import { DatePicker, Space, Select } from 'antd'
 import PropTypes from 'prop-types'
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import style from './CreateEvent.module.scss'
 import icons from '../../assets/icons'
-import { setVisible } from '../../redux-toolkit/dateReducer'
 
 const { Option } = Select
 
 function CreateEvent({ showPopover, value }) {
-  const dispatch = useDispatch()
   const [hours] = useState([
     '09:00',
     '10:00',

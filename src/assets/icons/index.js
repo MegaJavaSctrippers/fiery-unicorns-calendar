@@ -23,6 +23,7 @@ import hideEyeSVG from './hideEye.svg'
 import locationSVG from './location.svg'
 import blueClockSVG from './blueClock.svg'
 import whitePlusSVG from './whitePlus.svg'
+import circleCloseSVG from './circleClose.svg'
 
 const icons = {
   calendarSVG,
@@ -50,6 +51,7 @@ const icons = {
   locationSVG,
   blueClockSVG,
   whitePlusSVG,
+  circleCloseSVG,
 }
 
 export default icons

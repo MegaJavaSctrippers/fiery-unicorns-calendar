@@ -15,23 +15,26 @@ function CalendarParent({ value }) {
   }
   const content = () => <CreateEvent showPopover={showPopover} value={value} />
   return (
-    <Popover
-      overlayClassName="centered_popover"
-      content={content}
-      placement="right"
-      trigger="click"
-      visible={visible}
-      onClick={() => setVisible(!visible)}
-    >
-      <div className="bektemir">
-        {data.map((item) => {
-          if (item.date === moment(value).format('YYYY-MM-DD')) {
-            return <CalendarChild key={item.name} item={item} />
-          }
-          return null
-        })}
-      </div>
-    </Popover>
+    <div>
+      <div className={visible ? 'disable_select' : null} />
+      <Popover
+        overlayClassName="centered_popover"
+        content={content}
+        placement="right"
+        trigger="click"
+        visible={visible}
+        onClick={() => setVisible(!visible)}
+      >
+        <div className="bektemir">
+          {data.map((item) => {
+            if (item.date === moment(value).format('YYYY-MM-DD')) {
+              return <CalendarChild key={item.name} item={item} />
+            }
+            return null
+          })}
+        </div>
+      </Popover>
+    </div>
   )
 }
 

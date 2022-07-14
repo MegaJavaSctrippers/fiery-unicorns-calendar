@@ -46,10 +46,10 @@ function CalendarPage() {
       <CalendarItem hour={hour} />
     </div>
   ))
-  const bool = true
+
   const dateCellRender = (value) => {
     if (value) {
-      return <CalendarParent visible={bool} value={value} />
+      return <CalendarParent value={value} />
     }
     return null
   }
