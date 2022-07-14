@@ -22,6 +22,12 @@ function CalendarParent({ value }) {
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
 
+  const calendarChild = data.map((item) => {
+    if (item.date === moment(value).format('YYYY-MM-DD')) {
+      return <CalendarChild key={item.name} item={item} />
+    }
+    return null
+  })
   return (
     <div>
       <div
@@ -31,12 +37,7 @@ function CalendarParent({ value }) {
         onClick={handleClick}
         className="bektemir"
       >
-        {data.map((item) => {
-          if (item.date === moment(value).format('YYYY-MM-DD')) {
-            return <CalendarChild key={item.name} item={item} />
-          }
-          return null
-        })}
+        {calendarChild}
       </div>
       <Popover
         id={id}
@@ -53,22 +54,6 @@ function CalendarParent({ value }) {
       >
         <CreateEvent handleClose={handleClose} value={value} />
       </Popover>
-
-      {/* <Popover
-        overlayClassName="centered_popover"
-        content={content}
-        placement="right"
-        trigger="click"
-      >
-        <div className="bektemir">
-          {data.map((item) => {
-            if (item.date === moment(value).format('YYYY-MM-DD')) {
-              return <CalendarChild key={item.name} item={item} />
-            }
-            return null
-          })}
-        </div>
-      </Popover> */}
     </div>
   )
 }

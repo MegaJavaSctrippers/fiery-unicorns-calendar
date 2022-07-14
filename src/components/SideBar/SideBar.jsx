@@ -58,7 +58,7 @@ function SideBar() {
           transitionDuration="auto"
           className="material_popover"
           anchorPosition={{
-            left: 400,
+            left: 380,
             top: 50,
           }}
           anchorReference="anchorPosition"

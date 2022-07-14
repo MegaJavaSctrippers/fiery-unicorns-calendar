@@ -12,26 +12,9 @@ const { Option } = Select
 
 function CreateEvent({ handleClose }) {
   const selectedDate = useSelector((state) => state.date.selectedDate)
-  const [hours] = useState([
-    '09:00',
-    '10:00',
-    '11:00',
-    '12:00',
-    '13:00',
-    '14:00',
-    '15:00',
-    '16:00',
-    '17:00',
-    '18:00',
-  ])
-  const [repeat] = useState([
-    'Не повторят',
-    'Ежедневно',
-    'По будням (Пн-Пт)',
-    'Еженедельно (среда)',
-    'Ежемесячно (1ая среда)',
-    'Ежегодно (2 сент.)',
-  ])
+  const hours = useSelector((state) => state.date.hours)
+  const repeat = useSelector((state) => state.date.repeat)
+
   const hourOption = hours.map((hour) => (
     <Option key={hour} value={hour}>
       {hour}

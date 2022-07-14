@@ -13,8 +13,6 @@ function CalendarItem(props) {
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const { hour } = props
 
-  // Fake meetings data
-
   const handleHover = (data) => {
     if (data) {
       return (
