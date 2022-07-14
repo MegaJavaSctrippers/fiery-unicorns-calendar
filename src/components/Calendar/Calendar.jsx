@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Calendar } from 'antd'
 import locale from 'antd/es/date-picker/locale/ru_RU'
@@ -15,20 +15,10 @@ function CalendarPage() {
   const week = useSelector((state) => state.date.week)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dateType = useSelector((state) => state.date.dateType)
+  const hours = useSelector((state) => state.date.hours)
 
   const dispatch = useDispatch()
-  const [hours] = useState([
-    '09:00',
-    '10:00',
-    '11:00',
-    '12:00',
-    '13:00',
-    '14:00',
-    '15:00',
-    '16:00',
-    '17:00',
-    '18:00',
-  ])
+
   const weekHeader = week.map((item) => (
     <div key={item} className={style.week}>
       <CalendarHeader day={item} />
@@ -47,12 +37,7 @@ function CalendarPage() {
     </div>
   ))
 
-  const dateCellRender = (value) => {
-    if (value) {
-      return <CalendarParent value={value} />
-    }
-    return null
-  }
+  const dateCellRender = (value) => <CalendarParent value={value} />
 
   return (
     <div className={style.calendar}>

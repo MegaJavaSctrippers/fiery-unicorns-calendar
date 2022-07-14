@@ -1,12 +1,15 @@
 .create_event{
 
   .create_content{
-    padding: 12px 18px;
+    padding:  18px;
     .create_header{
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 10px;
+      button:focus{
+        box-shadow:none !important;
+      }
       
       h2{
         font-size: 19px;
@@ -72,6 +75,7 @@
       width: 24px;
       height: 24px;
       border-radius: 4px;
+      cursor:pointer;
     }
     label{
       display: block;

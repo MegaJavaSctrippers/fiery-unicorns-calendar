@@ -39,7 +39,6 @@ function CalendarChild({ item }) {
         <span className={style.label} />
         <span className={style.hour}>{item.hours}</span>
         {item.name}
-        ...
       </div>
     </Popover>
   )

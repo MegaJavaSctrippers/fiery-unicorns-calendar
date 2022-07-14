@@ -85,7 +85,7 @@
         "ignorePackages",
         {
           "js": "never",
-          "jsx": "never",
+          "jsx": "never"
         }
       ],
       // prettier

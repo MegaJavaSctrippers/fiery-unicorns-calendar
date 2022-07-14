@@ -1,6 +1,5 @@
 import React from 'react'
 import classNames from 'classnames'
-import $ from 'jquery'
 import icons from '../../assets/icons'
 import style from './Invitation.module.scss'
 import InivitationItem from './InvitationItem'
@@ -14,7 +13,7 @@ function Invitation() {
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog modal-dialog-centered" style={{ 'max-width': '600px' }}>
+      <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: '600px' }}>
         <div className="modal-content">
           <div className={style.popup_header}>
             <h5>Пригласить</h5>
@@ -27,18 +26,9 @@ function Invitation() {
           </div>
           <div className={style.popup_search}>
             <img alt="" src={icons.searchSVG} />
-            <input />
+            <input type="text" />
           </div>
           <div className={style.popup_body}>
-            <InivitationItem />
-            <InivitationItem />
-            <InivitationItem />
-            <InivitationItem />
-            <InivitationItem />
-            <InivitationItem />
-            <InivitationItem />
-            <InivitationItem />
-            <InivitationItem />
             <InivitationItem />
           </div>
           <div className="d-flex align-items-center">
@@ -52,11 +42,7 @@ function Invitation() {
             </div>
           </div>
           <div className="d-flex justify-content-end">
-            <button
-              onClick={() => $('#invitation').modal('hide')}
-              className={style.popup_btns}
-              type="button"
-            >
+            <button className={style.popup_btns} type="button">
               Пригласить
             </button>
           </div>

@@ -2,13 +2,16 @@ import React, { useState } from 'react'
 import classNames from 'classnames'
 import { DatePicker, Space, Select } from 'antd'
 import PropTypes from 'prop-types'
+import moment from 'moment'
 import locale from 'antd/es/date-picker/locale/ru_RU'
+import { useSelector } from 'react-redux'
 import style from './CreateEvent.module.scss'
 import icons from '../../assets/icons'
 
 const { Option } = Select
 
-function CreateEvent({ showPopover, value }) {
+function CreateEvent({ handleClose }) {
+  const selectedDate = useSelector((state) => state.date.selectedDate)
   const [hours] = useState([
     '09:00',
     '10:00',
@@ -46,12 +49,7 @@ function CreateEvent({ showPopover, value }) {
         <div className={classNames(style.create_content)}>
           <div className={style.create_header}>
             <h2 id="exampleModalLabel">Новое событие</h2>
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={() => showPopover()}
-            />
+            <button type="button" className="btn-close" aria-label="close" onClick={handleClose} />
           </div>
           <div className={style.create_body}>
             <label htmlFor="name">
@@ -74,7 +72,7 @@ function CreateEvent({ showPopover, value }) {
                   format="YYYY-MM-DD dddd"
                   showToday={false}
                   mode="date"
-                  value={value}
+                  defaultValue={moment(selectedDate)}
                 />
               </Space>
               <Space>
@@ -156,7 +154,7 @@ function CreateEvent({ showPopover, value }) {
             </div>
 
             <div className="d-flex justify-content-end">
-              <button type="button" className={style.save}>
+              <button onClick={handleClose} type="button" className={style.save}>
                 Сохранить
               </button>
             </div>
@@ -166,8 +164,8 @@ function CreateEvent({ showPopover, value }) {
     </div>
   )
 }
+
 CreateEvent.propTypes = {
-  value: PropTypes.object.isRequired,
-  showPopover: PropTypes.func.isRequired,
+  handleClose: PropTypes.func.isRequired,
 }
 export default CreateEvent

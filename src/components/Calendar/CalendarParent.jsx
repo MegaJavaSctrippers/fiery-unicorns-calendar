@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Popover } from 'antd'
+import React from 'react'
+import { Popover } from '@mui/material'
 import { useSelector } from 'react-redux'
 import moment from 'moment'
 import { PropTypes } from 'prop-types'
@@ -8,22 +8,57 @@ import CalendarChild from './CalendarChild'
 
 function CalendarParent({ value }) {
   const data = useSelector((state) => state.date.events)
-  const [visible, setVisible] = useState(false)
 
-  const showPopover = () => {
-    setVisible(!visible)
+  const [anchorEl, setAnchorEl] = React.useState(null)
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
   }
-  const content = () => <CreateEvent showPopover={showPopover} value={value} />
+
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
+
   return (
     <div>
-      <div className={visible ? 'disable_select' : null} />
+      <div
+        aria-hidden="true"
+        aria-describedby={id}
+        variant="contained"
+        onClick={handleClick}
+        className="bektemir"
+      >
+        {data.map((item) => {
+          if (item.date === moment(value).format('YYYY-MM-DD')) {
+            return <CalendarChild key={item.name} item={item} />
+          }
+          return null
+        })}
+      </div>
       <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        transitionDuration="auto"
+        marginThreshold={60}
+        className="material_popover"
+        anchorOrigin={{
+          vertical: 'center',
+          horizontal: 'right',
+        }}
+      >
+        <CreateEvent handleClose={handleClose} value={value} />
+      </Popover>
+
+      {/* <Popover
         overlayClassName="centered_popover"
         content={content}
         placement="right"
         trigger="click"
-        visible={visible}
-        onClick={() => setVisible(!visible)}
       >
         <div className="bektemir">
           {data.map((item) => {
@@ -33,7 +68,7 @@ function CalendarParent({ value }) {
             return null
           })}
         </div>
-      </Popover>
+      </Popover> */}
     </div>
   )
 }
