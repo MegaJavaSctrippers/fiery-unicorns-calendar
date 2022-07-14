@@ -47,56 +47,5 @@
     }
     
   }
-  .labels{
-    position: absolute;
-    top:370px;
-    width: calc(100% - 40px);
-   
-    .labels_header{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
 
-      .labels_title {
-        color:#4B84F4;
-        font-size: 16px;
-        font-weight: 400;
-      }
-      .labels_add{
-        border:1px solid #4B84F4;
-        height: 24px;
-        width: 24px;
-        border-radius: 6px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-      }
-      
-    }
-    .labels_color{
-      display: inline-block;
-      border-radius: 4px;
-      width: 15px;
-      height: 15px;
-      margin-right: 10px;
-      
-
-
-    }
-    .labels_private{
-      background: #E37DAC;
-    }
-    .labels_work{
-      background-color: #80DEA0;
-    }
-    .labels_project{
-      background: #F4BB4B;
-    }
-    .labels_party{
-      background: #664BF4;
-    }
-    
-  }
 }

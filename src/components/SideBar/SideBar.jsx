@@ -1,6 +1,5 @@
 import React from 'react'
 import { DatePicker, Space } from 'antd'
-import classNames from 'classnames'
 import { Popover } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
 import locale from 'antd/es/date-picker/locale/ru_RU'
@@ -10,6 +9,7 @@ import icons from '../../assets/icons'
 import { setSelectedDate } from '../../redux-toolkit/dateReducer'
 import 'moment/locale/ru'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
+import Labels from '../Labels/Labels'
 
 function SideBar() {
   const selectedDate = useSelector((state) => state.date.selectedDate)
@@ -59,7 +59,7 @@ function SideBar() {
           className="material_popover"
           anchorPosition={{
             left: 400,
-            top: 60,
+            top: 50,
           }}
           anchorReference="anchorPosition"
           anchorOrigin={{
@@ -82,37 +82,10 @@ function SideBar() {
             showToday={false}
             locale={locale}
             value={moment(selectedDate)}
-            onChange={(value) => {
-              selectDate(value)
-            }}
+            onChange={(value) => selectDate(value)}
           />
         </Space>
-
-        <div className={style.labels}>
-          <div className={style.labels_header}>
-            <h2 className={style.labels_title}>Мои метки</h2>
-            <div className={style.labels_add}>
-              <img src={icons.plusSVG} alt="" />
-            </div>
-          </div>
-
-          <div className="d-flex align-items-center mb-1">
-            <span className={classNames(style.labels_color, style.labels_private)}> </span>
-            Личный
-          </div>
-          <div className="d-flex align-items-center mb-1">
-            <span className={classNames(style.labels_color, style.labels_work)}> </span>
-            Рабочий
-          </div>
-          <div className="d-flex align-items-center mb-1">
-            <span className={classNames(style.labels_color, style.labels_party)}> </span>
-            Мероприятия
-          </div>
-          <div className="d-flex align-items-center mb-1">
-            <span className={classNames(style.labels_color, style.labels_project)}> </span>
-            Проекты
-          </div>
-        </div>
+        <Labels />
       </div>
     </div>
   )
