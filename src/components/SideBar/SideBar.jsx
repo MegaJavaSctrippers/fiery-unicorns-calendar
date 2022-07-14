@@ -10,6 +10,7 @@ import { setSelectedDate } from '../../redux-toolkit/dateReducer'
 import 'moment/locale/ru'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 import Labels from '../Labels/Labels'
+import Invitation from '../../modals/Invitation/Inivitation'
 
 function SideBar() {
   const selectedDate = useSelector((state) => state.date.selectedDate)
@@ -69,7 +70,7 @@ function SideBar() {
         >
           <CreateEvent handleClose={handleClose} />
         </Popover>
-
+        <Invitation />
         <Space direction="vertical">
           <DatePicker
             open="true"

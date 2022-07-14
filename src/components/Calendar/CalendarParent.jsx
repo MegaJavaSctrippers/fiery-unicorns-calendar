@@ -52,7 +52,7 @@ function CalendarParent({ value }) {
           horizontal: 'right',
         }}
       >
-        <CreateEvent handleClose={handleClose} value={value} />
+        <CreateEvent handleClose={handleClose} />
       </Popover>
     </div>
   )

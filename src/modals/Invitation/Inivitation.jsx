@@ -10,7 +10,6 @@ function Invitation() {
       className={classNames('modal fade', style.popup_modal)}
       id="invitation"
       tabIndex="-1"
-      aria-labelledby="exampleModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: '600px' }}>
@@ -29,6 +28,11 @@ function Invitation() {
             <input type="text" />
           </div>
           <div className={style.popup_body}>
+            <InivitationItem />
+            <InivitationItem />
+            <InivitationItem />
+            <InivitationItem />
+            <InivitationItem />
             <InivitationItem />
           </div>
           <div className="d-flex align-items-center">

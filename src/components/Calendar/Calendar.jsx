@@ -62,7 +62,7 @@ function CalendarPage() {
             locale={locale}
             value={moment(selectedDate)}
             headerRender={() => false}
-            onSelect={(value) => {
+            onChange={(value) => {
               dispatch(setSelectedDate(moment(value).format()))
             }}
           />

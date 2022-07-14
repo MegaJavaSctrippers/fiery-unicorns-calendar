@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 import { DatePicker, Space, Select } from 'antd'
 import PropTypes from 'prop-types'
@@ -7,6 +7,7 @@ import locale from 'antd/es/date-picker/locale/ru_RU'
 import { useSelector } from 'react-redux'
 import style from './CreateEvent.module.scss'
 import icons from '../../assets/icons'
+import Users from './Users'
 
 const { Option } = Select
 
@@ -87,22 +88,7 @@ function CreateEvent({ handleClose }) {
                 <img src={icons.whitePlusSVG} alt="" />
               </div>
             </div>
-            <div className={style.invite_box}>
-              <div className={style.invite_user}>
-                <img src={icons.avatar} alt="" />
-                <div>
-                  <h4>Jenny Wilson</h4>
-                  <span>Intern</span>
-                </div>
-              </div>
-              <div className={style.invite_user}>
-                <img src={icons.avatar} alt="" />
-                <div>
-                  <h4>Jenny Wilson</h4>
-                  <span>Intern</span>
-                </div>
-              </div>
-            </div>
+            <Users />
             <span className={style.label_span}>Помещение</span>
             <div className={style.dates}>
               <Space className="select_full_width">
