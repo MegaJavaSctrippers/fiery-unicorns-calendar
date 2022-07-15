@@ -42,7 +42,8 @@
         {
           "allow": [
             "warn",
-            "error"
+            "error",
+            "log"
           ]
         }
       ],
@@ -84,7 +85,7 @@
         "ignorePackages",
         {
           "js": "never",
-          "jsx": "never",
+          "jsx": "never"
         }
       ],
       // prettier

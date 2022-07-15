@@ -1,0 +1,335 @@
+html{
+  scrollbar-width: none !important;
+}
+body{
+  margin:0;
+  padding: 0;
+  font-size: 14px;
+  scrollbar-width:none !important;
+  -webkit-scrollbar-width:none !important;
+  font-family: 'Roboto' !important;
+  
+}
+body::-webkit-scrollbar{
+  display:none;
+}
+
+a, a:hover{
+  text-decoration: none;
+  color:#000;
+}
+select:focus,input:focus,button:focus{
+  outline: none;
+}
+h1,h2,h3,h4{
+  margin-bottom: 0 !important;
+}
+button{
+  border:none;
+  background: none;
+}
+
+
+/* Date picker style */
+
+ 
+.main_date{
+  width: calc(17% - 40px) !important;
+}
+.ant-picker-panel-container{
+  box-shadow: none !important;
+}
+.ant-picker-header .ant-picker-header-super-next-btn,
+.ant-picker-header .ant-picker-header-super-prev-btn{
+  display: none !important;
+}
+.ant-picker-panel{
+  border:none !important;
+
+}
+.create_date .ant-picker-date-panel{
+  width: 208px !important;
+  border: 1px solid rgba(46, 46, 46, 0.2);
+  padding: 5px 10px;
+}
+.create_date.ant-picker-dropdown{
+  z-index:1060 !important;
+}
+.ant-picker-cell{
+  padding: 0 !important;
+}
+.ant-picker-date-panel .ant-picker-body{
+  padding: 0 !important;
+}
+.ant-picker-panel-focused, .ant-picker-date-panel,
+.ant-picker-panel-container .ant-picker-panel .ant-picker-content, .ant-picker-panel-container .ant-picker-panel table{
+  width: 100% !important;
+}
+.ant-picker-date-panel .ant-picker-content{
+   /* width: 0 !important; */
+   table-layout: auto !important;
+}
+ .ant-picker-month-panel .ant-picker-content {
+  height: 174px !important;
+}
+.ant-picker-header {
+  border:none !important;
+  padding: 0 5px !important;
+}
+.ant-picker-content th, .ant-picker-content td{
+  font-size: 13px !important;
+}
+.ant-picker-content th{
+  font-size: 12px !important;
+  color:#9C9D9F !important;
+}
+.ant-picker-prev-icon, .ant-picker-next-icon, .ant-picker-super-prev-icon, .ant-picker-super-next-icon, .ant-picker-prev-icon::before,
+ .ant-picker-next-icon::before, .ant-picker-super-prev-icon::before, .ant-picker-super-next-icon::before{
+  width: 10px !important;
+  height: 10px !important;
+  color:#4B84F4 !important;
+}
+.main_date .ant-picker-cell-in-view.ant-picker-cell-selected .ant-picker-cell-inner{
+  background: #4B84F4 !important;
+  opacity: 0.8;
+  border-radius:6px;
+
+}
+
+.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before{
+  border:1px solid #4B84F4 !important;
+  border-radius: 6px !important; 
+  opacity: 0.8;
+}
+/* Calendar ant design */
+
+ 
+.calendar_table .ant-picker-content thead{
+  background-color: #4B84F4;
+  
+}
+
+.calendar_table .ant-picker-content thead tr th {
+  color: rgba(255, 255, 255, 0.8) !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  text-align: left !important;
+  padding-left: 16px !important;
+  padding-right: 0 !important;
+  height: 30px !important;
+  border-right: 1px solid rgba(35, 35, 35, 0.1) !important;
+}
+
+.calendar_table .ant-picker-cell-in-view{
+  width: 14%;
+}
+
+.calendar_table .ant-picker-calendar-date:hover{
+  background:none !important;
+}
+.disable_select{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: red;
+  z-index: 1060;
+  opacity: 0;
+  top: 0;
+  left: 0;
+
+}
+.calendar_table .ant-picker-calendar-date{
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: left;
+  padding-top: 4px !important;
+  border:none !important;
+  font-size: 14px !important;
+  width:100% !important;
+  position: relative;
+}
+.calendar_table .ant-picker-calendar-date-value{
+  padding-left: 16px !important;
+}
+.calendar_table .ant-picker-cell{
+  border-right: 1px solid rgba(35, 35, 35, 0.1) !important;
+  border-bottom: 1px solid rgba(35, 35, 35, 0.1) !important;
+
+}
+.calendar_table .ant-picker-cell:last-child{
+  border-right:none !important;
+}
+
+.calendar_table .ant-picker-calendar-date-content{
+  height:78px !important;
+}
+.datepicker_input{
+  border: 1px solid rgba(46, 46, 46, 0.2) !important;
+  border-radius: 8px !important;
+  height:37px !important;
+  box-shadow:none !important;
+  width: 200px !important;
+}
+
+/* Selector style antd  */
+
+.select_type .ant-select-selector{
+  box-shadow: 0px 1px 5px rgba(55, 55, 55, 0.17) !important;
+  border-radius: 8px !important;
+  border: none !important;
+  padding: 0 20px !important;
+  width: 110px !important;
+}
+.ant-select-item-option-selected{
+  font-weight: 400 !important;
+}
+.ant-select-dropdown{
+  z-index: 1060 !important;
+  border-radius: 8px !important;
+}
+.bektemir{
+  height: 70% !important;
+  position: absolute;
+  overflow: auto;
+  width: 100%;
+  top:28px;
+  
+
+}
+.general_select.hour{
+  margin: 0 5px;
+}
+.general_select .ant-select-selector{
+  border: 1px solid rgba(46, 46, 46, 0.2) !important;
+  border-radius: 8px !important;
+  height: 37px !important; 
+  display: flex;
+  align-items: center;
+  padding: 0 16px !important;
+  box-shadow: none !important;
+  color:#000 !important;
+  font-size: 14px;
+  font-family: 'Roboto';
+}
+.auth_select .ant-select-selector{
+  border-color:rgba(46,46,46,0.1) !important;
+}
+
+.ant-select-selector:focus-visible{
+  box-shadow: none !important;
+}
+.margin_right .ant-select-selector{
+  margin-right: 10px !important;
+}
+.select_repeat{
+  width: 170px !important;
+}
+.select_full_width, .ant-space-item, .select_full_width .ant-space-item .general_select{
+  width: 100% !important;
+}
+.margin_right .ant-space-item{
+  margin-right:10px !important
+}
+/* dropdown styles bootstrap*/
+
+.dropdown-toggle:after{
+  display: none !important;
+}
+.dropdown-menu{
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+  right: 0;
+  width: 464px;
+  border:none;
+  height: 300px;
+  transition: .3s;
+  transform: translate(0px, 50px);
+  margin-top: 6px !important;
+  
+}
+
+.error{
+  font-size: 14px !important;
+  margin-bottom: 20px;
+  color:red !important;
+  display: block;
+}
+
+/* Material popover */
+
+.material_popover{
+  z-index:1050 !important;
+}
+
+/*  popover  antd */
+
+.ant-popover-placement-bottomRight{
+  top:33px !important;
+}
+
+.ant-popover-placement-rightTop{
+  padding-left: 0 !important;
+}
+.ant-popover-placement-leftTop, .ant-popover-placement-left{
+  padding-right: 0 !important;
+}
+.ant-popover-arrow{
+  display: none !important;
+}
+
+
+.ant-popover-inner{
+  border-radius: 8px !important;
+}
+.ant-popover-inner-content{
+  padding: 12px 0;
+  border-radius:8px !important;
+}
+.ant-popover-arrow-content::before{
+  background-color: #F8FAFF !important;
+  
+}
+.event_popup .ant-popover-inner-content{
+  padding: 0 !important;
+}
+
+.event_popup .ant-popover-inner{
+  background-color: #F8FAFF !important;
+  padding: 16px !important;
+  width: 328px;
+} 
+
+/* modal bootstrap */
+
+.modal-content{
+  border:none;
+  box-shadow: 0px 2px 25px rgba(136, 136, 136, 0.35);
+  border-radius: 8px;
+  padding: 12px 18px;
+  padding-bottom: 12px;
+  padding-bottom: 24px;
+}
+
+
+button[disabled=disabled], button:disabled {
+  background: #0A253F !important;
+  opacity: 0.2;
+}
+
+
+/* scroll bar style */
+
+::-webkit-scrollbar {
+  background: #CFCFCF;
+  border-radius: 8px;
+  width: 2px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}

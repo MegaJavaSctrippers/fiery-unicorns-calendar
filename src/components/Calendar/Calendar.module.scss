@@ -1,0 +1,96 @@
+.calendar{
+  background: #fff;
+  margin: 24px;
+  margin-bottom: 0;
+ 
+ 
+  .month{
+    height: calc(100vh - 72px);
+    overflow-y: auto;
+    scrollbar-width:none;
+    -webkit-scrollbar-width:none;
+    
+    .event_name{
+      font-size: 12px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      // width: 148px;
+      white-space: nowrap;
+      border-radius: 4px;
+      padding-left: 16px !important;
+     &:hover{
+      background: rgba(75, 132, 244, 0.25) !important;
+      transition:0.5s;
+    }
+    }
+    .label{
+      display: inline-block;
+      background: #80DEA0;
+      width: 10px;
+      height: 10px;
+      border-radius: 10px;
+    }
+    .hour{
+      margin: 0 5px;
+    }
+  }
+  .calendar_content{
+    height: calc(100vh - 112px);
+    overflow-y: auto;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    &::-webkit-scrollbar{
+      display:none;
+    }
+    
+    .hours{
+      width: 7%;
+      display: flex;
+      align-items: center;
+      height: 72px;
+      justify-content: center;
+      border-bottom: 1px solid rgba(35, 35, 35, 0.1);
+      box-sizing: border-box;
+    }
+
+  }
+  .calendar_header{
+    background: #4B84F4;
+    box-sizing: border-box;
+    color:#fff;
+    display: flex;
+    align-items: center;
+    
+    
+    .clock_calendar{
+      width: 7%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+    }
+  
+    
+    .week{
+      width:13.28%;
+      padding-left:16px;
+      border-left: 1px solid rgba(35, 35, 35, 0.1);
+      min-height:24px;
+      }
+      .day{
+        border-left: 1px solid rgba(35, 35, 35, 0.1);
+      }
+  }
+ 
+}
+.event_popover{
+  span{
+    font-size: 14px;
+    color:#2E2E2E;
+  }
+  h3{
+    font-size: 14px !important;
+    margin-bottom: 10px !important;
+    font-family: "Roboto";
+  }
+}

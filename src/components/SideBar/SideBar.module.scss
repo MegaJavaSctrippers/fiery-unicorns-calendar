@@ -1,0 +1,51 @@
+.sidebar{
+  width:17%;
+  background: #fff;
+  height: 100vh;
+  position: absolute;
+  
+  
+  
+  .header{
+    display: flex;
+    align-items: center;
+    height:48px;
+    background-color:#4B84F4;
+    padding-left: 20px;
+    margin-bottom: 16px;
+    
+    .title{
+      margin-bottom: 0;
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      margin-left: 10px;
+      color:#fff;
+    }
+    
+    .logo{
+      width: 21px;
+      height: 21px;
+
+    }
+  }
+
+  .content{
+    padding: 0 20px;
+
+    .create_btn{
+      border: 1px solid #4B84F4;
+      border-radius: 10px;
+      background:none;
+      width: 100%;
+      height: 40px;
+      color: #4B84F4;
+      font-weight: 500;
+      font-family: 'Roboto';
+      font-size: 15px;
+
+    }
+    
+  }
+
+}

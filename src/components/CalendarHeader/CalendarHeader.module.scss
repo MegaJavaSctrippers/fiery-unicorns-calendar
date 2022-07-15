@@ -1,0 +1,29 @@
+  .day{
+      border: none !important;
+      padding-left: 16px;
+      margin-top: 2px;
+      
+      .today{
+        background:#fff;
+        width: 16px;
+        height: 16px;
+        border-radius:16px;
+        font-size: 15px;
+        color:#4B84F4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+      }
+        h4{
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 14px;
+          font-weight: 400;
+        }
+        span{
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 20px;
+  
+        }
+      }
