@@ -7,7 +7,6 @@ body{
   font-size: 14px;
   scrollbar-width:none !important;
   -webkit-scrollbar-width:none !important;
-  font-family: 'Roboto' !important;
   
 }
 body::-webkit-scrollbar{
@@ -103,12 +102,6 @@ button{
 }
 /* Calendar ant design */
 
- 
-.calendar_table .ant-picker-content thead{
-  background-color: #4B84F4;
-  
-}
-
 .calendar_table .ant-picker-content thead tr th {
   color: rgba(255, 255, 255, 0.8) !important;
   font-weight: 400 !important;
@@ -118,6 +111,10 @@ button{
   padding-right: 0 !important;
   height: 30px !important;
   border-right: 1px solid rgba(35, 35, 35, 0.1) !important;
+  background-color: #4B84F4;
+  position: sticky;
+  top:0;
+  z-index:1050;
 }
 
 .calendar_table .ant-picker-cell-in-view{
@@ -265,6 +262,7 @@ button{
 
 .ant-popover-placement-bottomRight{
   top:33px !important;
+  z-index:1050 !important;
 }
 
 .ant-popover-placement-rightTop{

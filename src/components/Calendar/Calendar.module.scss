@@ -9,6 +9,9 @@
     overflow-y: auto;
     scrollbar-width:none;
     -webkit-scrollbar-width:none;
+    &::-webkit-scrollbar{
+      display: none;
+    }
     
     .event_name{
       font-size: 12px;
