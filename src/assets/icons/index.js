@@ -24,6 +24,13 @@ import locationSVG from './location.svg'
 import blueClockSVG from './blueClock.svg'
 import whitePlusSVG from './whitePlus.svg'
 import circleCloseSVG from './circleClose.svg'
+import whiteSearchSVG from './whiteSearch.svg'
+import editSVG from './edit.svg'
+import deleteSVG from './delete.svg'
+import roomSVG from './room.svg'
+import refreshSVG from './refresh.svg'
+import organizationSVG from './organization.svg'
+import usersSVG from './users.svg'
 
 const icons = {
   calendarSVG,
@@ -52,6 +59,13 @@ const icons = {
   blueClockSVG,
   whitePlusSVG,
   circleCloseSVG,
+  whiteSearchSVG,
+  editSVG,
+  refreshSVG,
+  deleteSVG,
+  roomSVG,
+  organizationSVG,
+  usersSVG,
 }
 
 export default icons

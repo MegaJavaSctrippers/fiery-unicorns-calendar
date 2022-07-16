@@ -2,7 +2,8 @@ import React from 'react'
 import icons from '../../assets/icons'
 import style from './CreateEvent.module.scss'
 
-function Users() {
+function Users(props) {
+  console.log(props)
   return (
     <div className={style.invite_box}>
       <div className={style.invite_user}>

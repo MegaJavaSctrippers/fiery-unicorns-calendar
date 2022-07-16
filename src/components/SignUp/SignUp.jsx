@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
+import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
@@ -28,12 +29,27 @@ function SignUp() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
       console.log('password are not same')
     } else {
-      navigate('/')
+      const data = new FormData()
+      data.append('name', name)
+      data.append('surname', surname)
+      data.append('middlename', lastname)
+      data.append('password', password)
+      data.append('department_id', department)
+      data.append('position_id', job)
+      await axios
+        .post('https://checkit24.herokuapp.com/api/user/reg/', data)
+        .then((res) => {
+          console.log(res)
+          navigate('/')
+        })
+        .catch((e) => {
+          console.log(e)
+        })
     }
   }
   const enabled = Object.values(formData).every((item) => item.length > 0)

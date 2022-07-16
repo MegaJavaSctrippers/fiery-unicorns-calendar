@@ -196,6 +196,7 @@ button{
 .general_select.hour{
   margin: 0 5px;
 }
+
 .general_select .ant-select-selector{
   border: 1px solid rgba(46, 46, 46, 0.2) !important;
   border-radius: 8px !important;
@@ -330,4 +331,18 @@ button[disabled=disabled], button:disabled {
  
 ::-webkit-scrollbar-thumb {
   background: #888; 
+}
+
+
+
+/*  libraries style in admin */
+
+.admin_select .ant-select-selector{
+  height:32px !important;
+}
+
+/* antd dropdown */
+
+.calendar_dropdown .ant-dropdown-menu{
+  border-radius:12px !important;
 }

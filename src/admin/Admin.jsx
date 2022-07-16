@@ -1,0 +1,19 @@
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import AdminSideBar from './components/AdminSideBar/AdminSideBar'
+import style from './Admin.module.scss'
+import AdminHeader from './components/AdminHeader/AdminHeader'
+
+function Admin() {
+  return (
+    <div className={style.admin}>
+      <AdminSideBar />
+      <div className={style.dashboard}>
+        <AdminHeader />
+        <Outlet />
+      </div>
+    </div>
+  )
+}
+
+export default Admin

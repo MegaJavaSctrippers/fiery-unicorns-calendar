@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { useNavigate, Link } from 'react-router-dom'
+import axios from 'axios'
 import style from './SignIn.module.scss'
 import icons from '../../assets/icons'
 
@@ -18,14 +19,21 @@ function SignIn() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault()
-    if (email !== 'kudajberdievbektemir@gmail.com' && password !== 123) {
-      setError(true)
-    } else {
-      setError(false)
-      navigate('/')
-    }
+    await axios
+      .post('https://checkit24.herokuapp.com/api/login/', {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((res) => {
+        console.log(res)
+        navigate('/')
+      })
+      .catch((e) => {
+        setError(false)
+        console.log(e.message)
+      })
   }
   const enabled = email.length > 0 && password.length > 0
 

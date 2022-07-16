@@ -1,0 +1,46 @@
+.header{
+  background-color: #fff;
+  height:48px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  font-family: 'Roboto' !important;
+
+  .select_wrapper{
+    width: 200px;
+    margin-right: 8px;
+  }
+  .search_btn{
+    height: 32px;
+    width: 32px;
+    background: #4B84F4;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+  }
+  .refresh_btn{
+    height: 32px;
+    width: 32px;
+    border: 1px solid rgba(75, 132, 244, 0.7);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right:30px;
+  }
+  .header_btn{
+    background: #4B84F4;
+    border-radius: 8px;
+    height: 32px;
+    padding: 0 25px;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+  }
+  .dropdown_create{
+    background: #fff;
+  }
+}
