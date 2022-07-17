@@ -1,9 +1,11 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import React from 'react'
 import icons from '../../../assets/icons'
 import style from './AdminSideBar.module.scss'
 
 function AdminSideBar() {
+  const location = useLocation()
+  const active = location.pathname.split('/').pop()
   return (
     <div className={style.sidebar}>
       <div className={style.header}>
@@ -12,15 +14,15 @@ function AdminSideBar() {
       </div>
 
       <div className={style.menu}>
-        <Link className={style.sidebar_link} to="/admin">
+        <Link className={active === 'admin' ? style.active_link : style.sidebar_link} to="/admin">
           <img src={icons.organizationSVG} alt="" />
           <span>Организация</span>
         </Link>
-        <Link className={style.sidebar_link} to="users">
+        <Link className={active === 'user' ? style.active_link : style.sidebar_link} to="users">
           <img src={icons.usersSVG} alt="" />
           <span>Пользователи</span>
         </Link>
-        <Link className={style.sidebar_link} to="accommodation">
+        <Link className={active === 'rooms' ? style.active_link : style.sidebar_link} to="rooms">
           <img src={icons.roomSVG} alt="" />
           <span>Помещение</span>
         </Link>

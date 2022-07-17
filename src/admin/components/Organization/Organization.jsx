@@ -7,7 +7,6 @@ import style from './Organization.module.scss'
 
 function Organization() {
   const create = useSelector((state) => state.admin.create)
-  console.log(create)
   const handleCreate = () => {
     switch (create) {
       case 'position':
