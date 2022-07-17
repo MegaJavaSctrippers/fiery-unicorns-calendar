@@ -1,25 +1,33 @@
 import React from 'react'
 import { Space, Select, Dropdown, Menu } from 'antd'
+import { useDispatch } from 'react-redux'
 import icons from '../../../assets/icons'
 import style from './AdminHeader.module.scss'
+import { setCreate } from '../../../store/admin/adminReducer'
 
 const { Option } = Select
 
 function AdminHeader() {
+  const dispatch = useDispatch()
+
+  const handleClick = (e) => {
+    dispatch(setCreate(e.key))
+  }
   const menu = (
     <Menu
+      onClick={handleClick}
       items={[
         {
           label: <span>Организация</span>,
-          key: '0',
+          key: 'organization',
         },
         {
           label: <span>Отдел</span>,
-          key: '1',
+          key: 'department',
         },
         {
           label: <span>Должность</span>,
-          key: '3',
+          key: 'position',
         },
       ]}
     />

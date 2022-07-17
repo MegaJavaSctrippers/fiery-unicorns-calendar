@@ -11,12 +11,7 @@ import { ReactComponent as FolderIcon } from '../../assets/icons/folder.svg'
 import { ReactComponent as ClockIcon } from '../../assets/icons/clock.svg'
 import { ReactComponent as ProfileIcon } from '../../assets/icons/profile.svg'
 import { ReactComponent as JobIcon } from '../../assets/icons/job.svg'
-import {
-  setDateType,
-  setSelectedDate,
-  addDate,
-  subrtactDate,
-} from '../../redux-toolkit/dateReducer'
+import { setDateType, setSelectedDate, addDate, subrtactDate } from '../../store/date/dateReducer'
 
 const { Option } = Select
 

@@ -193,6 +193,7 @@ button{
   
 
 }
+
 .general_select.hour{
   margin: 0 5px;
 }
@@ -213,6 +214,15 @@ button{
   border-color:rgba(46,46,46,0.1) !important;
 }
 
+.create_select{
+  margin-right: 10px;
+}
+.create_select .ant-select-selector{
+  border:none !important;
+  box-shadow: 0px 1px 6px rgba(55, 55, 55, 0.2) !important;
+  width: 224px !important;
+  height: 40px !important;
+}
 .ant-select-selector:focus-visible{
   box-shadow: none !important;
 }

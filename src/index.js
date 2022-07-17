@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@mui/material/'
 import '@fortawesome/fontawesome-free/js/all'
-import { store } from './redux-toolkit'
+import { store } from './store'
 import App from './App'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
