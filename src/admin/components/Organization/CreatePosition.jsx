@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
-import style from './CreatePosition.module.scss'
 
 const { Option } = Select
 
@@ -15,7 +14,7 @@ function CreatePosition() {
     setFormData({ ...formData, position: e.target.value })
   }
   return (
-    <div className={style.position}>
+    <div>
       <div className="create_title">
         Создать:
         <span>Должность</span>

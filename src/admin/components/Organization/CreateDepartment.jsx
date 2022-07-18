@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
-import style from './CreateDepartment.module.scss'
 
 const { Option } = Select
 
@@ -15,7 +14,7 @@ function CreateDepartment() {
     setFormData({ ...formData, department: e.target.value })
   }
   return (
-    <div className={style.position}>
+    <div>
       <div className="create_title">
         Создать:
         <span>Отдел</span>

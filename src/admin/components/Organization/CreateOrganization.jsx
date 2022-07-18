@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import style from './CreateOrganization.module.scss'
 
 function CreateOrganization() {
   const [organization, setOrganization] = useState('')
@@ -7,7 +6,7 @@ function CreateOrganization() {
     setOrganization(e.target.value)
   }
   return (
-    <div className={style.position}>
+    <div>
       <div className="create_title">
         Создать:
         <span>Организацию</span>

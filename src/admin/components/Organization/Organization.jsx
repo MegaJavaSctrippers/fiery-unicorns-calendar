@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import CreateDepartment from '../CreateDepartment/CreateDepartment'
-import CreateOrganization from '../CreateOrganization/CreateOrganization'
-import CreatePosition from '../CreatePosition/CreatePosition'
+import CreateDepartment from './CreateDepartment'
+import CreateOrganization from './CreateOrganization'
+import CreatePosition from './CreatePosition'
 import style from './Organization.module.scss'
 
 function Organization() {
