@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
 import axios from 'axios'
@@ -10,6 +10,8 @@ const { Option } = Select
 
 function SignUp() {
   const navigate = useNavigate()
+  const [departments, setDepartments] = useState([])
+  const [positions, setPositions] = useState([])
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -25,6 +27,31 @@ function SignUp() {
     confirmPassword: false,
   })
 
+  useEffect(() => {
+    const getDepartments = async () => {
+      await axios
+        .get('https://checkit24.herokuapp.com/api/departments/')
+        .then((res) => {
+          setDepartments(res.data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
+    const getPositions = async () => {
+      await axios
+        .get('https://checkit24.herokuapp.com/api/positions/')
+        .then((res) => {
+          setPositions(res.data)
+        })
+        .catch((e) => {
+          console.log(e)
+        })
+    }
+    getPositions()
+    getDepartments()
+  }, [])
+
   const { name, department, job, email, password, confirmPassword, surname, lastname } = formData
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -32,28 +59,32 @@ function SignUp() {
   const register = async (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-      console.log('password are not same')
+      alert('password are not same')
     } else {
-      const data = new FormData()
-      data.append('name', name)
-      data.append('surname', surname)
-      data.append('middlename', lastname)
-      data.append('password', password)
-      data.append('department_id', department)
-      data.append('position_id', job)
       await axios
-        .post('https://checkit24.herokuapp.com/api/user/reg/', data)
+        .post('https://checkit24.herokuapp.com/api/user/reg/', {
+          user: {
+            name,
+            surname,
+            password,
+            email,
+            middlename: lastname,
+            position_id: job,
+            department_id: department,
+          },
+        })
         .then((res) => {
           console.log(res)
-          navigate('/')
+          navigate('/signin')
         })
         .catch((e) => {
           console.log(e)
         })
     }
   }
-  const enabled = Object.values(formData).every((item) => item.length > 0)
-
+  const enabled = Object.values(formData).every(
+    (item) => item.length > 0 || item.toString().length > 0,
+  )
   return (
     <div className="container-fluid pl-0">
       <div className="row">
@@ -98,14 +129,15 @@ function SignUp() {
                   <Space className="select_full_width mt-1">
                     <Select
                       showArrow={false}
-                      defaultValue="Отдел разработка"
                       className="general_select auth_select"
                       value={department}
                       onChange={(value) => setFormData({ ...formData, department: value })}
                     >
-                      <Option value="1">Отдел разработка</Option>
-                      <Option value="2">Отдел продаж</Option>
-                      <Option value="3">Отдел по работе с клиентами</Option>
+                      {departments.map((department) => (
+                        <Option value={department.id} key={department.id}>
+                          {department.name}
+                        </Option>
+                      ))}
                     </Select>
                   </Space>
                 </label>
@@ -161,9 +193,11 @@ function SignUp() {
                       value={job}
                       onChange={(value) => setFormData({ ...formData, job: value })}
                     >
-                      <Option value="1">Frontend разработчик</Option>
-                      <Option value="2">Backend разработчик</Option>
-                      <Option value="3">Android разработчик</Option>
+                      {positions.map((pos) => (
+                        <Option key={pos.id} value={pos.id}>
+                          {pos.name}
+                        </Option>
+                      ))}
                     </Select>
                   </Space>
                 </label>
