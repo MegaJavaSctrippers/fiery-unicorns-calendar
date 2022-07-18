@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Search from '../Search/Search'
 import CreateDepartment from './CreateDepartment'
 import CreateOrganization from './CreateOrganization'
 import CreatePosition from './CreatePosition'
@@ -19,7 +20,7 @@ function Organization() {
         return null
     }
   }
-  return <div className={style.organization}>{handleCreate()}</div>
+  return <div className={style.organization}>{create ? handleCreate() : <Search />}</div>
 }
 
 export default Organization

@@ -6,6 +6,13 @@ import style from './SignIn.module.scss'
 import icons from '../../assets/icons'
 
 function SignIn() {
+  const ax = axios.create({
+    timeout: 1000,
+    proxy: {
+      host: 'localhost',
+      port: 3000,
+    },
+  })
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
     email: '',
@@ -21,7 +28,7 @@ function SignIn() {
 
   const loginSubmit = async (e) => {
     e.preventDefault()
-    await axios
+    await ax
       .post('https://checkit24.herokuapp.com/api/login/', {
         email: formData.email,
         password: formData.password,
