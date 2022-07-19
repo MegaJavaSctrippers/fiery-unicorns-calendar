@@ -10,6 +10,7 @@ const { Option } = Select
 
 function SignUp() {
   const navigate = useNavigate()
+  const [validation, setValidation] = useState(false)
   const [departments, setDepartments] = useState([])
   const [positions, setPositions] = useState([])
   const [formData, setFormData] = useState({
@@ -59,7 +60,7 @@ function SignUp() {
   const register = async (e) => {
     e.preventDefault()
     if (password !== confirmPassword) {
-      alert('password are not same')
+      setValidation(true)
     } else {
       await axios
         .post('https://checkit24.herokuapp.com/api/user/reg/', {
@@ -82,9 +83,7 @@ function SignUp() {
         })
     }
   }
-  const enabled = Object.values(formData).every(
-    (item) => item.length > 0 || item.toString().length > 0,
-  )
+  const enabled = Object.values(formData).every((item) => item.toString().length > 0)
   return (
     <div className="container-fluid pl-0">
       <div className="row">
@@ -98,7 +97,16 @@ function SignUp() {
               </label>
               <span className={style.user_text}>Добавьте фото профиля</span>
             </div>
-
+            {validation ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                Введенные пароли не совпадают
+              </div>
+            ) : null}
             <div className="row">
               <div className="col-lg-6">
                 <label htmlFor="surname">
@@ -226,7 +234,7 @@ function SignUp() {
                 </label>
               </div>
               <div className="col-lg-12">
-                <button disabled={!enabled} type="submit" className={style.save}>
+                <button disabled={!enabled} onClick={register} type="submit" className={style.save}>
                   Сохранить
                 </button>
               </div>
