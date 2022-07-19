@@ -11,6 +11,7 @@ const { Option } = Select
 function SignUp() {
   const navigate = useNavigate()
   const [validation, setValidation] = useState(false)
+  const [passwordLength, setPasswordLength] = useState(false)
   const [departments, setDepartments] = useState([])
   const [positions, setPositions] = useState([])
   const [formData, setFormData] = useState({
@@ -61,6 +62,9 @@ function SignUp() {
     e.preventDefault()
     if (password !== confirmPassword) {
       setValidation(true)
+    } else if (password.length < 8) {
+      setPasswordLength(true)
+      setValidation(false)
     } else {
       await axios
         .post('https://checkit24.herokuapp.com/api/user/reg/', {
@@ -79,10 +83,11 @@ function SignUp() {
           navigate('/signin')
         })
         .catch((e) => {
-          console.log(e)
+          console.log(e.response)
         })
     }
   }
+  const prwd = 'Пароль должен содержать 8 символов'
   const enabled = Object.values(formData).every((item) => item.toString().length > 0)
   return (
     <div className="container-fluid pl-0">
@@ -184,7 +189,7 @@ function SignUp() {
                   Почта
                   <input
                     value={email}
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     onChange={handleChange}
@@ -233,6 +238,7 @@ function SignUp() {
                   </div>
                 </label>
               </div>
+              {passwordLength ? <span className={style.password_length}>{prwd}</span> : null}
               <div className="col-lg-12">
                 <button disabled={!enabled} onClick={register} type="submit" className={style.save}>
                   Сохранить
