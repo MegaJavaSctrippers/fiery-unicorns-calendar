@@ -6,6 +6,7 @@ import style from './AdminSideBar.module.scss'
 function AdminSideBar() {
   const location = useLocation()
   const active = location.pathname.split('/').pop()
+
   return (
     <div className={style.sidebar}>
       <div className={style.header}>
@@ -18,7 +19,7 @@ function AdminSideBar() {
           <img src={icons.organizationSVG} alt="" />
           <span>Организация</span>
         </Link>
-        <Link className={active === 'user' ? style.active_link : style.sidebar_link} to="users">
+        <Link className={active === 'users' ? style.active_link : style.sidebar_link} to="users">
           <img src={icons.usersSVG} alt="" />
           <span>Пользователи</span>
         </Link>

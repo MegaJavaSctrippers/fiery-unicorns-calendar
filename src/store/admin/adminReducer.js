@@ -5,6 +5,8 @@ const initialState = {
   searchPosition: '',
   searchDepartment: '',
   searchOrganization: '',
+  searchUser: '',
+  createUser: false,
 }
 
 export const adminSlice = createSlice({
@@ -24,8 +26,15 @@ export const adminSlice = createSlice({
     setOrganization: (state, action) => {
       state.searchOrganization = action.payload
     },
+    setCreateUser: (state, action) => {
+      state.createUser = action.payload
+    },
+    setSearchUser: (state, action) => {
+      state.searchUser = action.payload
+    },
   },
 })
 
 export const { setCreate, setPosition, setOrganization, setDepartment } = adminSlice.actions
+export const { setCreateUser, setSearchUser } = adminSlice.actions
 export default adminSlice.reducer

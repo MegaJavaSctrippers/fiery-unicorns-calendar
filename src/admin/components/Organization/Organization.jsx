@@ -1,5 +1,6 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setSearchUser } from '../../../store/admin/adminReducer'
 import Search from '../Search/Search'
 import CreateDepartment from './CreateDepartment'
 import CreateOrganization from './CreateOrganization'
@@ -8,6 +9,10 @@ import style from './Organization.module.scss'
 
 function Organization() {
   const create = useSelector((state) => state.admin.create)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setSearchUser(''))
+  }, [])
   const handleCreate = () => {
     switch (create) {
       case 'position':

@@ -41,7 +41,7 @@ function SignIn() {
         <div className="col-lg-6 d-flex">
           <form onSubmit={loginSubmit} className={classNames(style.login)}>
             <h2>Вход</h2>
-            {error ? <span className="error">Не правильный пароль или логин </span> : null}
+            {error ? <div className={style.error}>Не правильный пароль или логин </div> : null}
             <label htmlFor="email">
               Почта
               <input onChange={handleChange} type="text" id="email" name="email" />

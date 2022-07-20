@@ -1,25 +1,25 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import Department from './Department'
+import Organization from './Organization'
+import Position from './Position'
 import style from './Search.module.scss'
-import SearchDepartment from './SearchDepartment'
-import SearchOrganization from './SearchOrganization'
-import SearchPosition from './SearchPosition'
 
 function Search() {
-  const searchPos = useSelector((state) => state.admin.searchPosition)
-  const searchDep = useSelector((state) => state.admin.searchDepartment)
-  const searchOrg = useSelector((state) => state.admin.searchOrganization)
+  const position = useSelector((state) => state.admin.searchPosition)
+  const department = useSelector((state) => state.admin.searchDepartment)
+  const organization = useSelector((state) => state.admin.searchOrganization)
 
   return (
     <div style={style.search}>
-      {searchOrg && !searchDep && !searchPos ? (
-        <SearchOrganization />
+      {position ? (
+        <Position />
       ) : (
         <>
-          {searchDep && !searchPos ? (
-            <SearchDepartment />
+          {department && !position ? (
+            <Department />
           ) : (
-            <>{searchPos ? <SearchPosition /> : null}</>
+            <>{organization && !department && !position ? <Organization /> : null}</>
           )}
         </>
       )}

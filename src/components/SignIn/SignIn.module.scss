@@ -21,6 +21,17 @@
 .login{
   width:50%;
   margin: auto;
+  .error{
+    height:37px;
+    color: #e94a4a;
+    background: #ffecec;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-family: 'Roboto';
+  }
   span{
     color: #2E2E2E;
     opacity: 0.5;

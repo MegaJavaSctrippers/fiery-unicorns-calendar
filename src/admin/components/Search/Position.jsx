@@ -1,19 +1,21 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import icons from '../../../assets/icons'
 
-function SearchDepartment() {
-  const department = useSelector((state) => state.admin.searchDepartment)
+function Position() {
   return (
-    <div>
+    <>
       <div className="create_title">
         Поиск:
-        <span>{department}</span>
+        <span>Frontend разработчик</span>
       </div>
       <div className="create_box">
         <div className="create_form">
-          <span className="create_label">Название отдела</span>
-          <div className="create_div">{department}</div>
+          <span className="create_label">Должность</span>
+          <div className="create_div">Frontend разработчик</div>
+        </div>
+        <div className="create_form">
+          <span className="create_label">Отдел</span>
+          <div className="create_div">Отдел разработок</div>
         </div>
         <div className="create_form">
           <span className="create_label">Организация</span>
@@ -26,8 +28,8 @@ function SearchDepartment() {
           <img src={icons.deleteSVG} alt="" />
         </button>
       </div>
-    </div>
+    </>
   )
 }
 
-export default SearchDepartment
+export default Position

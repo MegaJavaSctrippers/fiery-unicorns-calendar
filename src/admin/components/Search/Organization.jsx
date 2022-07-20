@@ -1,19 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import icons from '../../../assets/icons'
 
-function SearchOrganization() {
-  const organization = useSelector((state) => state.admin.searchOrganization)
+function Organization() {
   return (
-    <div>
+    <>
       <div className="create_title">
         Поиск:
-        <span>{organization}</span>
+        <span>Megalab</span>
       </div>
       <div className="create_box">
         <div className="create_form">
-          <span className="create_label">Название организаций</span>
-          <div className="create_div">{organization}</div>
+          <span className="create_label">Организация</span>
+          <div className="create_div">Megalab</div>
         </div>
         <button type="button" className="edit_icon">
           <img src={icons.editSVG} alt="" />
@@ -22,8 +20,8 @@ function SearchOrganization() {
           <img src={icons.deleteSVG} alt="" />
         </button>
       </div>
-    </div>
+    </>
   )
 }
 
-export default SearchOrganization
+export default Organization
