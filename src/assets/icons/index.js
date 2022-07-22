@@ -31,6 +31,7 @@ import roomSVG from './room.svg'
 import refreshSVG from './refresh.svg'
 import organizationSVG from './organization.svg'
 import usersSVG from './users.svg'
+import editBlackSVG from './editBlack.svg'
 
 const icons = {
   calendarSVG,
@@ -66,6 +67,7 @@ const icons = {
   roomSVG,
   organizationSVG,
   usersSVG,
+  editBlackSVG,
 }
 
 export default icons

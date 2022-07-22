@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Department from './Department'
-import Organization from './Organization'
-import Position from './Position'
+import SearchDepartment from './SearchDepartment'
+import SearchOrganization from './SearchOrganization'
+import SearchPosition from './SearchPosition'
 import style from './Search.module.scss'
 
 function Search() {
@@ -13,13 +13,13 @@ function Search() {
   return (
     <div style={style.search}>
       {position ? (
-        <Position />
+        <SearchPosition />
       ) : (
         <>
           {department && !position ? (
-            <Department />
+            <SearchDepartment />
           ) : (
-            <>{organization && !department && !position ? <Organization /> : null}</>
+            <>{organization && !department && !position ? <SearchOrganization /> : null}</>
           )}
         </>
       )}

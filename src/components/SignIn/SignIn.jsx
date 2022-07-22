@@ -26,7 +26,9 @@ function SignIn() {
         email: formData.email,
         password: formData.password,
       })
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem('token', JSON.stringify(res.data.access))
+        localStorage.setItem('refresh', JSON.stringify(res.data.refresh))
         navigate('/')
       })
       .catch(() => {

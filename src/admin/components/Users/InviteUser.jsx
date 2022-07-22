@@ -1,9 +1,19 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 function InviteUser() {
   const [user, setUser] = useState('')
   const handleChange = (e) => {
     setUser(e.target.value)
+  }
+  const inviteUser = async () => {
+    await axios
+      .post('https://checkit24.herokuapp.com/api/sendinvitation/', {
+        email: user,
+      })
+      .then((res) => {
+        console.log(res)
+      })
   }
   return (
     <div>
@@ -21,7 +31,12 @@ function InviteUser() {
             className="create_input"
           />
         </div>
-        <button disabled={!user.length > 0} className="create_btn" type="button">
+        <button
+          onClick={inviteUser}
+          disabled={!user.length > 0}
+          className="create_btn"
+          type="button"
+        >
           Сохранить
         </button>
       </div>

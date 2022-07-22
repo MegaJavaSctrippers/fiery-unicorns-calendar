@@ -64,7 +64,6 @@ function SignUp() {
       setValidation(true)
     } else if (password.length < 8) {
       setPasswordLength(true)
-      setValidation(false)
     } else {
       await axios
         .post('https://checkit24.herokuapp.com/api/user/reg/', {
