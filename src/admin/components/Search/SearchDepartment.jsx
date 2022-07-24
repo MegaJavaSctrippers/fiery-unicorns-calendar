@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { Select, Space } from 'antd'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import classNames from 'classnames'
 import icons from '../../../assets/icons'
-import style from './Search.module.scss'
+import SearchDepartmentChild from './SearchDepartmentChild'
 
 const { Option } = Select
 
@@ -12,27 +11,9 @@ const Alert = withReactContent(Swal)
 
 function Department() {
   const [edit, setEdit] = useState(false)
-
-  const content = (
-    <div className={classNames(style.delete_department, 'radio-toolbar')}>
-      <h3>Выберите метод удаления отдела “Безопасности” ?</h3>
-      <div>
-        <label htmlFor="cut">
-          <input type="radio" name="select_dep" id="cut" />
-          <span>Удалить отдел, а участников переместить в другой отдел</span>
-        </label>
-      </div>
-      <div>
-        <label htmlFor="all">
-          <input type="radio" name="select_dep" id="all" />
-          <span> Удалить отдел и участников полностью</span>
-        </label>
-      </div>
-    </div>
-  )
   const deleteDepartment = () => {
     Alert.fire({
-      html: content,
+      html: <SearchDepartmentChild />,
       showCloseButton: true,
       showCancelButton: true,
       showConfirmButton: true,

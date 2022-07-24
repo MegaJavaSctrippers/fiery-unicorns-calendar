@@ -7,7 +7,7 @@ const initialState = {
   searchOrganization: '',
   searchUser: '',
   createUser: false,
-  auth: false,
+  delDepartment: 'notall',
 }
 
 export const adminSlice = createSlice({
@@ -15,8 +15,8 @@ export const adminSlice = createSlice({
   initialState,
 
   reducers: {
-    setAuth: (state, action) => {
-      state.auth = action.payload
+    setDelDepartment: (state, action) => {
+      state.delDepartment = action.payload
     },
     setCreate: (state, action) => {
       state.create = action.payload
@@ -40,5 +40,5 @@ export const adminSlice = createSlice({
 })
 
 export const { setCreate, setPosition, setOrganization, setDepartment } = adminSlice.actions
-export const { setCreateUser, setSearchUser, setAuth } = adminSlice.actions
+export const { setCreateUser, setSearchUser, setDelDepartment } = adminSlice.actions
 export default adminSlice.reducer

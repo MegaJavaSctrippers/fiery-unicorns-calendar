@@ -368,7 +368,7 @@ button[disabled=disabled], button:disabled {
   font-size: 16px;
   text-align: center;
   color: #2e2e2e;
-  margin-top: 45px;
+  margin-top: 40px;
 }
 
 .confirm-btn, .cancel-btn{  
@@ -411,6 +411,10 @@ button[disabled=disabled], button:disabled {
   font-size: 14px;
 }
 
+.del_all {
+  background: #4B84F4 !important;
+  border:none !important;
+}
 /* animate css styles */
 
 .animate__slideInDown, .animate__fadeOutUp{

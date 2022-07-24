@@ -33,6 +33,7 @@ import organizationSVG from './organization.svg'
 import usersSVG from './users.svg'
 import editBlackSVG from './editBlack.svg'
 import closeBlackSVG from './closeBlack.svg'
+import tickSVG from './tick.svg'
 
 const icons = {
   calendarSVG,
@@ -70,6 +71,7 @@ const icons = {
   usersSVG,
   editBlackSVG,
   closeBlackSVG,
+  tickSVG,
 }
 
 export default icons
