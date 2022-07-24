@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 import { Navigate } from 'react-router-dom'
 
 function ProtectedRoute({ children }) {
-  const [auth, setAuth] = useState(true)
   const parseJwt = (token) => {
     try {
       return JSON.parse(atob(token.split('.')[1]))
@@ -15,20 +14,16 @@ function ProtectedRoute({ children }) {
 
   // Check if token is not expired open home page
 
+  let auth = false
   const token = localStorage.getItem('token')
   const refresh = localStorage.getItem('refresh')
   if (token) {
     const parseToken = parseJwt(token)
-    if (parseToken.exp - 1000 > new Date()) {
-      setAuth(true)
-    } else if (refresh) {
-      axios.post('https://checkit24.herokuapp.com/api/token/refresh/', refresh).then((res) => {
-        localStorage.setItem('token', res.data.access)
-        const refreshParse = parseJwt(res.data.access)
-        if (refreshParse.exp * 1000 > new Date()) {
-          setAuth(true)
-        }
+    if (parseToken.exp * 1000 > new Date()) {
+      axios.post('https://checkit24.herokuapp.com/api/token/refresh/', { refresh }).then((res) => {
+        console.log(res)
       })
+      auth = true
     }
   }
 

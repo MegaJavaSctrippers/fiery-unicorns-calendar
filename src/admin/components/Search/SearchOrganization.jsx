@@ -1,11 +1,43 @@
 import React, { useState } from 'react'
 import { Space, Select } from 'antd'
+import Swal from 'sweetalert2'
 import icons from '../../../assets/icons'
 
 const { Option } = Select
 
 function Organization() {
   const [edit, setEdit] = useState(false)
+  const deleteOrganization = () => {
+    Swal.fire({
+      html: 'Удалить организацию Megalab ?',
+      showCloseButton: true,
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'Да',
+      cancelButtonText: 'Нет',
+      buttonsStyling: false,
+      reverseButtons: true,
+      closeButtonHtml: `<img class='close-sweet' src=${icons.closeBlackSVG}/>`,
+      customClass: {
+        popup: 'sweet-delete',
+        confirmButton: 'confirm-btn',
+        cancelButton: 'cancel-btn',
+        closeButton: 'close-btn',
+        actions: 'btn-group-sweet',
+      },
+      showClass: {
+        popup: 'animate__animated animate__slideInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log('yes')
+      }
+    })
+  }
+
   return (
     <>
       <div className="create_title">
@@ -54,7 +86,7 @@ function Organization() {
           {edit ? <img src={icons.editBlackSVG} alt="" /> : <img src={icons.editSVG} alt="" />}
         </button>
 
-        <button type="button" className="delete_icon">
+        <button onClick={deleteOrganization} type="button" className="delete_icon">
           <img src={icons.deleteSVG} alt="" />
         </button>
       </div>

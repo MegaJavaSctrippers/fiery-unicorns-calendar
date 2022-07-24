@@ -1,11 +1,65 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
+import classNames from 'classnames'
 import icons from '../../../assets/icons'
+import style from './Search.module.scss'
 
 const { Option } = Select
 
+const Alert = withReactContent(Swal)
+
 function Department() {
   const [edit, setEdit] = useState(false)
+
+  const content = (
+    <div className={classNames(style.delete_department, 'radio-toolbar')}>
+      <h3>Выберите метод удаления отдела “Безопасности” ?</h3>
+      <div>
+        <label htmlFor="cut">
+          <input type="radio" name="select_dep" id="cut" />
+          <span>Удалить отдел, а участников переместить в другой отдел</span>
+        </label>
+      </div>
+      <div>
+        <label htmlFor="all">
+          <input type="radio" name="select_dep" id="all" />
+          <span> Удалить отдел и участников полностью</span>
+        </label>
+      </div>
+    </div>
+  )
+  const deleteDepartment = () => {
+    Alert.fire({
+      html: content,
+      showCloseButton: true,
+      showCancelButton: true,
+      showConfirmButton: true,
+      confirmButtonText: 'Да',
+      cancelButtonText: 'Нет',
+      buttonsStyling: false,
+      reverseButtons: true,
+      closeButtonHtml: `<img class='close-sweet' src=${icons.closeBlackSVG}/>`,
+      customClass: {
+        popup: 'sweet-delete',
+        confirmButton: 'confirm-btn',
+        cancelButton: 'cancel-btn',
+        closeButton: 'close-btn',
+        actions: 'btn-group-sweet',
+      },
+      showClass: {
+        popup: 'animate__animated animate__slideInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log('yes')
+      }
+    })
+  }
 
   return (
     <>
@@ -76,7 +130,7 @@ function Department() {
           {edit ? <img src={icons.editBlackSVG} alt="" /> : <img src={icons.editSVG} alt="" />}
         </button>
 
-        <button type="button" className="delete_icon">
+        <button onClick={deleteDepartment} type="button" className="delete_icon">
           <img src={icons.deleteSVG} alt="" />
         </button>
       </div>

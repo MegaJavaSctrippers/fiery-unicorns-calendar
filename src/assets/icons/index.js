@@ -32,6 +32,7 @@ import refreshSVG from './refresh.svg'
 import organizationSVG from './organization.svg'
 import usersSVG from './users.svg'
 import editBlackSVG from './editBlack.svg'
+import closeBlackSVG from './closeBlack.svg'
 
 const icons = {
   calendarSVG,
@@ -68,6 +69,7 @@ const icons = {
   organizationSVG,
   usersSVG,
   editBlackSVG,
+  closeBlackSVG,
 }
 
 export default icons

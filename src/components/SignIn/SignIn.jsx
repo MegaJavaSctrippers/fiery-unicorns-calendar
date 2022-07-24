@@ -22,11 +22,12 @@ function SignIn() {
   const loginSubmit = async (e) => {
     e.preventDefault()
     await axios
-      .post('https://checkit24.herokuapp.com/api/login/', {
+      .post('https://checkit24.herokuapp.com/api/users/login/', {
         email: formData.email,
         password: formData.password,
       })
       .then((res) => {
+        console.log(res)
         localStorage.setItem('token', JSON.stringify(res.data.access))
         localStorage.setItem('refresh', JSON.stringify(res.data.refresh))
         navigate('/')

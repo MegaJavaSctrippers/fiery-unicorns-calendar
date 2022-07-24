@@ -356,3 +356,63 @@ button[disabled=disabled], button:disabled {
 .calendar_dropdown .ant-dropdown-menu{
   border-radius:12px !important;
 }
+
+/*  Sweet alert styles */
+
+.sweet-delete{
+  box-shadow: 0px 2px 25px rgba(136, 136, 136, 0.35);
+  border-radius: 12px;
+  width: 368px !important;
+}
+.sweet-delete .swal2-html-container {
+  font-size: 16px;
+  text-align: center;
+  color: #2e2e2e;
+  margin-top: 45px;
+}
+
+.confirm-btn, .cancel-btn{  
+  border-radius: 10px;
+  height:40px;
+  width: 120px;
+  color:#fff;
+}
+.confirm-btn{
+  background: #4B84F4;
+}
+.cancel-btn{
+  background: #E0E6EC;
+  color:#000;
+  margin-right: 8px;
+}
+.close-btn{
+  margin-top: 16px;
+  margin-right: 16px;
+  height: 16px;
+  width: 16px;
+}
+.close-btn:focus{
+  box-shadow: none;
+}
+.close-sweet{
+  width: 16px;
+}
+.btn-group-sweet{
+  margin-top:16px;
+}
+.swal2-popup.warning-popup{
+  width: 50%;
+  background: #FDB62E;
+  color:#fff;
+  padding-bottom: 15px;
+}
+.swal2-popup.warning-popup .swal2-html-container{
+  margin-bottom: 0 !important;
+  font-size: 16px;
+}
+
+/* animate css styles */
+
+.animate__slideInDown, .animate__fadeOutUp{
+  animation-duration: 0.8s;
+}

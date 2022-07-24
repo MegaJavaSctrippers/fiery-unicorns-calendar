@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
@@ -60,21 +61,32 @@ function SignUp() {
   }
   const register = async (e) => {
     e.preventDefault()
+    const reg = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i
     if (password !== confirmPassword) {
       setValidation(true)
     } else if (password.length < 8) {
       setPasswordLength(true)
+    } else if (reg.test(email) === false) {
+      Swal.fire({
+        timer: 1500,
+        text: 'Please enter valid email',
+        showConfirmButton: false,
+        position: 'top-right',
+        customClass: {
+          popup: 'warning-popup',
+        },
+      })
     } else {
       await axios
-        .post('https://checkit24.herokuapp.com/api/user/reg/', {
+        .post('https://checkit24.herokuapp.com/api/users/reg/', {
           user: {
             name,
             surname,
             password,
             email,
             middlename: lastname,
-            position_id: job,
-            department_id: department,
+            position: job,
+            department,
           },
         })
         .then((res) => {
@@ -82,7 +94,17 @@ function SignUp() {
           navigate('/signin')
         })
         .catch((e) => {
-          console.log(e.response)
+          if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
+            Swal.fire({
+              timer: 1500,
+              text: 'Введенный email уже существует',
+              showConfirmButton: false,
+              position: 'top-right',
+              customClass: {
+                popup: 'warning-popup',
+              },
+            })
+          }
         })
     }
   }
