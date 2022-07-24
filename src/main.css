@@ -408,7 +408,7 @@ button[disabled=disabled], button:disabled {
 }
 .swal2-popup.warning-popup .swal2-html-container{
   margin-bottom: 0 !important;
-  font-size: 16px;
+  font-size: 14px;
 }
 
 /* animate css styles */

@@ -69,7 +69,7 @@ function SignUp() {
     } else if (reg.test(email) === false) {
       Swal.fire({
         timer: 1500,
-        text: 'Please enter valid email',
+        text: 'Введите правильный email',
         showConfirmButton: false,
         position: 'top-right',
         customClass: {
@@ -108,7 +108,7 @@ function SignUp() {
         })
     }
   }
-  const prwd = 'Пароль должен содержать 8 символов'
+  const prwd = 'Пароль должен содержать минимум 8 символов'
   const enabled = Object.values(formData).every((item) => item.toString().length > 0)
   return (
     <div className="container-fluid pl-0">
