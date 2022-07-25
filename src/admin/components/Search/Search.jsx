@@ -6,9 +6,9 @@ import SearchPosition from './SearchPosition'
 import style from './Search.module.scss'
 
 function Search() {
-  const position = useSelector((state) => state.admin.searchPosition)
-  const department = useSelector((state) => state.admin.searchDepartment)
-  const organization = useSelector((state) => state.admin.searchOrganization)
+  const position = useSelector((state) => state.admin.search.position)
+  const department = useSelector((state) => state.admin.search.department)
+  const organization = useSelector((state) => state.admin.search.organization)
 
   return (
     <div style={style.search}>

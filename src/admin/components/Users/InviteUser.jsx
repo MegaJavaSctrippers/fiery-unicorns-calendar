@@ -13,12 +13,15 @@ function InviteUser() {
         { email: user },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
           },
         },
       )
       .then((res) => {
         console.log(res)
+      })
+      .catch((e) => {
+        console.log(e)
       })
   }
   return (
@@ -43,7 +46,7 @@ function InviteUser() {
           className="create_btn"
           type="button"
         >
-          Сохранить
+          Отправить
         </button>
       </div>
     </div>

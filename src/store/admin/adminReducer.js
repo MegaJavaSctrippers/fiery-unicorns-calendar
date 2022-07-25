@@ -1,14 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  search: {
+    position: '',
+    department: '',
+    organization: '',
+    user: '',
+    direction: '',
+  },
   create: '',
-  searchPosition: '',
-  searchDepartment: '',
-  searchOrganization: '',
-  searchUser: '',
-  createUser: false,
-  createRoom: false,
-  delDepartment: 'notall',
+  invite_user: '',
 }
 
 export const adminSlice = createSlice({
@@ -16,33 +17,23 @@ export const adminSlice = createSlice({
   initialState,
 
   reducers: {
-    setDelDepartment: (state, action) => {
-      state.delDepartment = action.payload
+    setSearchAction: (state, action) => {
+      const { search } = state
+      const { position, department, organization, user, direction } = action.payload
+      search.position = position
+      search.department = department
+      search.organization = organization
+      search.user = user
+      search.direction = direction
     },
     setCreate: (state, action) => {
       state.create = action.payload
     },
-    setPosition: (state, action) => {
-      state.searchPosition = action.payload
-    },
-    setDepartment: (state, action) => {
-      state.searchDepartment = action.payload
-    },
-    setOrganization: (state, action) => {
-      state.searchOrganization = action.payload
-    },
-    setCreateUser: (state, action) => {
-      state.createUser = action.payload
-    },
-    setCreateRoom: (state, action) => {
-      state.createRoom = action.payload
-    },
-    setSearchUser: (state, action) => {
-      state.searchUser = action.payload
+    setInviteUser: (state, action) => {
+      state.invite_user = action.payload
     },
   },
 })
 
-export const { setCreate, setPosition, setOrganization, setDepartment } = adminSlice.actions
-export const { setCreateUser, setSearchUser, setDelDepartment, setCreateRoom } = adminSlice.actions
+export const { setSearchAction, setCreate, setInviteUser } = adminSlice.actions
 export default adminSlice.reducer

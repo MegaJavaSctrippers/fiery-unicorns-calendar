@@ -4,15 +4,7 @@ import { useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import icons from '../../../assets/icons'
 import style from './AdminHeader.module.scss'
-import {
-  setCreate,
-  setDepartment,
-  setOrganization,
-  setPosition,
-  setCreateUser,
-  setSearchUser,
-  setCreateRoom,
-} from '../../../store/admin/adminReducer'
+import { setSearchAction, setCreate } from '../../../store/admin/adminReducer'
 
 const { Option } = Select
 
@@ -20,29 +12,38 @@ function AdminHeader() {
   const location = useLocation()
   const active = location.pathname.split('/').pop()
   const dispatch = useDispatch()
-  const [position, setPos] = useState('')
-  const [department, setDep] = useState('')
-  const [organization, setOrg] = useState('')
-  const [user, setUser] = useState('')
+
+  const [search, setSearch] = useState({
+    position: '',
+    department: '',
+    organization: '',
+    user: '',
+    direction: '',
+  })
 
   const submitSearch = () => {
-    dispatch(setPosition(position))
-    dispatch(setDepartment(department))
-    dispatch(setOrganization(organization))
-    dispatch(setSearchUser(user))
+    dispatch(setSearchAction(search))
     dispatch(setCreate(''))
-    dispatch(setCreateUser(false))
   }
   const clearSearch = () => {
-    dispatch(setPosition(''))
-    dispatch(setDepartment(''))
-    dispatch(setOrganization(''))
-    dispatch(setSearchUser(''))
-    setPos('')
-    setDep('')
-    setOrg('')
-    setUser('')
+    setSearch({
+      position: '',
+      department: '',
+      organization: '',
+      user: '',
+      direction: '',
+    })
+    dispatch(
+      setSearchAction({
+        position: '',
+        department: '',
+        organization: '',
+        user: '',
+        direction: '',
+      }),
+    )
   }
+  const { position, department, organization, user, direction } = search
   const handleClick = (e) => {
     dispatch(setCreate(e.key))
   }
@@ -62,6 +63,10 @@ function AdminHeader() {
           label: <span>Должность</span>,
           key: 'position',
         },
+        {
+          label: <span>Дирекции</span>,
+          key: 'direction',
+        },
       ]}
     />
   )
@@ -75,7 +80,7 @@ function AdminHeader() {
                 <Select
                   placeholder="Пользователь"
                   value={user || undefined}
-                  onChange={(value) => setUser(value)}
+                  onChange={(value) => setSearch({ ...search, user: value })}
                   className="general_select admin_select"
                 >
                   <Option value="Bektemir Kudaiberdiev">Bektemir Kudaiberdiev</Option>
@@ -85,17 +90,33 @@ function AdminHeader() {
               </Space>
             </div>
           ) : null}
+          {active === 'admin' ? (
+            <div className={style.select_wrapper}>
+              <Space className="select_full_width">
+                <Select
+                  placeholder="Организация"
+                  value={organization || undefined}
+                  onChange={(value) => setSearch({ ...search, organization: value })}
+                  className="general_select admin_select"
+                >
+                  <Option value="Megalab">Megalab</Option>
+                  <Option value="Megacom">Megacom</Option>
+                  <Option value="Единорожки">Единорожки</Option>
+                </Select>
+              </Space>
+            </div>
+          ) : null}
           <div className={style.select_wrapper}>
             <Space className="select_full_width">
               <Select
-                placeholder="Организация"
-                value={organization || undefined}
-                onChange={(value) => setOrg(value)}
+                placeholder="Дирекция"
+                value={direction || undefined}
+                onChange={(value) => setSearch({ ...search, direction: value })}
                 className="general_select admin_select"
               >
-                <Option value="Megalab">Megalab</Option>
-                <Option value="Megacom">Megacom</Option>
-                <Option value="Единорожки">Единорожки</Option>
+                <Option value="Коммерческая дирекция">Коммерческая дирекция</Option>
+                <Option value="Megacom">Дирекция по безопасности</Option>
+                <Option value="Единорожки">Дирекция информационных технологий</Option>
               </Select>
             </Space>
           </div>
@@ -104,7 +125,7 @@ function AdminHeader() {
               <Select
                 placeholder="Отдел"
                 value={department || undefined}
-                onChange={(value) => setDep(value)}
+                onChange={(value) => setSearch({ ...search, department: value })}
                 className="general_select admin_select"
               >
                 <Option value="Отдел разработок">Отдел разработок</Option>
@@ -118,7 +139,7 @@ function AdminHeader() {
               <Select
                 placeholder="Должность"
                 value={position || undefined}
-                onChange={(value) => setPos(value)}
+                onChange={(value) => setSearch({ ...search, position: value })}
                 className="general_select admin_select"
               >
                 <Option value="Frontend разработчик">Frontend разработчик</Option>
@@ -135,7 +156,7 @@ function AdminHeader() {
               <Select
                 placeholder="1 этаж, 4 кабинет"
                 value={position || undefined}
-                onChange={(value) => setPos(value)}
+                onChange={(value) => console.log(value)}
                 className="general_select admin_select"
               >
                 <Option value="Frontend разработчик">1 этаж, 4 кабинет</Option>
@@ -149,7 +170,7 @@ function AdminHeader() {
               <Select
                 placeholder="Вместимость (м2)"
                 value={position || undefined}
-                onChange={(value) => setPos(value)}
+                onChange={(value) => console.log(value)}
                 className="general_select admin_select"
               >
                 <Option value="Frontend разработчик">12</Option>
@@ -163,7 +184,7 @@ function AdminHeader() {
               <Select
                 placeholder="Описание"
                 value={position || undefined}
-                onChange={(value) => setPos(value)}
+                onChange={(value) => console.log(value)}
                 className="general_select admin_select"
               >
                 <Option value="Frontend разработчик">Кондиционер, диван, стулья</Option>
@@ -191,7 +212,7 @@ function AdminHeader() {
       ) : null}
       {active === 'users' ? (
         <button
-          onClick={() => dispatch(setCreateUser(true))}
+          onClick={() => console.log('Hello worlds')}
           className={style.header_btn}
           type="button"
         >
@@ -200,7 +221,7 @@ function AdminHeader() {
       ) : null}
       {active === 'rooms' ? (
         <button
-          onClick={() => dispatch(setCreateRoom(true))}
+          onClick={() => console.log('Hello worlds')}
           className={style.header_btn}
           type="button"
         >
