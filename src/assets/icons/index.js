@@ -34,6 +34,7 @@ import usersSVG from './users.svg'
 import editBlackSVG from './editBlack.svg'
 import closeBlackSVG from './closeBlack.svg'
 import tickSVG from './tick.svg'
+import hideRoomSVG from './hideRoom.svg'
 
 const icons = {
   calendarSVG,
@@ -72,6 +73,7 @@ const icons = {
   editBlackSVG,
   closeBlackSVG,
   tickSVG,
+  hideRoomSVG,
 }
 
 export default icons

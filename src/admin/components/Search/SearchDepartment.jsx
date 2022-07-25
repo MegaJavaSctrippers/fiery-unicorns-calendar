@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import icons from '../../../assets/icons'
 import SearchDepartmentChild from './SearchDepartmentChild'
+import Invitation from '../../../modals/Invitation/Inivitation'
 
 const { Option } = Select
 
@@ -15,10 +16,10 @@ function Department() {
     Alert.fire({
       html: <SearchDepartmentChild />,
       showCloseButton: true,
-      showCancelButton: true,
+      showCancelButton: false,
       showConfirmButton: true,
-      confirmButtonText: 'Да',
-      cancelButtonText: 'Нет',
+      confirmButtonText: 'Удалить',
+      borderRadius: '12px',
       buttonsStyling: false,
       reverseButtons: true,
       closeButtonHtml: `<img class='close-sweet' src=${icons.closeBlackSVG}/>`,
@@ -27,7 +28,7 @@ function Department() {
         confirmButton: 'confirm-btn',
         cancelButton: 'cancel-btn',
         closeButton: 'close-btn',
-        actions: 'btn-group-sweet',
+        actions: 'btn-group-sweet delete',
       },
       showClass: {
         popup: 'animate__animated animate__slideInDown',
@@ -37,8 +38,38 @@ function Department() {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log('yes')
+        Alert.fire({
+          html: <SearchDepartmentChild />,
+          showCloseButton: true,
+          showCancelButton: false,
+          showConfirmButton: true,
+          input: 'select',
+          inputOptions: {
+            1: 'Tier 1',
+            2: 'Tier 2',
+            3: 'Tier 3',
+          },
+          confirmButtonText: 'Удалить',
+          buttonsStyling: false,
+          width: 500,
+          reverseButtons: true,
+          closeButtonHtml: `<img class='close-sweet' src=${icons.closeBlackSVG}/>`,
+          customClass: {
+            popup: 'modal_sweet',
+            confirmButton: 'confirm-btn',
+            cancelButton: 'cancel-btn',
+            closeButton: 'close-btn',
+            actions: 'btn-group-sweet delete',
+          },
+          showClass: {
+            popup: 'animate__animated animate__slideInDown',
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp',
+          },
+        })
       }
+      return null
     })
   }
 
@@ -114,6 +145,7 @@ function Department() {
         <button onClick={deleteDepartment} type="button" className="delete_icon">
           <img src={icons.deleteSVG} alt="" />
         </button>
+        <Invitation />
       </div>
     </>
   )

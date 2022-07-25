@@ -7,6 +7,7 @@ const initialState = {
   searchOrganization: '',
   searchUser: '',
   createUser: false,
+  createRoom: false,
   delDepartment: 'notall',
 }
 
@@ -33,6 +34,9 @@ export const adminSlice = createSlice({
     setCreateUser: (state, action) => {
       state.createUser = action.payload
     },
+    setCreateRoom: (state, action) => {
+      state.createRoom = action.payload
+    },
     setSearchUser: (state, action) => {
       state.searchUser = action.payload
     },
@@ -40,5 +44,5 @@ export const adminSlice = createSlice({
 })
 
 export const { setCreate, setPosition, setOrganization, setDepartment } = adminSlice.actions
-export const { setCreateUser, setSearchUser, setDelDepartment } = adminSlice.actions
+export const { setCreateUser, setSearchUser, setDelDepartment, setCreateRoom } = adminSlice.actions
 export default adminSlice.reducer

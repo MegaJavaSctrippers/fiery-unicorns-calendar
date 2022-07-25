@@ -20,6 +20,7 @@ function SearchDepartmentChild() {
             checked={notAll}
             type="checkbox"
             id="notall"
+            value={notAll}
           />
           <img src={icons.tickSVG} alt="" />
         </label>
@@ -32,6 +33,7 @@ function SearchDepartmentChild() {
             onChange={() => setDeleteFormat({ all: true })}
             type="checkbox"
             id="all"
+            value={all}
           />
           <img src={icons.tickSVG} alt="" />
         </label>
