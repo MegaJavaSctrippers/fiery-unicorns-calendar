@@ -3,40 +3,40 @@ import { Select, Space } from 'antd'
 
 const { Option } = Select
 
-function CreateDepartment() {
+function CreateDirection() {
   const [formData, setFormData] = useState({
-    department: '',
     direction: '',
-    head: '',
+    director: '',
+    organization: '',
   })
-  const { direction, department, head } = formData
-  const enabled = direction.length > 0 && department.length > 0 && head.length > 0
+  const { direction, director, organization } = formData
+  const enabled = direction.length > 0 && director.length > 0 && organization.length > 0
   const handleChange = (e) => {
-    setFormData({ ...formData, department: e.target.value })
+    setFormData({ ...formData, direction: e.target.value })
   }
   return (
     <div>
       <div className="create_title">
         Создать:
-        <span>Отдел</span>
+        <span>Дирекциий</span>
       </div>
       <div className="create_box">
         <div className="create_form">
-          <span className="create_label">Название отдела</span>
+          <span className="create_label">Название дирекций</span>
           <input
             onChange={handleChange}
-            value={department}
-            name="department"
+            value={direction}
+            name="direction"
             className="create_input"
           />
         </div>
         <div className="create_form">
-          <span className="create_label">Руководитель отдела</span>
+          <span className="create_label">Директор</span>
           <Space>
             <Select
-              onChange={(value) => setFormData({ ...formData, head: value })}
-              value={head}
-              name="head"
+              onChange={(value) => setFormData({ ...formData, director: value })}
+              value={direction}
+              name="director"
               className="general_select create_select"
             >
               <Option value="1">Bektemir Kudaiberdiev</Option>
@@ -46,17 +46,16 @@ function CreateDepartment() {
           </Space>
         </div>
         <div className="create_form">
-          <span className="create_label">Дирекция</span>
+          <span className="create_label">Организация</span>
           <Space>
             <Select
-              onChange={(value) => setFormData({ ...formData, direction: value })}
-              value={direction}
-              name="direction"
+              onChange={(value) => setFormData({ ...formData, organization: value })}
+              value={organization}
+              name="organization"
               className="general_select create_select"
             >
               <Option value="1">Megalab</Option>
               <Option value="2">Megacom</Option>
-              <Option value="3">Единорожки</Option>
             </Select>
           </Space>
         </div>
@@ -68,4 +67,4 @@ function CreateDepartment() {
   )
 }
 
-export default CreateDepartment
+export default CreateDirection

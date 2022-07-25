@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import Search from '../Search/Search'
 import CreateDepartment from './CreateDepartment'
+import CreateDirection from './CreateDirection'
 import CreateOrganization from './CreateOrganization'
 import CreatePosition from './CreatePosition'
 import style from './Organization.module.scss'
@@ -17,6 +18,8 @@ function Organization() {
         return <CreateDepartment />
       case 'organization':
         return <CreateOrganization />
+      case 'direction':
+        return <CreateDirection />
       default:
         return null
     }

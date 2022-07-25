@@ -64,7 +64,7 @@ function AdminHeader() {
           key: 'position',
         },
         {
-          label: <span>Дирекции</span>,
+          label: <span>Дирекций</span>,
           key: 'direction',
         },
       ]}

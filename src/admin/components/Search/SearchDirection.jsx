@@ -10,7 +10,7 @@ const { Option } = Select
 
 const Alert = withReactContent(Swal)
 
-function Department() {
+function SearchDirection() {
   const [edit, setEdit] = useState(false)
   const deleteDepartment = () => {
     Alert.fire({
@@ -36,40 +36,6 @@ function Department() {
       hideClass: {
         popup: 'animate__animated animate__fadeOutUp',
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Alert.fire({
-          html: <SearchDepartmentChild />,
-          showCloseButton: true,
-          showCancelButton: false,
-          showConfirmButton: true,
-          input: 'select',
-          inputOptions: {
-            1: 'Tier 1',
-            2: 'Tier 2',
-            3: 'Tier 3',
-          },
-          confirmButtonText: 'Удалить',
-          buttonsStyling: false,
-          width: 500,
-          reverseButtons: true,
-          closeButtonHtml: `<img class='close-sweet' src=${icons.closeBlackSVG}/>`,
-          customClass: {
-            popup: 'modal_sweet',
-            confirmButton: 'confirm-btn',
-            cancelButton: 'cancel-btn',
-            closeButton: 'close-btn',
-            actions: 'btn-group-sweet delete',
-          },
-          showClass: {
-            popup: 'animate__animated animate__slideInDown',
-          },
-          hideClass: {
-            popup: 'animate__animated animate__fadeOutUp',
-          },
-        })
-      }
-      return null
     })
   }
 
@@ -77,30 +43,30 @@ function Department() {
     <>
       <div className="create_title">
         {edit ? 'Редактировать :' : 'Поиск :'}
-        <span>Отдел разработок</span>
+        <span>Коммерческая дирекций</span>
       </div>
       <div className="create_box">
         <div className="create_form">
-          <span className="create_label">Отдел</span>
+          <span className="create_label">Дирекция</span>
           {edit ? (
             <input
               onChange={() => console.log('j')}
               value=""
-              name="department"
+              name="direction"
               className="create_input"
             />
           ) : (
-            <div className="create_div">Отдел разработок</div>
+            <div className="create_div">Коммерческая дирекция</div>
           )}
         </div>
         <div className="create_form">
-          <span className="create_label">Руководитель отделa</span>
+          <span className="create_label">Директор</span>
           {edit ? (
             <Space>
               <Select
                 onChange={(value) => console.log(value)}
                 value=""
-                name="department"
+                name="director"
                 className="general_select create_select"
               >
                 <Option value="1">Асанов Тилек Асанович</Option>
@@ -113,18 +79,17 @@ function Department() {
           )}
         </div>
         <div className="create_form">
-          <span className="create_label">Дирекции отдела</span>
+          <span className="create_label">Организация</span>
           {edit ? (
             <Space>
               <Select
                 onChange={(value) => console.log(value)}
                 value=""
-                name="department"
+                name="organization"
                 className="general_select create_select"
               >
-                <Option value="1">Отдел разработок</Option>
-                <Option value="2">Отдел продаж</Option>
-                <Option value="3">Отдел по работе с клиентами</Option>
+                <Option value="1">Megalab</Option>
+                <Option value="2">Megacom</Option>
               </Select>
             </Space>
           ) : (
@@ -151,4 +116,4 @@ function Department() {
   )
 }
 
-export default Department
+export default SearchDirection
