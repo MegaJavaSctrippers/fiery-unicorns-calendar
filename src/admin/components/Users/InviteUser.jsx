@@ -8,9 +8,15 @@ function InviteUser() {
   }
   const inviteUser = async () => {
     await axios
-      .post('https://checkit24.herokuapp.com/api/sendinvitation/', {
-        email: user,
-      })
+      .post(
+        'https://checkit24.herokuapp.com/api/sendinvitation/',
+        { email: user },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        },
+      )
       .then((res) => {
         console.log(res)
       })
