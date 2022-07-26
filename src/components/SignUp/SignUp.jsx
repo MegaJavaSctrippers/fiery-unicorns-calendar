@@ -11,15 +11,19 @@ const { Option } = Select
 
 function SignUp() {
   const navigate = useNavigate()
-  const [validation, setValidation] = useState(false)
-  const [passwordLength, setPasswordLength] = useState(false)
   const [departments, setDepartments] = useState([])
   const [positions, setPositions] = useState([])
+  const [validation, setValidation] = useState({
+    passwordLength: false,
+    passwordConfirm: false,
+    validEmail: false,
+    emailExist: false,
+  })
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
     lastname: '',
-    department: '',
+    department: '1',
     job: '',
     email: '',
     password: '',
@@ -36,6 +40,7 @@ function SignUp() {
         .get('https://checkit24.herokuapp.com/api/departments/')
         .then((res) => {
           setDepartments(res.data)
+          console.log(res.data, 'departemtn')
         })
         .catch((e) => {
           console.log(e)
@@ -46,6 +51,7 @@ function SignUp() {
         .get('https://checkit24.herokuapp.com/api/positions/')
         .then((res) => {
           setPositions(res.data)
+          console.log(res.data, 'position')
         })
         .catch((e) => {
           console.log(e)
@@ -63,18 +69,15 @@ function SignUp() {
     e.preventDefault()
     const reg = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i
     if (password !== confirmPassword) {
-      setValidation(true)
+      setValidation({ ...validation, passwordConfirm: true })
     } else if (password.length < 8) {
-      setPasswordLength(true)
+      setValidation({ ...validation, passwordLength: true })
     } else if (reg.test(email) === false) {
-      Swal.fire({
-        timer: 1500,
-        text: 'Введите правильный email',
-        showConfirmButton: false,
-        position: 'top-right',
-        customClass: {
-          popup: 'warning-popup',
-        },
+      setValidation({
+        ...validation,
+        passwordConfirm: false,
+        passwordLength: false,
+        validEmail: true,
       })
     } else {
       await axios
@@ -94,17 +97,10 @@ function SignUp() {
           navigate('/signin')
         })
         .catch((e) => {
-          if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
-            Swal.fire({
-              timer: 1500,
-              text: 'Введенный email уже существует',
-              showConfirmButton: false,
-              position: 'top-right',
-              customClass: {
-                popup: 'warning-popup',
-              },
-            })
-          }
+          console.log(e)
+          // if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
+          //   setValidation({ emailExist: true })
+          // }
         })
     }
   }
@@ -123,7 +119,7 @@ function SignUp() {
               </label>
               <span className={style.user_text}>Добавьте фото профиля</span>
             </div>
-            {validation ? (
+            {validation.passwordConfirm ? (
               <div
                 className={classNames(
                   style.password_confirm,
@@ -131,6 +127,26 @@ function SignUp() {
                 )}
               >
                 Введенные пароли не совпадают
+              </div>
+            ) : null}
+            {validation.validEmail ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                Введите правильный email
+              </div>
+            ) : null}
+            {validation.emailExist ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                Введенный email уже существует
               </div>
             ) : null}
             <div className="row">
@@ -259,7 +275,9 @@ function SignUp() {
                   </div>
                 </label>
               </div>
-              {passwordLength ? <span className={style.password_length}>{prwd}</span> : null}
+              {validation.passwordLength ? (
+                <span className={style.password_length}>{prwd}</span>
+              ) : null}
               <div className="col-lg-12">
                 <button disabled={!enabled} onClick={register} type="submit" className={style.save}>
                   Сохранить

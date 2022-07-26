@@ -15,6 +15,7 @@ const home = (
     <Homepage />
   </ProtectedRoute>
 )
+
 function App() {
   return (
     <div className="app">

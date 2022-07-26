@@ -5,6 +5,7 @@ import { Select, Space, Popover } from 'antd'
 import Notification from '../../modals/Notification/Notification'
 import style from './Header.module.scss'
 import icons from '../../assets/icons'
+import UserDropdown from './UserDropdown'
 import { ReactComponent as PushIcon } from '../../assets/icons/push.svg'
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
 import { ReactComponent as FolderIcon } from '../../assets/icons/folder.svg'
@@ -90,7 +91,9 @@ function Header() {
             if (dateType === 'month') {
               return moment(selectedDate).format('MMMM YYYY')
             }
-            return moment(selectedDate).format('DD MMMM YYYY')
+            return `${moment(selectedDate).format('DD MMMM YYYY')} - ${moment(selectedDate).format(
+              'dddd',
+            )}`
           })()}
         </h2>
       </div>
@@ -110,9 +113,16 @@ function Header() {
           <PushIcon className={style.push_icon} />
         </div>
         <Notification />
-        <div className={style.user_box}>
-          <img src={icons.avatar} alt="" />
-        </div>
+        <Popover
+          className="header_popover"
+          placement="bottomRight"
+          content={<UserDropdown />}
+          trigger="click"
+        >
+          <div className={style.user_box}>
+            <img src={icons.avatar} alt="" />
+          </div>
+        </Popover>
       </div>
     </div>
   )

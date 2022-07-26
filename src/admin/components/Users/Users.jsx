@@ -5,8 +5,8 @@ import InviteUser from './InviteUser'
 import style from './Users.module.scss'
 
 function Users() {
-  const create = useSelector((state) => state.admin.createUser)
-  return <div className={style.users}>{create ? <InviteUser /> : <SearchUsers />}</div>
+  const invite = useSelector((state) => state.admin.invite_user)
+  return <div className={style.users}>{invite ? <InviteUser /> : <SearchUsers />}</div>
 }
 
 export default Users

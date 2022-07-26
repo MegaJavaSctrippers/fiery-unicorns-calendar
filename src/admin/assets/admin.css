@@ -12,6 +12,7 @@
 .create_box{
   display: flex;
   align-items: flex-end;
+  margin-bottom: 16px;
 }
 .create_form .create_label{
   width: 100%;

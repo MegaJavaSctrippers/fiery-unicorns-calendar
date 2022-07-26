@@ -13,6 +13,7 @@ export const useAuth = () => {
   const token = localStorage.getItem('token')
   if (token) {
     const parseToken = parseJwt(token)
+    console.log(parseToken)
     if (parseToken.exp * 1000 > new Date()) {
       console.log('access token')
       return true

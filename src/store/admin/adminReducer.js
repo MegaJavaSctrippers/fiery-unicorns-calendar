@@ -7,9 +7,13 @@ const initialState = {
     organization: '',
     user: '',
     direction: '',
+    roomName: '',
+    capacity: '',
+    description: '',
   },
   create: '',
-  invite_user: '',
+  create_room: false,
+  invite_user: false,
 }
 
 export const adminSlice = createSlice({
@@ -19,12 +23,26 @@ export const adminSlice = createSlice({
   reducers: {
     setSearchAction: (state, action) => {
       const { search } = state
-      const { position, department, organization, user, direction } = action.payload
+      const { position, department, organization, user, direction, roomName } = action.payload
       search.position = position
       search.department = department
       search.organization = organization
       search.user = user
       search.direction = direction
+      search.roomName = roomName
+      search.capacity = action.payload.capacity
+      search.description = action.payload.description
+    },
+    refreshSearch: (state) => {
+      const { search } = state
+      search.position = ''
+      search.department = ''
+      search.organization = ''
+      search.user = ''
+      search.direction = ''
+      search.roomName = ''
+      search.capacity = ''
+      search.description = ''
     },
     setCreate: (state, action) => {
       state.create = action.payload
@@ -32,8 +50,12 @@ export const adminSlice = createSlice({
     setInviteUser: (state, action) => {
       state.invite_user = action.payload
     },
+    setCreateRoom: (state, action) => {
+      state.create_room = action.payload
+    },
   },
 })
 
-export const { setSearchAction, setCreate, setInviteUser } = adminSlice.actions
+export const { setSearchAction, setCreate, setInviteUser, setCreateRoom } = adminSlice.actions
+export const { refreshSearch } = adminSlice.actions
 export default adminSlice.reducer
