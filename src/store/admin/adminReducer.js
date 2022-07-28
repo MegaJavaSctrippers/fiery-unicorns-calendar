@@ -14,6 +14,7 @@ const initialState = {
   create: '',
   create_room: false,
   invite_user: false,
+  auth: false,
 }
 
 export const adminSlice = createSlice({
@@ -53,9 +54,12 @@ export const adminSlice = createSlice({
     setCreateRoom: (state, action) => {
       state.create_room = action.payload
     },
+    setAuth: (state, action) => {
+      state.auth = action.payload
+    },
   },
 })
 
 export const { setSearchAction, setCreate, setInviteUser, setCreateRoom } = adminSlice.actions
-export const { refreshSearch } = adminSlice.actions
+export const { refreshSearch, setAuth } = adminSlice.actions
 export default adminSlice.reducer

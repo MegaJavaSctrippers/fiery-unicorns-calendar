@@ -1,9 +1,45 @@
-const axios = require('axios')
+/* eslint-disable no-underscore-dangle */
+import axios from 'axios'
+import tokenService from './token.service'
 
-const token = JSON.parse(localStorage.getItem('token'))
-console.log(token, 'hello')
-export const API = axios.create({
+const api = axios.create({
+  baseURL: 'https://checkit24.herokuapp.com/api',
   headers: {
-    Authorization: `Bearer ${token}`,
+    'Content-Type': 'application/json',
   },
 })
+
+api.interceptors.request.use(
+  (config) => {
+    const token = tokenService.getLocalAccessToken()
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => Promise.reject(error),
+)
+api.interceptors.response.use(
+  (res) => res,
+  async (err) => {
+    const originalConfig = err.config
+    if (originalConfig.url !== '/users/login/' && err.response) {
+      // Access Token was expired
+      if (err.response.status === 401 && !originalConfig._retry) {
+        originalConfig._retry = true
+        try {
+          const rs = await api.post('/token/refresh/', {
+            refresh: tokenService.getLocalRefreshToken(),
+          })
+          const { access } = rs.data
+          tokenService.updateLocalAccessToken(access)
+          return api(originalConfig)
+        } catch (_error) {
+          return Promise.reject(_error)
+        }
+      }
+    }
+    return Promise.reject(err)
+  },
+)
+export default api

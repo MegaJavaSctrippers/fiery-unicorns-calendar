@@ -1,25 +1,20 @@
 import React, { useState, useEffect } from 'react'
-// import { API } from '../../../services/api'
-import axios from 'axios'
+import api from '../../../services/api'
 import icons from '../../../assets/icons'
 
 function SearchRoom() {
   const [edit] = useState(false)
   const [rooms, setRooms] = useState([])
+
   useEffect(() => {
     const getRooms = async () => {
-      await axios
-        .get('https://checkit24.herokuapp.com/api/room/', {
-          headers: {
-            Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
-          },
-        })
-        .then((res) => {
-          setRooms(res.data)
-        })
+      await api.get('/room/').then((res) => {
+        setRooms(res.data)
+      })
     }
     getRooms()
   }, [])
+
   return (
     <>
       <div className="create_title">
