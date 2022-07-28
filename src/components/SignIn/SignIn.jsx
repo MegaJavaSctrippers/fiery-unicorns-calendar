@@ -27,10 +27,15 @@ function SignIn() {
         password: formData.password,
       })
       .then((res) => {
-        console.log(res)
+        if (res.data.is_staff) {
+          navigate('/admin')
+        } else {
+          navigate('/')
+        }
+        localStorage.setItem('user', JSON.stringify(res.data.user_id))
+        localStorage.setItem('is_staff', JSON.stringify(res.data.is_staff))
         localStorage.setItem('token', JSON.stringify(res.data.access))
         localStorage.setItem('refresh', JSON.stringify(res.data.refresh))
-        navigate('/')
       })
       .catch(() => {
         setError(true)

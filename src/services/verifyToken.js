@@ -8,7 +8,6 @@ const parseJwt = (token) => {
     return null
   }
 }
-
 export const useAuth = () => {
   const token = localStorage.getItem('token')
   if (token) {
@@ -19,7 +18,6 @@ export const useAuth = () => {
       return true
     } else {
       const refresh = localStorage.getItem('refresh')
-      console.log(refresh, 'refresh token')
       const refreshParse = parseJwt(refresh)
       if (refreshParse.exp * 1000 > new Date()) {
         axios
@@ -30,6 +28,8 @@ export const useAuth = () => {
             localStorage.setItem('token', res.data.access)
             console.log(res.data)
           })
+
+        console.log(refresh, 'refresh token')
         return true
       }
     }

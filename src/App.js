@@ -9,19 +9,25 @@ import Users from './admin/components/Users/Users'
 import './main.css'
 import Admin from './admin/Admin'
 import ProtectedRoute from './hoc/ProtectedRoute'
-
-const home = (
-  <ProtectedRoute>
-    <Homepage />
-  </ProtectedRoute>
-)
+import ProtectedAdmin from './hoc/ProtectAdmin'
 
 function App() {
+  const home = (
+    <ProtectedRoute>
+      <Homepage />
+    </ProtectedRoute>
+  )
+  const admin = (
+    <ProtectedAdmin>
+      <Admin />
+    </ProtectedAdmin>
+  )
+
   return (
     <div className="app">
       <Routes>
         <Route path="/" element={home} />
-        <Route path="/admin" element={<Admin />}>
+        <Route path="/admin" element={admin}>
           <Route index element={<Organization />} />
           <Route path="users" element={<Users />} />
           <Route path="rooms" element={<Accommodaton />} />

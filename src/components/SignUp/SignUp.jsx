@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
 import axios from 'axios'
-import Swal from 'sweetalert2'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
@@ -98,9 +97,9 @@ function SignUp() {
         })
         .catch((e) => {
           console.log(e)
-          // if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
-          //   setValidation({ emailExist: true })
-          // }
+          if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
+            setValidation({ emailExist: true })
+          }
         })
     }
   }

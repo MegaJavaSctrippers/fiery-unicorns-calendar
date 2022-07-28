@@ -50,7 +50,7 @@ function Position() {
                 <Space>
                   <Select
                     onChange={(value) => console.log(value)}
-                    value={item.positions[0]?.department}
+                    value={item.positions[0]?.department.name}
                     name="department"
                     className="general_select create_select"
                   >
@@ -60,7 +60,7 @@ function Position() {
                   </Select>
                 </Space>
               ) : (
-                <div className="create_div">{item.positions[0]?.department}</div>
+                <div className="create_div">{item.positions[0]?.department.name}</div>
               )}
             </div>
             <div className="create_form">
@@ -69,7 +69,7 @@ function Position() {
                 <Space>
                   <Select
                     onChange={(value) => console.log(value)}
-                    value={item.positions[0]?.position}
+                    value={item.positions[0]?.position.name}
                     name="position"
                     className="general_select create_select"
                   >
@@ -79,7 +79,7 @@ function Position() {
                   </Select>
                 </Space>
               ) : (
-                <div className="create_div">{item.positions[0]?.position}</div>
+                <div className="create_div">{item.positions[0]?.position.name}</div>
               )}
             </div>
             {!edit ? (

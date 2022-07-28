@@ -1,9 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import icons from '../../assets/icons'
 import EditProfile from '../../modals/EditProfile/EditProfile'
 import style from './UserDropdown.module.scss'
 
-function UserDropdown() {
+function UserDropdown({ user }) {
   return (
     <div className={style.user_dropdown}>
       <div className={style.user_avatar}>
@@ -12,29 +13,31 @@ function UserDropdown() {
           Изменить данные
         </span>
       </div>
-      <h3>Jenny Wilson Jennfh</h3>
-      <span>alogin@gmail.com</span>
+      <h3>{user.name}</h3>
+      <span>{user.email}</span>
       <ul>
         <li>
           <img src={icons.profileSVG} alt="" />
-          Jenny Wilson Jennfh
+          {user.name}
         </li>
         <li>
           <img src={icons.folderSVG} alt="" />
-          Проект-менеджер Megacom
+          {user.positions[0]?.position.name}
         </li>
         <li>
           <img src={icons.clockSVG} alt="" />
-          Отдел разработок
+          {user.positions[0]?.department.name}
         </li>
         <li>
           <img src={icons.jobSVG} alt="" />
-          alogin@gmail.com
+          {user.email}
         </li>
       </ul>
       <EditProfile />
     </div>
   )
 }
-
+UserDropdown.propTypes = {
+  user: PropTypes.object,
+}
 export default UserDropdown

@@ -1,7 +1,9 @@
-import axios from 'axios'
+const axios = require('axios')
 
-const token = localStorage.getItem('token')
-export default axios.create({
-  baseURL: 'https://checkit24.herokuapp.com/api/',
-  Authorization: token,
+const token = JSON.parse(localStorage.getItem('token'))
+console.log(token, 'hello')
+export const API = axios.create({
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
 })

@@ -1,5 +1,6 @@
-import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+// import { API } from '../../../services/api'
+import axios from 'axios'
 import icons from '../../../assets/icons'
 
 function SearchRoom() {
@@ -15,7 +16,6 @@ function SearchRoom() {
         })
         .then((res) => {
           setRooms(res.data)
-          console.log(res.data)
         })
     }
     getRooms()

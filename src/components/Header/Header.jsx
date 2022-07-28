@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
+import axios from 'axios'
 import { Select, Space, Popover } from 'antd'
 import Notification from '../../modals/Notification/Notification'
 import style from './Header.module.scss'
@@ -46,6 +47,16 @@ function Header() {
       </ul>
     </div>
   )
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    const getUser = async () => {
+      const id = JSON.parse(localStorage.getItem('user'))
+      await axios.get(`https://checkit24.herokuapp.com/api/users/${id}/`).then((res) => {
+        setUser(res.data)
+      })
+    }
+    getUser()
+  }, [])
   const dispatch = useDispatch()
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
@@ -116,7 +127,7 @@ function Header() {
         <Popover
           className="header_popover"
           placement="bottomRight"
-          content={<UserDropdown />}
+          content={<UserDropdown user={user} />}
           trigger="click"
         >
           <div className={style.user_box}>
