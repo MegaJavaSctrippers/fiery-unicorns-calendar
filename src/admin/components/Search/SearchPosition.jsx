@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Space, Select } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
 import Swal from 'sweetalert2'
-import api from '../../../services/api'
 import icons from '../../../assets/icons'
+import { getPositions } from '../../../store/admin/actions/positions'
 
 const { Option } = Select
 function Position() {
   const [edit, setEdit] = useState(false)
-  const [positions, setPositions] = useState([])
+  const positions = useSelector((state) => state.positions.positions)
+  const dispatch = useDispatch()
+
   useEffect(() => {
-    const getPosition = async () => {
-      await api.get('https://checkit24.herokuapp.com/api/positions/').then((res) => {
-        setPositions(res.data)
-        console.log(res.data)
-      })
-    }
-    getPosition()
+    dispatch(getPositions())
   }, [])
+
   const deletePosition = () => {
     Swal.fire({
       html: 'Удалить должность “UX/UI дизайнер” из <br/> отдела Разработок ?',

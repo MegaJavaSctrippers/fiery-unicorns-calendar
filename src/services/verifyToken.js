@@ -1,38 +1,21 @@
-// /* eslint-disable no-else-return */
-// import axios from 'axios'
+/* eslint-disable no-else-return */
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]))
+  } catch (e) {
+    return null
+  }
+}
 
-// const parseJwt = (token) => {
-//   try {
-//     return JSON.parse(atob(token.split('.')[1]))
-//   } catch (e) {
-//     return null
-//   }
-// }
-// export const useAuth = () => {
-//   const token = localStorage.getItem('token')
-//   if (token) {
-//     const parseToken = parseJwt(token)
-//     console.log(parseToken)
-//     if (parseToken.exp * 1000 > new Date()) {
-//       console.log('access token')
-//       return true
-//     } else {
-//       const refresh = localStorage.getItem('refresh')
-//       const refreshParse = parseJwt(refresh)
-//       if (refreshParse.exp * 1000 > new Date()) {
-//         axios
-//           .post('https://checkit24.herokuapp.com/api/token/refresh/', {
-//             refresh: JSON.parse(refresh),
-//           })
-//           .then((res) => {
-//             localStorage.setItem('token', res.data.access)
-//             console.log(refresh, 'refresh token')
-//           })
-//         return true
-//       } else {
-//         return false
-//       }
-//     }
-//   }
-//   return false
-// }
+export const useAuth = () => {
+  const token = JSON.parse(localStorage.getItem('token'))
+  if (token) {
+    const tokenParse = parseJwt(token)
+    if (tokenParse.exp * 1000 > new Date()) {
+      return true
+    }
+    return false
+  } else {
+    return false
+  }
+}

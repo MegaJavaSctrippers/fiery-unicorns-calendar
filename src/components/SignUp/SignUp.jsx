@@ -22,7 +22,7 @@ function SignUp() {
     name: '',
     surname: '',
     lastname: '',
-    department: '1',
+    department: '',
     job: '',
     email: '',
     password: '',

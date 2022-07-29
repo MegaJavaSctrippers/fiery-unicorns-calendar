@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { Space, Select } from 'antd'
-import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../assets/icons'
+import { getUsers } from '../../../store/admin/actions/users'
 
 const { Option } = Select
 
 function Position() {
   const [edit, setEdit] = useState(false)
   const user = useSelector((state) => state.admin.search.user)
-  const [users, setUsers] = useState([])
+  const users = useSelector((state) => state.users.users)
+  console.log(users)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getUsers = async () => {
-      await axios.get('https://checkit24.herokuapp.com/api/users/').then((res) => {
-        setUsers(res.data)
-        console.log(res.data)
-      })
-    }
-    getUsers()
+    // const getUsers = async () => {
+    //   await axios.get('https://checkit24.herokuapp.com/api/users/').then((res) => {
+    //     setUsers(res.data)
+    //     console.log(res.data)
+    //   })
+    // }
+    // getUsers()
+    dispatch(getUsers())
   }, [])
 
   return (

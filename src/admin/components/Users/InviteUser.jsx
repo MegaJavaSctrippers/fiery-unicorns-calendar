@@ -1,43 +1,18 @@
 import React, { useState } from 'react'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-// import { API } from '../../../services/api'
-import axios from 'axios'
-import icons from '../../../assets/icons'
-
-const Alert = withReactContent(Swal)
+import { success } from '../../../services/success'
+import api from '../../../services/api'
+import SuccessAlert from '../Alerts/SuccessAlert'
 
 function InviteUser() {
   const [user, setUser] = useState('')
   const handleChange = (e) => {
     setUser(e.target.value)
   }
-  const alertContent = (
-    <div className="d-flex align-items-center">
-      <img className="success_img" src={icons.acceptSVG} alt="" />
-      <span>Приглашение отправлено</span>
-    </div>
-  )
   const inviteUser = async () => {
-    await axios
-      .post('https://checkit24.herokuapp.com/api/sendinvitation/', { email: user })
-      .then((res) => {
-        console.log(res)
-        setUser('')
-        Alert.fire({
-          position: 'bottom',
-          html: alertContent,
-          text: 'Приглашение отправлено',
-          showConfirmButton: false,
-          timer: 2000,
-          customClass: {
-            popup: 'success-sweet',
-          },
-        })
-      })
-      .catch((e) => {
-        console.log(e)
-      })
+    await api.post('/sendinvitation/', { email: user }).then(() => {
+      setUser('')
+      success(<SuccessAlert text="Приглашения отправлена" />)
+    })
   }
   return (
     <div>

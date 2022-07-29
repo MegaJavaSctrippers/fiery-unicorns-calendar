@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Select, Space } from 'antd'
 import Swal from 'sweetalert2'
+import { useDispatch, useSelector } from 'react-redux'
 import withReactContent from 'sweetalert2-react-content'
 import icons from '../../../assets/icons'
 import SearchDepartmentChild from './SearchDepartmentChild'
 import Invitation from '../../../modals/Invitation/Inivitation'
+import { getDirections } from '../../../store/admin/actions/directions'
 
 const { Option } = Select
 
@@ -12,6 +14,11 @@ const Alert = withReactContent(Swal)
 
 function SearchDirection() {
   const [edit, setEdit] = useState(false)
+  const directions = useSelector((state) => state.directions.directions)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getDirections())
+  }, [])
   const deleteDepartment = () => {
     Alert.fire({
       html: <SearchDepartmentChild />,
@@ -45,73 +52,74 @@ function SearchDirection() {
         {edit ? 'Редактировать :' : 'Поиск :'}
         <span>Коммерческая дирекций</span>
       </div>
-      <div className="create_box">
-        <div className="create_form">
-          <span className="create_label">Дирекция</span>
+      {directions.map((item) => (
+        <div key={item.id} className="create_box">
+          <div className="create_form">
+            <span className="create_label">Дирекция</span>
+            {edit ? (
+              <input
+                onChange={() => console.log('j')}
+                value={item.name}
+                name="direction"
+                className="create_input"
+              />
+            ) : (
+              <div className="create_div">{item.name}</div>
+            )}
+          </div>
+          <div className="create_form">
+            <span className="create_label">Директор</span>
+            {edit ? (
+              <Space>
+                <Select
+                  onChange={(value) => console.log(value)}
+                  value={item.director.name}
+                  name="director"
+                  className="general_select create_select"
+                >
+                  <Option value="1">Асанов Тилек Асанович</Option>
+                  <Option value="2">Bektemir Kudaiberdiev</Option>
+                  <Option value="3">Cristiano Ronaldo</Option>
+                </Select>
+              </Space>
+            ) : (
+              <div className="create_div">{item.director.name}</div>
+            )}
+          </div>
+          <div className="create_form">
+            <span className="create_label">Организация</span>
+            {edit ? (
+              <Space>
+                <Select
+                  onChange={(value) => console.log(value)}
+                  value={item.organization.name}
+                  name="organization"
+                  className="general_select create_select"
+                >
+                  <Option value="1">Megalab</Option>
+                  <Option value="2">Megacom</Option>
+                </Select>
+              </Space>
+            ) : (
+              <div className="create_div">{item.organization.name}</div>
+            )}
+          </div>
           {edit ? (
-            <input
-              onChange={() => console.log('j')}
-              value=""
-              name="direction"
-              className="create_input"
-            />
-          ) : (
-            <div className="create_div">Коммерческая дирекция</div>
-          )}
-        </div>
-        <div className="create_form">
-          <span className="create_label">Директор</span>
-          {edit ? (
-            <Space>
-              <Select
-                onChange={(value) => console.log(value)}
-                value=""
-                name="director"
-                className="general_select create_select"
-              >
-                <Option value="1">Асанов Тилек Асанович</Option>
-                <Option value="2">Bektemir Kudaiberdiev</Option>
-                <Option value="3">Cristiano Ronaldo</Option>
-              </Select>
-            </Space>
-          ) : (
-            <div className="create_div">Асанов Тилек Асанович</div>
-          )}
-        </div>
-        <div className="create_form">
-          <span className="create_label">Организация</span>
-          {edit ? (
-            <Space>
-              <Select
-                onChange={(value) => console.log(value)}
-                value=""
-                name="organization"
-                className="general_select create_select"
-              >
-                <Option value="1">Megalab</Option>
-                <Option value="2">Megacom</Option>
-              </Select>
-            </Space>
-          ) : (
-            <div className="create_div">Коммерческая дирекция</div>
-          )}
-        </div>
+            <button className="create_btn" onClick={() => console.log('heelo')} type="button">
+              Сохранить
+            </button>
+          ) : null}
 
-        {edit ? (
-          <button className="create_btn" onClick={() => console.log('heelo')} type="button">
-            Сохранить
+          <button onClick={() => setEdit(!edit)} type="button" className="edit_icon">
+            {edit ? <img src={icons.editBlackSVG} alt="" /> : <img src={icons.editSVG} alt="" />}
           </button>
-        ) : null}
 
-        <button onClick={() => setEdit(!edit)} type="button" className="edit_icon">
-          {edit ? <img src={icons.editBlackSVG} alt="" /> : <img src={icons.editSVG} alt="" />}
-        </button>
-
-        <button onClick={deleteDepartment} type="button" className="delete_icon">
-          <img src={icons.deleteSVG} alt="" />
-        </button>
-        <Invitation />
-      </div>
+          <button onClick={deleteDepartment} type="button" className="delete_icon">
+            <img src={icons.deleteSVG} alt="" />
+          </button>
+          <Invitation />
+        </div>
+      ))}
     </>
   )
 }

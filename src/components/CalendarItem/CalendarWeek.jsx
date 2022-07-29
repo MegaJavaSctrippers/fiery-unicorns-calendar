@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import style from './CalendarItem.module.scss'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
-import { setSelectedDate } from '../../store/date/dateReducer'
+import { setSelectedDate } from '../../store/date/dateSlice'
 
 function CalendarWeek({ value }) {
   const [anchorEl, setAnchorEl] = React.useState(null)

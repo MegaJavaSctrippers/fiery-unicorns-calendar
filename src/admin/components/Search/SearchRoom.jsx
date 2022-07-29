@@ -33,7 +33,7 @@ function SearchRoom() {
           </div>
           <div className="create_form">
             <span className="create_label">Описание</span>
-            <div className="create_div">{room.location}</div>
+            <div className="create_div">{room.description}</div>
           </div>
           <button type="button" className="edit_icon">
             <img src={icons.editSVG} alt="" />

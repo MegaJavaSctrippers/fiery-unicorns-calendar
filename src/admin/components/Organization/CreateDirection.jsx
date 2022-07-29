@@ -1,18 +1,41 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
+import { useSelector } from 'react-redux'
+import api from '../../../services/api'
+import SuccessAlert from '../Alerts/SuccessAlert'
+import { success } from '../../../services/success'
 
 const { Option } = Select
 
 function CreateDirection() {
+  const users = useSelector((state) => state.users.users)
+  const organizations = useSelector((state) => state.organizations.organizations)
   const [formData, setFormData] = useState({
-    direction: '',
+    name: '',
     director: '',
-    organization: '',
+    org: '',
   })
-  const { direction, director, organization } = formData
-  const enabled = direction.length > 0 && director.length > 0 && organization.length > 0
+  const { name, director, org } = formData
   const handleChange = (e) => {
-    setFormData({ ...formData, direction: e.target.value })
+    setFormData({ ...formData, name: e.target.value })
+  }
+
+  const enabled = name.length > 0 && director.toString().length > 0 && org.toString().length > 0
+  const onSubmit = async () => {
+    await api
+      .post('/create/directions/', {
+        name,
+        organization: org,
+        director,
+      })
+      .then(() => {
+        setFormData({
+          name: '',
+          director: '',
+          org: '',
+        })
+        success(<SuccessAlert text="Дирекция успешна создана" />)
+      })
   }
   return (
     <div>
@@ -23,25 +46,22 @@ function CreateDirection() {
       <div className="create_box">
         <div className="create_form">
           <span className="create_label">Название дирекций</span>
-          <input
-            onChange={handleChange}
-            value={direction}
-            name="direction"
-            className="create_input"
-          />
+          <input onChange={handleChange} value={name} name="direction" className="create_input" />
         </div>
         <div className="create_form">
           <span className="create_label">Директор</span>
           <Space>
             <Select
               onChange={(value) => setFormData({ ...formData, director: value })}
-              value={direction}
+              value={director}
               name="director"
               className="general_select create_select"
             >
-              <Option value="1">Bektemir Kudaiberdiev</Option>
-              <Option value="2">Cristiano Ronaldo</Option>
-              <Option value="3">Lionel Messi</Option>
+              {users.map((user) => (
+                <Option key={user.id} value={user.id}>
+                  {user.name}
+                </Option>
+              ))}
             </Select>
           </Space>
         </div>
@@ -49,17 +69,20 @@ function CreateDirection() {
           <span className="create_label">Организация</span>
           <Space>
             <Select
-              onChange={(value) => setFormData({ ...formData, organization: value })}
-              value={organization}
+              onChange={(value) => setFormData({ ...formData, org: value })}
+              value={org}
               name="organization"
               className="general_select create_select"
             >
-              <Option value="1">Megalab</Option>
-              <Option value="2">Megacom</Option>
+              {organizations.map((item) => (
+                <Option key={item.id} value={item.id}>
+                  {item.name}
+                </Option>
+              ))}
             </Select>
           </Space>
         </div>
-        <button disabled={!enabled} className="create_btn" type="button">
+        <button disabled={!enabled} onClick={onSubmit} className="create_btn" type="button">
           Сохранить
         </button>
       </div>

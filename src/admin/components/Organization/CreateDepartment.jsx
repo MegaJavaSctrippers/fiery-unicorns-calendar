@@ -1,18 +1,42 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
+import { useSelector } from 'react-redux'
+import api from '../../../services/api'
+import SuccessAlert from '../Alerts/SuccessAlert'
+import { success } from '../../../services/success'
 
 const { Option } = Select
 
 function CreateDepartment() {
+  const users = useSelector((state) => state.users.users)
+  const directions = useSelector((state) => state.directions.directions)
+
   const [formData, setFormData] = useState({
-    department: '',
+    name: '',
     direction: '',
     head: '',
   })
-  const { direction, department, head } = formData
-  const enabled = direction.length > 0 && department.length > 0 && head.length > 0
+  const { direction, name, head } = formData
+  const enabled = name.length > 0 && direction.toString().length > 0 && head.toString().length > 0
+
   const handleChange = (e) => {
-    setFormData({ ...formData, department: e.target.value })
+    setFormData({ ...formData, name: e.target.value })
+  }
+  const onSubmit = async () => {
+    await api
+      .post('/create/departments/', {
+        name,
+        direction,
+        manager: head,
+      })
+      .then(() => {
+        success(<SuccessAlert text="Отдел успешно создан" />)
+        setFormData({
+          name: '',
+          direction: '',
+          head: '',
+        })
+      })
   }
   return (
     <div>
@@ -23,12 +47,7 @@ function CreateDepartment() {
       <div className="create_box">
         <div className="create_form">
           <span className="create_label">Название отдела</span>
-          <input
-            onChange={handleChange}
-            value={department}
-            name="department"
-            className="create_input"
-          />
+          <input onChange={handleChange} value={name} name="name" className="create_input" />
         </div>
         <div className="create_form">
           <span className="create_label">Руководитель отдела</span>
@@ -39,9 +58,11 @@ function CreateDepartment() {
               name="head"
               className="general_select create_select"
             >
-              <Option value="1">Bektemir Kudaiberdiev</Option>
-              <Option value="2">Cristiano Ronaldo</Option>
-              <Option value="3">Lionel Messi</Option>
+              {users.map((item) => (
+                <Option key={item.id} value={item.id}>
+                  {item.name}
+                </Option>
+              ))}
             </Select>
           </Space>
         </div>
@@ -54,13 +75,15 @@ function CreateDepartment() {
               name="direction"
               className="general_select create_select"
             >
-              <Option value="1">Megalab</Option>
-              <Option value="2">Megacom</Option>
-              <Option value="3">Единорожки</Option>
+              {directions.map((item) => (
+                <Option key={item.id} value={item.id}>
+                  {item.name}
+                </Option>
+              ))}
             </Select>
           </Space>
         </div>
-        <button disabled={!enabled} className="create_btn" type="button">
+        <button disabled={!enabled} onClick={onSubmit} className="create_btn" type="button">
           Сохранить
         </button>
       </div>

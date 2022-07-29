@@ -1,5 +1,7 @@
-import axios from 'axios'
 import React, { useState } from 'react'
+import api from '../../../services/api'
+import SuccessAlert from '../Alerts/SuccessAlert'
+import { success } from '../../../services/success'
 
 function CreateRoom() {
   const [room, setRoom] = useState({
@@ -11,24 +13,23 @@ function CreateRoom() {
   })
   const { name, capacity, location, hasAc, hasProjector } = room
   const submitRoom = async () => {
-    await axios
-      .post(
-        'https://checkit24.herokuapp.com/api/room/',
-        {
-          name,
-          capacity,
-          location,
-          has_ac: hasAc,
-          has_projector: hasProjector,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
-          },
-        },
-      )
-      .then((res) => {
-        console.log(res)
+    await api
+      .post('/room/', {
+        name,
+        capacity,
+        description: location,
+        has_ac: hasAc,
+        has_projector: hasProjector,
+      })
+      .then(() => {
+        setRoom({
+          name: '',
+          capacity: '',
+          location: '',
+          hasProjector: true,
+          hasAc: true,
+        })
+        success(<SuccessAlert text="Помещение создано" />)
       })
   }
   const handleChange = (e) => {

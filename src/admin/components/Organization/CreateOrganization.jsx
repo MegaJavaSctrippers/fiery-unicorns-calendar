@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { Space, Select } from 'antd'
+import api from '../../../services/api'
+import SuccessAlert from '../Alerts/SuccessAlert'
+import { success } from '../../../services/success'
 
 const { Option } = Select
 
@@ -8,11 +11,17 @@ function CreateOrganization() {
     organization: '',
     admin: '',
   })
+  const { organization, admin } = formData
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  const { organization, admin } = formData
-  const enabled = organization.length > 0 && admin.length > 0
+  const onSubmit = async () => {
+    await api.post('/organizations/', { name: organization }).then(() => {
+      success(<SuccessAlert text="Организация создана" />)
+      setFormData({ organization: '', admin: '' })
+    })
+  }
+  const enabled = organization.length > 0
   return (
     <div>
       <div className="create_title">
@@ -38,13 +47,11 @@ function CreateOrganization() {
               name="direction"
               className="general_select create_select"
             >
-              <Option value="1">Megalab</Option>
-              <Option value="2">Megacom</Option>
-              <Option value="3">Единорожки</Option>
+              <Option value="1">Bektemir Kudaiberdiev</Option>
             </Select>
           </Space>
         </div>
-        <button disabled={!enabled} className="create_btn" type="button">
+        <button onClick={onSubmit} disabled={!enabled} className="create_btn" type="button">
           Сохранить
         </button>
       </div>

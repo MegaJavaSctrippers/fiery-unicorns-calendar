@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Space, Select, Dropdown, Menu } from 'antd'
 import { useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../assets/icons'
 import style from './AdminHeader.module.scss'
 import {
@@ -10,11 +10,16 @@ import {
   setInviteUser,
   setCreateRoom,
   refreshSearch,
-} from '../../../store/admin/adminReducer'
+} from '../../../store/adminSlice'
 
 const { Option } = Select
 
 function AdminHeader() {
+  const organizations = useSelector((state) => state.organizations.organizations)
+  const departments = useSelector((state) => state.departments.departments)
+  const positions = useSelector((state) => state.positions.positions)
+  const directions = useSelector((state) => state.directions.directions)
+  const users = useSelector((state) => state.users.users)
   const location = useLocation()
   const active = location.pathname.split('/').pop()
   const dispatch = useDispatch()
@@ -62,16 +67,16 @@ function AdminHeader() {
           key: 'organization',
         },
         {
+          label: <span>Дирекций</span>,
+          key: 'direction',
+        },
+        {
           label: <span>Отдел</span>,
           key: 'department',
         },
         {
           label: <span>Должность</span>,
           key: 'position',
-        },
-        {
-          label: <span>Дирекций</span>,
-          key: 'direction',
         },
       ]}
     />
@@ -89,9 +94,13 @@ function AdminHeader() {
                   onChange={(value) => setSearch({ ...search, user: value })}
                   className="general_select admin_select"
                 >
-                  <Option value="Bektemir">Bektemir Kudaiberdiev</Option>
-                  <Option value="Cristiano Ronaldo">Cristiano Ronaldo</Option>
-                  <Option value="Lionel Messi">Lionel Messi</Option>
+                  {users.map((user) => (
+                    <Option key={user.id} value={user.id}>
+                      {user.name}
+                      <span style={{ display: 'inline-block', width: '4px' }} />
+                      {user.surname}
+                    </Option>
+                  ))}
                 </Select>
               </Space>
             </div>
@@ -105,9 +114,11 @@ function AdminHeader() {
                   onChange={(value) => setSearch({ ...search, organization: value })}
                   className="general_select admin_select"
                 >
-                  <Option value="Megalab">Megalab</Option>
-                  <Option value="Megacom">Megacom</Option>
-                  <Option value="Единорожки">Единорожки</Option>
+                  {organizations.map((item) => (
+                    <Option key={item.id} value={item.id}>
+                      {item.name}
+                    </Option>
+                  ))}
                 </Select>
               </Space>
             </div>
@@ -120,9 +131,11 @@ function AdminHeader() {
                 onChange={(value) => setSearch({ ...search, direction: value })}
                 className="general_select admin_select"
               >
-                <Option value="Коммерческая дирекция">Коммерческая дирекция</Option>
-                <Option value="Megacom">Дирекция по безопасности</Option>
-                <Option value="Единорожки">Дирекция информационных технологий</Option>
+                {directions.map((item) => (
+                  <Option key={item.id} value={item.id}>
+                    {item.name}
+                  </Option>
+                ))}
               </Select>
             </Space>
           </div>
@@ -134,9 +147,11 @@ function AdminHeader() {
                 onChange={(value) => setSearch({ ...search, department: value })}
                 className="general_select admin_select"
               >
-                <Option value="Отдел разработок">Отдел разработок</Option>
-                <Option value="Отдел продаж">Отдел продаж</Option>
-                <Option value="Отдел по работе с клиентами">Отдел по работе с клиентами</Option>
+                {departments.map((item) => (
+                  <Option key={item.id} value={item.id}>
+                    {item.name}
+                  </Option>
+                ))}
               </Select>
             </Space>
           </div>
@@ -148,9 +163,11 @@ function AdminHeader() {
                 onChange={(value) => setSearch({ ...search, position: value })}
                 className="general_select admin_select"
               >
-                <Option value="Frontend разработчик">Frontend разработчик</Option>
-                <Option value="Backend разработчик">Backend разработчик</Option>
-                <Option value="Android разработчик">Android разработчик</Option>
+                {positions.map((item) => (
+                  <Option key={item.id} value={item.id}>
+                    {item.name}
+                  </Option>
+                ))}
               </Select>
             </Space>
           </div>

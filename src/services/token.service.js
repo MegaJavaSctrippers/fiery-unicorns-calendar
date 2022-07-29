@@ -13,5 +13,9 @@ class TokenService {
   updateLocalAccessToken(token) {
     localStorage.setItem('token', JSON.stringify(token))
   }
+
+  setAuth(auth) {
+    localStorage.setItem('auth', JSON.stringify(auth))
+  }
 }
 export default new TokenService()

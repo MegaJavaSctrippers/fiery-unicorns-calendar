@@ -7,7 +7,7 @@ import style from './Calendar.module.scss'
 import icons from '../../assets/icons'
 import CalendarHeader from '../CalendarHeader/CalendarHeader'
 import CalendarItem from '../CalendarItem/CalendarItem'
-import { setSelectedDate } from '../../store/date/dateReducer'
+import { setSelectedDate } from '../../store/date/dateSlice'
 import Invitation from '../../modals/Invitation/Inivitation'
 import CalendarParent from './CalendarParent'
 
