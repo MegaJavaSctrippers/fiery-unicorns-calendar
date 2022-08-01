@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import api from '../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../services/success'
+import { setCreateRoom } from '../../../store/adminSlice'
 
 function CreateRoom() {
+  const dispatch = useDispatch()
   const [room, setRoom] = useState({
     name: '',
     capacity: '',
@@ -22,6 +25,7 @@ function CreateRoom() {
         has_projector: hasProjector,
       })
       .then(() => {
+        dispatch(setCreateRoom(false))
         setRoom({
           name: '',
           capacity: '',

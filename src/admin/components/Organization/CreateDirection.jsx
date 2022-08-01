@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import api from '../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../services/success'
+import { setCreate } from '../../../store/adminSlice'
 
 const { Option } = Select
 
 function CreateDirection() {
   const users = useSelector((state) => state.users.users)
   const organizations = useSelector((state) => state.organizations.organizations)
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     name: '',
     director: '',
@@ -34,6 +36,7 @@ function CreateDirection() {
           director: '',
           org: '',
         })
+        dispatch(setCreate(''))
         success(<SuccessAlert text="Дирекция успешна создана" />)
       })
   }

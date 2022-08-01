@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { success } from '../../../services/success'
 import api from '../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
+import { setInviteUser } from '../../../store/adminSlice'
 
 function InviteUser() {
   const [user, setUser] = useState('')
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     setUser(e.target.value)
   }
   const inviteUser = async () => {
     await api.post('/sendinvitation/', { email: user }).then(() => {
       setUser('')
+      dispatch(setInviteUser(false))
       success(<SuccessAlert text="Приглашения отправлена" />)
     })
   }

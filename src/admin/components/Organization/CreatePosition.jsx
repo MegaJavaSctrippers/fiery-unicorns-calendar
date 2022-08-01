@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import api from '../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../services/success'
+import { setCreate } from '../../../store/adminSlice'
 
 const { Option } = Select
 
 function CreatePosition() {
   const departments = useSelector((state) => state.departments.departments)
+  const dispatch = useDispatch()
   const [formData, setFormData] = useState({
     name: '',
     department: '',
@@ -29,6 +31,7 @@ function CreatePosition() {
           name: '',
           department: '',
         })
+        dispatch(setCreate(''))
         success(<SuccessAlert text="Должность успешна создана" />)
       })
   }

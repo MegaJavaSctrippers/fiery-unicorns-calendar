@@ -1,15 +1,17 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import api from '../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../services/success'
+import { setCreate } from '../../../store/adminSlice'
 
 const { Option } = Select
 
 function CreateDepartment() {
   const users = useSelector((state) => state.users.users)
   const directions = useSelector((state) => state.directions.directions)
+  const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
     name: '',
@@ -30,6 +32,7 @@ function CreateDepartment() {
         manager: head,
       })
       .then(() => {
+        dispatch(setCreate(''))
         success(<SuccessAlert text="Отдел успешно создан" />)
         setFormData({
           name: '',

@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import api from '../../../services/api'
+import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../assets/icons'
+import { getRooms } from '../../../store/admin/actions/rooms'
 
 function SearchRoom() {
   const [edit] = useState(false)
-  const [rooms, setRooms] = useState([])
+  const rooms = useSelector((state) => state.rooms.rooms)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getRooms = async () => {
-      await api.get('/room/').then((res) => {
-        setRooms(res.data)
-      })
-    }
-    getRooms()
+    dispatch(getRooms())
   }, [])
 
   return (

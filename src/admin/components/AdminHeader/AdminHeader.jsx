@@ -20,6 +20,7 @@ function AdminHeader() {
   const positions = useSelector((state) => state.positions.positions)
   const directions = useSelector((state) => state.directions.directions)
   const users = useSelector((state) => state.users.users)
+  const rooms = useSelector((state) => state.rooms.rooms)
   const location = useLocation()
   const active = location.pathname.split('/').pop()
   const dispatch = useDispatch()
@@ -115,7 +116,7 @@ function AdminHeader() {
                   className="general_select admin_select"
                 >
                   {organizations.map((item) => (
-                    <Option key={item.id} value={item.id}>
+                    <Option key={item.id} value={item.name}>
                       {item.name}
                     </Option>
                   ))}
@@ -132,7 +133,7 @@ function AdminHeader() {
                 className="general_select admin_select"
               >
                 {directions.map((item) => (
-                  <Option key={item.id} value={item.id}>
+                  <Option key={item.id} value={item.name}>
                     {item.name}
                   </Option>
                 ))}
@@ -148,7 +149,7 @@ function AdminHeader() {
                 className="general_select admin_select"
               >
                 {departments.map((item) => (
-                  <Option key={item.id} value={item.id}>
+                  <Option key={item.id} value={item.name}>
                     {item.name}
                   </Option>
                 ))}
@@ -164,7 +165,7 @@ function AdminHeader() {
                 className="general_select admin_select"
               >
                 {positions.map((item) => (
-                  <Option key={item.id} value={item.id}>
+                  <Option key={item.id} value={item.name}>
                     {item.name}
                   </Option>
                 ))}
@@ -177,14 +178,14 @@ function AdminHeader() {
           <div className={style.select_wrapper}>
             <Space className="select_full_width">
               <Select
-                placeholder="1 этаж, 4 кабинет"
+                placeholder="Название помещение"
                 onChange={(value) => setSearch({ ...search, roomName: value })}
                 className="general_select admin_select"
                 value={roomName || undefined}
               >
-                <Option value="1">1 этаж, 4 кабинет</Option>
-                <Option value="2">1 этаж, 5 кабинет</Option>
-                <Option value="3">1 этаж, 6 кабинет</Option>
+                {rooms.map((item) => (
+                  <Option key={item.id}>{item.name}</Option>
+                ))}
               </Select>
             </Space>
           </div>
@@ -196,9 +197,9 @@ function AdminHeader() {
                 value={capacity || undefined}
                 className="general_select admin_select"
               >
-                <Option value="4">12</Option>
-                <Option value="5">23</Option>
-                <Option value="6">10</Option>
+                {rooms.map((item) => (
+                  <Option key={item.id}>{item.capacity}</Option>
+                ))}
               </Select>
             </Space>
           </div>
@@ -210,9 +211,9 @@ function AdminHeader() {
                 className="general_select admin_select"
                 value={search.description || undefined}
               >
-                <Option value="7">Кондиционер, диван, стулья</Option>
-                <Option value="8">Кондиционер, диван, стулья</Option>
-                <Option value="9">Кондиционер, диван, стулья</Option>
+                {rooms.map((item) => (
+                  <Option key={item.id}>{item.description}</Option>
+                ))}
               </Select>
             </Space>
           </div>

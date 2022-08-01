@@ -15,6 +15,8 @@ const Alert = withReactContent(Swal)
 function Department() {
   const [edit, setEdit] = useState(false)
   const departments = useSelector((state) => state.departments.departments)
+  const searchDep = useSelector((state) => state.admin.search.department)
+  const searchDir = useSelector((state) => state.admin.search.direction)
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getDepartments())
@@ -50,78 +52,80 @@ function Department() {
     <>
       <div className="create_title">
         {edit ? 'Редактировать :' : 'Поиск :'}
-        <span>Отдел разработок</span>
+        <span>{`${searchDep}  ${searchDir}`}</span>
       </div>
-      {departments.map((item) => (
-        <div key={item.id} className="create_box">
-          <div className="create_form">
-            <span className="create_label">Отдел</span>
-            {edit ? (
-              <input
-                onChange={() => console.log('j')}
-                value={item.name}
-                name="department"
-                className="create_input"
-              />
-            ) : (
-              <div className="create_div">{item.name}</div>
-            )}
-          </div>
-          <div className="create_form">
-            <span className="create_label">Руководитель отделa</span>
-            {edit ? (
-              <Space>
-                <Select
-                  onChange={(value) => console.log(value)}
-                  value={item.manager.name}
+      {departments
+        .filter((item) => item.name.includes(searchDep) && item.direction.name.includes(searchDir))
+        .map((item) => (
+          <div key={item.id} className="create_box">
+            <div className="create_form">
+              <span className="create_label">Отдел</span>
+              {edit ? (
+                <input
+                  onChange={() => console.log('j')}
+                  value={item.name}
                   name="department"
-                  className="general_select create_select"
-                >
-                  <Option value="1">Асанов Тилек Асанович</Option>
-                  <Option value="2">Bektemir Kudaiberdiev</Option>
-                  <Option value="3">Cristiano Ronaldo</Option>
-                </Select>
-              </Space>
-            ) : (
-              <div className="create_div">{item.manager.name}</div>
-            )}
-          </div>
-          <div className="create_form">
-            <span className="create_label">Дирекции отдела</span>
-            {edit ? (
-              <Space>
-                <Select
-                  onChange={(value) => console.log(value)}
-                  value={item.direction.name}
-                  name="department"
-                  className="general_select create_select"
-                >
-                  <Option value="1">Отдел разработок</Option>
-                  <Option value="2">Отдел продаж</Option>
-                  <Option value="3">Отдел по работе с клиентами</Option>
-                </Select>
-              </Space>
-            ) : (
-              <div className="create_div">{item.direction.name}</div>
-            )}
-          </div>
+                  className="create_input"
+                />
+              ) : (
+                <div className="create_div">{item.name}</div>
+              )}
+            </div>
+            <div className="create_form">
+              <span className="create_label">Руководитель отделa</span>
+              {edit ? (
+                <Space>
+                  <Select
+                    onChange={(value) => console.log(value)}
+                    value={item.manager.name}
+                    name="department"
+                    className="general_select create_select"
+                  >
+                    <Option value="1">Асанов Тилек Асанович</Option>
+                    <Option value="2">Bektemir Kudaiberdiev</Option>
+                    <Option value="3">Cristiano Ronaldo</Option>
+                  </Select>
+                </Space>
+              ) : (
+                <div className="create_div">{item.manager.name}</div>
+              )}
+            </div>
+            <div className="create_form">
+              <span className="create_label">Дирекции отдела</span>
+              {edit ? (
+                <Space>
+                  <Select
+                    onChange={(value) => console.log(value)}
+                    value={item.direction.name}
+                    name="department"
+                    className="general_select create_select"
+                  >
+                    <Option value="1">Отдел разработок</Option>
+                    <Option value="2">Отдел продаж</Option>
+                    <Option value="3">Отдел по работе с клиентами</Option>
+                  </Select>
+                </Space>
+              ) : (
+                <div className="create_div">{item.direction.name}</div>
+              )}
+            </div>
 
-          {edit ? (
-            <button className="create_btn" onClick={() => console.log('heelo')} type="button">
-              Сохранить
+            {edit ? (
+              <button className="create_btn" onClick={() => console.log('heelo')} type="button">
+                Сохранить
+              </button>
+            ) : null}
+
+            <button onClick={() => setEdit(!edit)} type="button" className="edit_icon">
+              {edit ? <img src={icons.editBlackSVG} alt="" /> : <img src={icons.editSVG} alt="" />}
             </button>
-          ) : null}
 
-          <button onClick={() => setEdit(!edit)} type="button" className="edit_icon">
-            {edit ? <img src={icons.editBlackSVG} alt="" /> : <img src={icons.editSVG} alt="" />}
-          </button>
-
-          <button onClick={deleteDepartment} type="button" className="delete_icon">
-            <img src={icons.deleteSVG} alt="" />
-          </button>
-          <Invitation />
-        </div>
-      ))}
+            <button onClick={deleteDepartment} type="button" className="delete_icon">
+              <img src={icons.deleteSVG} alt="" />
+            </button>
+            <Invitation />
+          </div>
+        ))}
     </>
   )
 }

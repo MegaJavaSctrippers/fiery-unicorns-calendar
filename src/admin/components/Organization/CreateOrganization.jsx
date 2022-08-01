@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { Space, Select } from 'antd'
+import { useDispatch } from 'react-redux'
 import api from '../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../services/success'
+import { setCreate } from '../../../store/adminSlice'
 
 const { Option } = Select
 
@@ -11,12 +13,14 @@ function CreateOrganization() {
     organization: '',
     admin: '',
   })
+  const dispatch = useDispatch()
   const { organization, admin } = formData
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
   const onSubmit = async () => {
     await api.post('/organizations/', { name: organization }).then(() => {
+      dispatch(setCreate(''))
       success(<SuccessAlert text="Организация создана" />)
       setFormData({ organization: '', admin: '' })
     })
