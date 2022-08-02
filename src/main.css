@@ -362,29 +362,29 @@ button[disabled=disabled], button:disabled {
   background:none;
 }
 .success-sweet{
-  background: #404040;
-  box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  width: auto;
-  height: 40px;
-  padding: 0;
-  margin: 0;
-  color:#fff;
-  font-weight: 500;
-  font-family: "Inter";
+  background: #404040 !important;
+  box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+  width: auto !important;
+  height: 40px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color:#fff !important;
+  font-weight: 500 !important;
+  font-family: "Inter" !important;
 }
 .success_img{
-  margin-right:10px;
-  display: block;
+  margin-right:10px !important;
+  display: block !important;
 
 }
 .success-sweet .swal2-html-container{
-  margin: 0;
-  padding: 0;
-  font-size: 14px;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
   display: flex !important;
-  align-items: center;
-  margin: 0 20px;
+  align-items: center !important;
+  margin: 0 20px !important;
 }
 .sweet-delete{
   box-shadow: 0px 2px 25px rgba(136, 136, 136, 0.35);
