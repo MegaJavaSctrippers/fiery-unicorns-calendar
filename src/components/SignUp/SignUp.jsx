@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
+import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
@@ -10,8 +11,8 @@ const { Option } = Select
 
 function SignUp() {
   const navigate = useNavigate()
-  const [departments, setDepartments] = useState([])
-  const [positions, setPositions] = useState([])
+  const departments = useSelector((state) => state.departments.departments)
+  const positions = useSelector((state) => state.positions.positions)
   const [validation, setValidation] = useState({
     passwordLength: false,
     passwordConfirm: false,
@@ -32,33 +33,6 @@ function SignUp() {
     password: false,
     confirmPassword: false,
   })
-
-  useEffect(() => {
-    const getDepartments = async () => {
-      await axios
-        .get('https://checkit24.herokuapp.com/api/departments/')
-        .then((res) => {
-          setDepartments(res.data)
-          console.log(res.data, 'departemtn')
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    }
-    const getPositions = async () => {
-      await axios
-        .get('https://checkit24.herokuapp.com/api/positions/')
-        .then((res) => {
-          setPositions(res.data)
-          console.log(res.data, 'position')
-        })
-        .catch((e) => {
-          console.log(e)
-        })
-    }
-    getPositions()
-    getDepartments()
-  }, [])
 
   const { name, department, job, email, password, confirmPassword, surname, lastname } = formData
   const handleChange = (e) => {

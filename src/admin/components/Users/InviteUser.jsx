@@ -15,7 +15,7 @@ function InviteUser() {
     await api.post('/sendinvitation/', { email: user }).then(() => {
       setUser('')
       dispatch(setInviteUser(false))
-      success(<SuccessAlert text="Приглашения отправлена" />)
+      success(<SuccessAlert text="Приглашение отправлено" />)
     })
   }
   return (
