@@ -1,22 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
+import axios from 'axios'
 import { Select, Space, Popover } from 'antd'
 import Notification from '../../modals/Notification/Notification'
 import style from './Header.module.scss'
 import icons from '../../assets/icons'
+import UserDropdown from './UserDropdown'
 import { ReactComponent as PushIcon } from '../../assets/icons/push.svg'
 import { ReactComponent as SearchIcon } from '../../assets/icons/search.svg'
 import { ReactComponent as FolderIcon } from '../../assets/icons/folder.svg'
 import { ReactComponent as ClockIcon } from '../../assets/icons/clock.svg'
 import { ReactComponent as ProfileIcon } from '../../assets/icons/profile.svg'
 import { ReactComponent as JobIcon } from '../../assets/icons/job.svg'
-import {
-  setDateType,
-  setSelectedDate,
-  addDate,
-  subrtactDate,
-} from '../../redux-toolkit/dateReducer'
+import { setDateType, setSelectedDate, addDate, subrtactDate } from '../../store/date/dateSlice'
 
 const { Option } = Select
 
@@ -50,6 +47,16 @@ function Header() {
       </ul>
     </div>
   )
+  const [user, setUser] = useState({})
+  useEffect(() => {
+    const getUser = async () => {
+      const id = JSON.parse(localStorage.getItem('user'))
+      await axios.get(`https://checkit24.herokuapp.com/api/users/${id}/`).then((res) => {
+        setUser(res.data)
+      })
+    }
+    getUser()
+  }, [])
   const dispatch = useDispatch()
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
@@ -95,7 +102,9 @@ function Header() {
             if (dateType === 'month') {
               return moment(selectedDate).format('MMMM YYYY')
             }
-            return moment(selectedDate).format('DD MMMM YYYY')
+            return `${moment(selectedDate).format('DD MMMM YYYY')} - ${moment(selectedDate).format(
+              'dddd',
+            )}`
           })()}
         </h2>
       </div>
@@ -115,9 +124,16 @@ function Header() {
           <PushIcon className={style.push_icon} />
         </div>
         <Notification />
-        <div className={style.user_box}>
-          <img src={icons.avatar} alt="" />
-        </div>
+        <Popover
+          className="header_popover"
+          placement="bottomRight"
+          content={<UserDropdown user={user} />}
+          trigger="click"
+        >
+          <div className={style.user_box}>
+            <img src={icons.avatar} alt="" />
+          </div>
+        </Popover>
       </div>
     </div>
   )

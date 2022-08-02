@@ -21,11 +21,28 @@
 .register{
   width:70%;
   margin: auto;
+  .password_length {
+    color: #e94a4a;
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Roboto';
+  }
   .user_text{
     color: #2E2E2E;
     opacity: 0.5;
     font-size: 14px;
     font-weight: 300;
+  }
+  .password_confirm {
+    height:37px;
+    color: #e94a4a;
+    background: #ffecec;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 300;
+    margin-bottom: 16px;
+    font-family: 'Roboto';
   }
   .logo_box{
     display: flex;

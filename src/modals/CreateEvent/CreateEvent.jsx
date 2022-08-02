@@ -38,7 +38,7 @@ function CreateEvent({ handleClose }) {
           <div className={style.create_body}>
             <label htmlFor="name">
               Название
-              <input type="text" id="name" name="name" />
+              <input type="text" id="name1" name="name" />
             </label>
             <span className={style.label_span}>Дата и время</span>
             <div

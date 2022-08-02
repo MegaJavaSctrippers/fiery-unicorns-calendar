@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
@@ -9,6 +11,14 @@ const { Option } = Select
 
 function SignUp() {
   const navigate = useNavigate()
+  const departments = useSelector((state) => state.departments.departments)
+  const positions = useSelector((state) => state.positions.positions)
+  const [validation, setValidation] = useState({
+    passwordLength: false,
+    passwordConfirm: false,
+    validEmail: false,
+    emailExist: false,
+  })
   const [formData, setFormData] = useState({
     name: '',
     surname: '',
@@ -28,16 +38,47 @@ function SignUp() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault()
+    const reg = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i
     if (password !== confirmPassword) {
-      console.log('password are not same')
+      setValidation({ ...validation, passwordConfirm: true })
+    } else if (password.length < 8) {
+      setValidation({ ...validation, passwordLength: true })
+    } else if (reg.test(email) === false) {
+      setValidation({
+        ...validation,
+        passwordConfirm: false,
+        passwordLength: false,
+        validEmail: true,
+      })
     } else {
-      navigate('/')
+      await axios
+        .post('https://checkit24.herokuapp.com/api/users/reg/', {
+          user: {
+            name,
+            surname,
+            password,
+            email,
+            middlename: lastname,
+            position: job,
+            department,
+          },
+        })
+        .then((res) => {
+          console.log(res)
+          navigate('/signin')
+        })
+        .catch((e) => {
+          console.log(e)
+          if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
+            setValidation({ emailExist: true })
+          }
+        })
     }
   }
-  const enabled = Object.values(formData).every((item) => item.length > 0)
-
+  const prwd = 'Пароль должен содержать минимум 8 символов'
+  const enabled = Object.values(formData).every((item) => item.toString().length > 0)
   return (
     <div className="container-fluid pl-0">
       <div className="row">
@@ -51,7 +92,36 @@ function SignUp() {
               </label>
               <span className={style.user_text}>Добавьте фото профиля</span>
             </div>
-
+            {validation.passwordConfirm ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                Введенные пароли не совпадают
+              </div>
+            ) : null}
+            {validation.validEmail ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                Введите правильный email
+              </div>
+            ) : null}
+            {validation.emailExist ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                Введенный email уже существует
+              </div>
+            ) : null}
             <div className="row">
               <div className="col-lg-6">
                 <label htmlFor="surname">
@@ -82,14 +152,15 @@ function SignUp() {
                   <Space className="select_full_width mt-1">
                     <Select
                       showArrow={false}
-                      defaultValue="Отдел разработка"
                       className="general_select auth_select"
                       value={department}
                       onChange={(value) => setFormData({ ...formData, department: value })}
                     >
-                      <Option value="1">Отдел разработка</Option>
-                      <Option value="2">Отдел продаж</Option>
-                      <Option value="3">Отдел по работе с клиентами</Option>
+                      {departments.map((department) => (
+                        <Option value={department.id} key={department.id}>
+                          {department.name}
+                        </Option>
+                      ))}
                     </Select>
                   </Space>
                 </label>
@@ -128,7 +199,7 @@ function SignUp() {
                   Почта
                   <input
                     value={email}
-                    type="text"
+                    type="email"
                     id="email"
                     name="email"
                     onChange={handleChange}
@@ -145,9 +216,11 @@ function SignUp() {
                       value={job}
                       onChange={(value) => setFormData({ ...formData, job: value })}
                     >
-                      <Option value="1">Frontend разработчик</Option>
-                      <Option value="2">Backend разработчик</Option>
-                      <Option value="3">Android разработчик</Option>
+                      {positions.map((pos) => (
+                        <Option key={pos.id} value={pos.id}>
+                          {pos.name}
+                        </Option>
+                      ))}
                     </Select>
                   </Space>
                 </label>
@@ -175,8 +248,11 @@ function SignUp() {
                   </div>
                 </label>
               </div>
+              {validation.passwordLength ? (
+                <span className={style.password_length}>{prwd}</span>
+              ) : null}
               <div className="col-lg-12">
-                <button disabled={!enabled} type="submit" className={style.save}>
+                <button disabled={!enabled} onClick={register} type="submit" className={style.save}>
                   Сохранить
                 </button>
               </div>

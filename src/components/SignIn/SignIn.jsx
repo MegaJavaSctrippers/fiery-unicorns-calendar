@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import { useNavigate, Link } from 'react-router-dom'
+import axios from 'axios'
 import style from './SignIn.module.scss'
 import icons from '../../assets/icons'
 
@@ -18,14 +19,27 @@ function SignIn() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault()
-    if (email !== 'kudajberdievbektemir@gmail.com' && password !== 123) {
-      setError(true)
-    } else {
-      setError(false)
-      navigate('/')
-    }
+    await axios
+      .post('https://checkit24.herokuapp.com/api/users/login/', {
+        email: formData.email,
+        password: formData.password,
+      })
+      .then((res) => {
+        if (res.data.is_staff) {
+          navigate('/admin')
+        } else {
+          navigate('/')
+        }
+        localStorage.setItem('user', JSON.stringify(res.data.user_id))
+        localStorage.setItem('is_staff', JSON.stringify(res.data.is_staff))
+        localStorage.setItem('token', JSON.stringify(res.data.access))
+        localStorage.setItem('refresh', JSON.stringify(res.data.refresh))
+      })
+      .catch(() => {
+        setError(true)
+      })
   }
   const enabled = email.length > 0 && password.length > 0
 
@@ -35,7 +49,7 @@ function SignIn() {
         <div className="col-lg-6 d-flex">
           <form onSubmit={loginSubmit} className={classNames(style.login)}>
             <h2>Вход</h2>
-            {error ? <span className="error">Не правильный пароль или логин </span> : null}
+            {error ? <div className={style.error}>Не правильный пароль или логин </div> : null}
             <label htmlFor="email">
               Почта
               <input onChange={handleChange} type="text" id="email" name="email" />

@@ -7,7 +7,6 @@ const initialState = {
   dateType: 'date',
   selectedDate: moment().format(),
   week: [],
-  visible: false,
   hours: data.hours,
   repeat: data.repeat,
   events: data.events,
