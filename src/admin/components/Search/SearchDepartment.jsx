@@ -91,7 +91,7 @@ function Department() {
               )}
             </div>
             <div className="create_form">
-              <span className="create_label">Дирекции отдела</span>
+              <span className="create_label">Дирекция</span>
               {edit ? (
                 <Space>
                   <Select

@@ -11,7 +11,7 @@ function Position() {
   const positions = useSelector((state) => state.positions.positions)
   const searchPos = useSelector((state) => state.admin.search.position)
   const searchOrg = useSelector((state) => state.admin.search.organization)
-  const searchDep = useSelector((state) => state.admin.search.department)
+  const dep = useSelector((state) => state.admin.search.department)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -53,10 +53,10 @@ function Position() {
     <>
       <div className="create_title">
         {edit ? 'Редактировать :' : 'Поиск :'}
-        <span>{`${searchPos} ${searchDep} ${searchOrg}`}</span>
+        <span>{`${searchPos} ${dep} ${searchOrg}`}</span>
       </div>
       {positions
-        .filter((item) => item.name.includes(searchPos) && item.department.name.includes(searchDep))
+        .filter((item) => item.name.includes(searchPos) && item.department?.name.includes(dep))
         .map((item) => (
           <div key={item.id} className="create_box">
             <div className="create_form">

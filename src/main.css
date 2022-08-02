@@ -349,6 +349,7 @@ button[disabled=disabled], button:disabled {
 
 .admin_select .ant-select-selector{
   height:32px !important;
+  padding: 0 10px !important;
 }
 
 /* antd dropdown */

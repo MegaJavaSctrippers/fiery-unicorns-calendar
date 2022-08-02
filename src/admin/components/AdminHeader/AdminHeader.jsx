@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-curly-newline */
+/* eslint-disable implicit-arrow-linebreak */
 import React, { useState } from 'react'
 import { Space, Select, Dropdown, Menu } from 'antd'
 import { useLocation } from 'react-router-dom'
@@ -59,6 +61,7 @@ function AdminHeader() {
   const handleClick = (e) => {
     dispatch(setCreate(e.key))
   }
+
   const menu = (
     <Menu
       onClick={handleClick}
@@ -94,9 +97,12 @@ function AdminHeader() {
                   value={user || undefined}
                   onChange={(value) => setSearch({ ...search, user: value })}
                   className="general_select admin_select"
+                  showSearch
+                  optionFilterProp="children"
+                  filterSort={(input, option) => option.children.includes(input)}
                 >
                   {users.map((user) => (
-                    <Option key={user.id} value={user.id}>
+                    <Option key={user.id} value={user.name}>
                       {user.name}
                       <span style={{ display: 'inline-block', width: '4px' }} />
                       {user.surname}
@@ -112,6 +118,9 @@ function AdminHeader() {
                 <Select
                   placeholder="Организация"
                   value={organization || undefined}
+                  showSearch
+                  optionFilterProp="children"
+                  filterSort={(input, option) => option.children.includes(input)}
                   onChange={(value) => setSearch({ ...search, organization: value })}
                   className="general_select admin_select"
                 >
@@ -131,6 +140,9 @@ function AdminHeader() {
                 value={direction || undefined}
                 onChange={(value) => setSearch({ ...search, direction: value })}
                 className="general_select admin_select"
+                showSearch
+                optionFilterProp="children"
+                filterSort={(input, option) => option.children.includes(input)}
               >
                 {directions.map((item) => (
                   <Option key={item.id} value={item.name}>
@@ -147,6 +159,9 @@ function AdminHeader() {
                 value={department || undefined}
                 onChange={(value) => setSearch({ ...search, department: value })}
                 className="general_select admin_select"
+                showSearch
+                optionFilterProp="children"
+                filterSort={(input, option) => option.children.includes(input)}
               >
                 {departments.map((item) => (
                   <Option key={item.id} value={item.name}>
@@ -163,6 +178,9 @@ function AdminHeader() {
                 value={position || undefined}
                 onChange={(value) => setSearch({ ...search, position: value })}
                 className="general_select admin_select"
+                showSearch
+                optionFilterProp="children"
+                filterSort={(input, option) => option.children.includes(input)}
               >
                 {positions.map((item) => (
                   <Option key={item.id} value={item.name}>

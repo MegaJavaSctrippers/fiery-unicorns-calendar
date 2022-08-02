@@ -9,18 +9,13 @@ const { Option } = Select
 function Position() {
   const [edit, setEdit] = useState(false)
   const user = useSelector((state) => state.admin.search.user)
+  const pos = useSelector((state) => state.admin.search.position)
+  const dep = useSelector((state) => state.admin.search.department)
   const users = useSelector((state) => state.users.users)
   console.log(users)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    // const getUsers = async () => {
-    //   await axios.get('https://checkit24.herokuapp.com/api/users/').then((res) => {
-    //     setUsers(res.data)
-    //     console.log(res.data)
-    //   })
-    // }
-    // getUsers()
     dispatch(getUsers())
   }, [])
 
@@ -28,10 +23,12 @@ function Position() {
     <>
       <div className="create_title">
         {edit ? 'Редактировать :' : 'Поиск :'}
-        <span>Bektemir Kudaiberdiev</span>
+        <span>{`${user}  ${pos}  ${dep}`}</span>
       </div>
       {users
         .filter((item) => item.name.includes(user))
+        .filter((item) => item.positions[0]?.position.name.includes(pos))
+        .filter((item) => item.positions[0]?.department.name.includes(dep))
         .map((item) => (
           <div key={item.id} className="create_box">
             <div className="create_form">
@@ -41,6 +38,7 @@ function Position() {
                   onChange={() => console.log('j')}
                   value={item.name}
                   name="name"
+                  showSearch
                   className="create_input"
                 />
               ) : (
