@@ -3,10 +3,10 @@ import { Select, Space } from 'antd'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { useDispatch, useSelector } from 'react-redux'
-import icons from '../../../assets/icons'
+import icons from '../../../../assets/icons'
 import SearchDepartmentChild from './SearchDepartmentChild'
-import Invitation from '../../../modals/Invitation/Inivitation'
-import { getDepartments } from '../../../store/admin/actions/departments'
+import Invitation from '../../../../modals/Invitation/Inivitation'
+import { getDepartments } from '../../../../store/admin/actions/departments'
 
 const { Option } = Select
 

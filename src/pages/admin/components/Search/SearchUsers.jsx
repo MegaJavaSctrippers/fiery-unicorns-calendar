@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Space, Select } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import icons from '../../../assets/icons'
-import { getUsers } from '../../../store/admin/actions/users'
+import icons from '../../../../assets/icons'
+import { getUsers } from '../../../../store/admin/actions/users'
 
 const { Option } = Select
 

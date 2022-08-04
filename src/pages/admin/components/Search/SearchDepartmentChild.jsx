@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import style from './Search.module.scss'
-import icons from '../../../assets/icons'
+import icons from '../../../../assets/icons'
 
 function SearchDepartmentChild() {
   const [deleteFormat, setDeleteFormat] = useState({

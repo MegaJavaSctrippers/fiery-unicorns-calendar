@@ -5,6 +5,7 @@ import EditProfile from '../../modals/EditProfile/EditProfile'
 import style from './UserDropdown.module.scss'
 
 function UserDropdown({ user }) {
+  console.log(user)
   return (
     <div className={style.user_dropdown}>
       <div className={style.user_avatar}>
@@ -22,11 +23,11 @@ function UserDropdown({ user }) {
         </li>
         <li>
           <img src={icons.folderSVG} alt="" />
-          {user.positions[0]?.position.name}
+          {/* {user.positions[0].position.name} */}
         </li>
         <li>
           <img src={icons.clockSVG} alt="" />
-          {user.positions[0]?.department.name}
+          {/* {user.positions[0]?.department.name} */}
         </li>
         <li>
           <img src={icons.jobSVG} alt="" />

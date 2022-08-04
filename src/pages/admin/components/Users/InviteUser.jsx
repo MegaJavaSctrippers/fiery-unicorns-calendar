@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { success } from '../../../services/success'
-import api from '../../../services/api'
+import { success } from '../../../../services/success'
+import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
-import { setInviteUser } from '../../../store/adminSlice'
+import { setInviteUser } from '../../../../store/adminSlice'
 
 function InviteUser() {
   const [user, setUser] = useState('')

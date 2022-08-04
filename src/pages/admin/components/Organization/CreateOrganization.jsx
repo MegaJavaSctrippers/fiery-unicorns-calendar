@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Space, Select } from 'antd'
 import { useDispatch } from 'react-redux'
-import api from '../../../services/api'
+import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
-import { success } from '../../../services/success'
-import { setCreate } from '../../../store/adminSlice'
+import { success } from '../../../../services/success'
+import { setCreate } from '../../../../store/adminSlice'
 
 const { Option } = Select
 

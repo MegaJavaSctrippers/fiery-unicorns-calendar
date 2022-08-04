@@ -4,11 +4,12 @@ import { Routes, Route } from 'react-router-dom'
 import Homepage from './pages/Homepage/Homepage'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
-import Organization from './admin/components/Organization/Organization'
-import Accommodaton from './admin/components/Accommodation/Accommodation'
-import Users from './admin/components/Users/Users'
-import './main.css'
-import Admin from './admin/Admin'
+import Organization from './pages/admin/components/Organization/Organization'
+import Accommodaton from './pages/admin/components/Accommodation/Accommodation'
+import Users from './pages/admin/components/Users/Users'
+import './assets/styles/main.css'
+import Admin from './pages/admin/Admin'
+import { useAuth } from './services/verifyToken'
 import ProtectedRoute from './hoc/ProtectedRoute'
 import ProtectedAdmin from './hoc/ProtectAdmin'
 import { getPositions } from './store/admin/actions/positions'
@@ -19,15 +20,17 @@ import { getDirections } from './store/admin/actions/directions'
 
 function App() {
   const dispatch = useDispatch()
+  const isAdmin = JSON.parse(localStorage.getItem('is_staff'))
+  const auth = useAuth()
   const home = (
-    <ProtectedRoute>
+    <ProtectedRoute isAllowed={!!auth}>
       <Homepage />
     </ProtectedRoute>
   )
   const admin = (
-    <ProtectedAdmin>
+    <ProtectedRoute isAllowed={!!auth && !!isAdmin} redirectPath="/">
       <Admin />
-    </ProtectedAdmin>
+    </ProtectedRoute>
   )
   useEffect(() => {
     dispatch(getPositions())
@@ -35,7 +38,7 @@ function App() {
     dispatch(getOrganizations())
     dispatch(getUsers())
     dispatch(getDirections())
-  })
+  }, [])
   return (
     <div className="app">
       <Routes>

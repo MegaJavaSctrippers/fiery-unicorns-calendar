@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { Space, Select, Dropdown, Menu } from 'antd'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import icons from '../../../assets/icons'
+import icons from '../../../../assets/icons'
 import style from './AdminHeader.module.scss'
 import {
   setSearchAction,
@@ -12,7 +12,7 @@ import {
   setInviteUser,
   setCreateRoom,
   refreshSearch,
-} from '../../../store/adminSlice'
+} from '../../../../store/adminSlice'
 
 const { Option } = Select
 

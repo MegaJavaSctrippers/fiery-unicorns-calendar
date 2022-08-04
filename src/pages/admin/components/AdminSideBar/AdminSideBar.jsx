@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import React from 'react'
-import icons from '../../../assets/icons'
+import icons from '../../../../assets/icons'
 import style from './AdminSideBar.module.scss'
 
 function AdminSideBar() {

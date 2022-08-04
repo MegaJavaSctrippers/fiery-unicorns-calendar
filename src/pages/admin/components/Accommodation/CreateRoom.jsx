@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import api from '../../../services/api'
+import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
-import { success } from '../../../services/success'
-import { setCreateRoom } from '../../../store/adminSlice'
+import { success } from '../../../../services/success'
+import { setCreateRoom } from '../../../../store/adminSlice'
 
 function CreateRoom() {
   const dispatch = useDispatch()

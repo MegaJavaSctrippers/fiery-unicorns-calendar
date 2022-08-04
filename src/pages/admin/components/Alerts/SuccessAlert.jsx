@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import icons from '../../../assets/icons'
+import icons from '../../../../assets/icons'
 
 function SuccessAlert(props) {
   const { text } = props

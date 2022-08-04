@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import icons from '../../../assets/icons'
-import { getRooms } from '../../../store/admin/actions/rooms'
+import icons from '../../../../assets/icons'
+import { getRooms } from '../../../../store/admin/actions/rooms'
 
 function SearchRoom() {
   const [edit] = useState(false)
