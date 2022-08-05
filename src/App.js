@@ -9,9 +9,6 @@ import Accommodaton from './pages/admin/components/Accommodation/Accommodation'
 import Users from './pages/admin/components/Users/Users'
 import './assets/styles/main.css'
 import Admin from './pages/admin/Admin'
-import { useAuth } from './services/verifyToken'
-import ProtectedRoute from './hoc/ProtectedRoute'
-import ProtectedAdmin from './hoc/ProtectAdmin'
 import { getPositions } from './store/admin/actions/positions'
 import { getDepartments } from './store/admin/actions/departments'
 import { getOrganizations } from './store/admin/actions/organization'
@@ -20,18 +17,6 @@ import { getDirections } from './store/admin/actions/directions'
 
 function App() {
   const dispatch = useDispatch()
-  const isAdmin = JSON.parse(localStorage.getItem('is_staff'))
-  const auth = useAuth()
-  const home = (
-    <ProtectedRoute isAllowed={!!auth}>
-      <Homepage />
-    </ProtectedRoute>
-  )
-  const admin = (
-    <ProtectedRoute isAllowed={!!auth && !!isAdmin} redirectPath="/">
-      <Admin />
-    </ProtectedRoute>
-  )
   useEffect(() => {
     dispatch(getPositions())
     dispatch(getDepartments())
@@ -39,11 +24,12 @@ function App() {
     dispatch(getUsers())
     dispatch(getDirections())
   }, [])
+
   return (
     <div className="app">
       <Routes>
-        <Route path="/" element={home} />
-        <Route path="/admin" element={admin}>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/admin" element={<Admin />}>
           <Route index element={<Organization />} />
           <Route path="users" element={<Users />} />
           <Route path="rooms" element={<Accommodaton />} />

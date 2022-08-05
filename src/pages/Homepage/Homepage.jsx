@@ -2,6 +2,7 @@ import React from 'react'
 import style from './Homepage.module.scss'
 import SideBar from '../../components/SideBar/SideBar'
 import Dashboard from '../Dashboard/Dashboard'
+import withAuth from '../../hoc/withAuth'
 
 function Homepage() {
   return (
@@ -12,4 +13,4 @@ function Homepage() {
   )
 }
 
-export default Homepage
+export default withAuth(Homepage)

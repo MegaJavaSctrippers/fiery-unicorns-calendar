@@ -4,6 +4,7 @@ import AdminSideBar from './components/AdminSideBar/AdminSideBar'
 import style from './Admin.module.scss'
 import './assets/admin.css'
 import AdminHeader from './components/AdminHeader/AdminHeader'
+import withAccess from '../../hoc/withAccess'
 
 function Admin() {
   return (
@@ -17,4 +18,4 @@ function Admin() {
   )
 }
 
-export default Admin
+export default withAccess(Admin)
