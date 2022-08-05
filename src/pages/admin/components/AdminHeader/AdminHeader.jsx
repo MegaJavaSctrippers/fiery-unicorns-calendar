@@ -1,17 +1,15 @@
-/* eslint-disable react/jsx-curly-newline */
-/* eslint-disable implicit-arrow-linebreak */
 import React, { useState } from 'react'
 import { Space, Select, Dropdown, Menu } from 'antd'
 import { useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../../assets/icons'
 import style from './AdminHeader.module.scss'
+import searchDefault from './searchDefault'
 import {
   setSearchAction,
   setCreate,
   setInviteUser,
   setCreateRoom,
-  refreshSearch,
 } from '../../../../store/adminSlice'
 
 const { Option } = Select
@@ -27,38 +25,19 @@ function AdminHeader() {
   const active = location.pathname.split('/').pop()
   const dispatch = useDispatch()
 
-  const [searchDefault, setSearch] = useState({
-    position: '',
-    department: '',
-    organization: '',
-    user: '',
-    direction: '',
-    roomName: '',
-    capacity: '',
-    description: '',
-  })
+  const [search, setSearch] = useState(searchDefault)
 
   const submitSearch = () => {
-    dispatch(setSearchAction(searchDefault))
+    dispatch(setSearchAction(search))
     dispatch(setCreate(''))
     dispatch(setInviteUser(false))
     dispatch(setCreateRoom(false))
   }
   const clearSearch = () => {
     setSearch(searchDefault)
-    // setSearch({
-    //   position: '',
-    //   department: '',
-    //   organization: '',
-    //   user: '',
-    //   direction: '',
-    //   roomName: '',
-    //   capacity: '',
-    //   description: '',
-    // })
-    dispatch(refreshSearch())
+    dispatch(setSearchAction(searchDefault))
   }
-  const { position, department, organization, user, direction, roomName, capacity } = searchDefault
+  const { position, department, organization, user, direction, roomName, capacity } = search
   const handleClick = (e) => {
     dispatch(setCreate(e.key))
   }
@@ -96,7 +75,7 @@ function AdminHeader() {
                 <Select
                   placeholder="Пользователь"
                   value={user || undefined}
-                  onChange={(value) => setSearch({ ...searchDefault, user: value })}
+                  onChange={(value) => setSearch({ ...search, user: value })}
                   className="general_select admin_select"
                   showSearch
                   optionFilterProp="children"
@@ -122,7 +101,7 @@ function AdminHeader() {
                   showSearch
                   optionFilterProp="children"
                   filterSort={(input, option) => option.children.includes(input)}
-                  onChange={(value) => setSearch({ ...searchDefault, organization: value })}
+                  onChange={(value) => setSearch({ ...search, organization: value })}
                   className="general_select admin_select"
                 >
                   {organizations.map((item) => (
@@ -139,7 +118,7 @@ function AdminHeader() {
               <Select
                 placeholder="Дирекция"
                 value={direction || undefined}
-                onChange={(value) => setSearch({ ...searchDefault, direction: value })}
+                onChange={(value) => setSearch({ ...search, direction: value })}
                 className="general_select admin_select"
                 showSearch
                 optionFilterProp="children"
@@ -158,7 +137,7 @@ function AdminHeader() {
               <Select
                 placeholder="Отдел"
                 value={department || undefined}
-                onChange={(value) => setSearch({ ...searchDefault, department: value })}
+                onChange={(value) => setSearch({ ...search, department: value })}
                 className="general_select admin_select"
                 showSearch
                 optionFilterProp="children"
@@ -177,7 +156,7 @@ function AdminHeader() {
               <Select
                 placeholder="Должность"
                 value={position || undefined}
-                onChange={(value) => setSearch({ ...searchDefault, position: value })}
+                onChange={(value) => setSearch({ ...search, position: value })}
                 className="general_select admin_select"
                 showSearch
                 optionFilterProp="children"
@@ -198,7 +177,7 @@ function AdminHeader() {
             <Space className="select_full_width">
               <Select
                 placeholder="Название помещение"
-                onChange={(value) => setSearch({ ...searchDefault, roomName: value })}
+                onChange={(value) => setSearch({ ...search, roomName: value })}
                 className="general_select admin_select"
                 value={roomName || undefined}
               >
@@ -212,7 +191,7 @@ function AdminHeader() {
             <Space className="select_full_width">
               <Select
                 placeholder="Вместимость количество"
-                onChange={(value) => setSearch({ ...searchDefault, capacity: value })}
+                onChange={(value) => setSearch({ ...search, capacity: value })}
                 value={capacity || undefined}
                 className="general_select admin_select"
               >
@@ -226,7 +205,7 @@ function AdminHeader() {
             <Space className="select_full_width">
               <Select
                 placeholder="Описание"
-                onChange={(value) => setSearch({ ...searchDefault, description: value })}
+                onChange={(value) => setSearch({ ...search, description: value })}
                 className="general_select admin_select"
                 value={searchDefault.description || undefined}
               >
@@ -241,7 +220,7 @@ function AdminHeader() {
       <button onClick={submitSearch} className={style.search_btn} type="button">
         <img src={icons.whiteSearchSVG} alt="" />
       </button>
-      <button onClick={() => clearSearch} className={style.refresh_btn} type="button">
+      <button onClick={clearSearch} className={style.refresh_btn} type="button">
         <img src={icons.refreshSVG} alt="" />
       </button>
       {active === 'admin' ? (

@@ -34,17 +34,6 @@ export const adminSlice = createSlice({
       search.capacity = action.payload.capacity
       search.description = action.payload.description
     },
-    refreshSearch: (state) => {
-      const { search } = state
-      search.position = ''
-      search.department = ''
-      search.organization = ''
-      search.user = ''
-      search.direction = ''
-      search.roomName = ''
-      search.capacity = ''
-      search.description = ''
-    },
     setCreate: (state, action) => {
       state.create = action.payload
     },

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
-import axios from 'axios'
 import { Select, Space, Popover } from 'antd'
+import api from '../../services/api'
 import Notification from '../../modals/Notification/Notification'
 import style from './Header.module.scss'
 import icons from '../../assets/icons'
@@ -51,7 +51,7 @@ function Header() {
   useEffect(() => {
     const getUser = async () => {
       const id = JSON.parse(localStorage.getItem('user'))
-      await axios.get(`https://checkit24.herokuapp.com/api/users/${id}/`).then((res) => {
+      await api.get(`/users/${id}/`).then((res) => {
         setUser(res.data)
       })
     }
