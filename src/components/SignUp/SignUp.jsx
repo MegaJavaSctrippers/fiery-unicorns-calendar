@@ -1,16 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { Space, Select } from 'antd'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
+import { getDepartments } from '../../store/admin/actions/departments'
+import { getPositions } from '../../store/admin/actions/positions'
 
 const { Option } = Select
 
 function SignUp() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const departments = useSelector((state) => state.departments.departments)
   const positions = useSelector((state) => state.positions.positions)
   const [validation, setValidation] = useState({
@@ -32,6 +35,10 @@ function SignUp() {
   const [type, setType] = useState({
     password: false,
     confirmPassword: false,
+  })
+  useEffect(() => {
+    dispatch(getDepartments())
+    dispatch(getPositions())
   })
 
   const { name, department, job, email, password, confirmPassword, surname, lastname } = formData
