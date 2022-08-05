@@ -5,6 +5,7 @@ import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
+import { createPosition } from '../../../../store/admin/actions/positions'
 
 const { Option } = Select
 
@@ -20,20 +21,18 @@ function CreatePosition() {
   const handleChange = (e) => {
     setFormData({ ...formData, name: e.target.value })
   }
-  const onSubmit = async () => {
-    await api
-      .post('/create/positions/', {
-        name,
-        department,
+  const onSubmit = () => {
+    try {
+      dispatch(createPosition(formData))
+      setFormData({
+        name: '',
+        department: '',
       })
-      .then(() => {
-        setFormData({
-          name: '',
-          department: '',
-        })
-        dispatch(setCreate(''))
-        success(<SuccessAlert text="Должность успешна создана" />)
-      })
+      dispatch(setCreate(''))
+      success(<SuccessAlert text="Должность успешна создана" />)
+    } catch (e) {
+      console.log(e.message)
+    }
   }
   return (
     <div>

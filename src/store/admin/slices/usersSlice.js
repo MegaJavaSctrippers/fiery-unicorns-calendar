@@ -8,13 +8,13 @@ const userSlice = createSlice({
     error: null,
   },
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getUsers.fulfilled, (state, action) => {
+  extraReducers: {
+    [getUsers.fulfilled.type]: (state, action) => {
       state.users = action.payload
-    })
-    builder.addCase(getUsers.rejected, (state, action) => {
+    },
+    [getUsers.rejected.type]: (state, action) => {
       state.error = action.payload
-    })
+    },
   },
 })
 

@@ -18,11 +18,11 @@ function Position() {
   useEffect(() => {
     dispatch(getUsers())
   }, [])
-
+  const title = edit ? 'Редактировать :' : 'Поиск :'
   return (
     <>
       <div className="create_title">
-        {edit ? 'Редактировать :' : 'Поиск :'}
+        {title}
         <span>{`${user}  ${pos}  ${dep}`}</span>
       </div>
       {users

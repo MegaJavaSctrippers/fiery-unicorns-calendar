@@ -1,31 +1,35 @@
 import React, { useState } from 'react'
 import { Space, Select } from 'antd'
-import { useDispatch } from 'react-redux'
-import api from '../../../../services/api'
+import { useDispatch, useSelector } from 'react-redux'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
+import { createOrganization } from '../../../../store/admin/actions/organization'
 
 const { Option } = Select
 
 function CreateOrganization() {
+  const users = useSelector((state) => state.users.users)
   const [formData, setFormData] = useState({
-    organization: '',
+    name: '',
     admin: '',
   })
   const dispatch = useDispatch()
-  const { organization, admin } = formData
+  const { name, admin } = formData
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  const onSubmit = async () => {
-    await api.post('/organizations/', { name: organization }).then(() => {
+  const onSubmit = () => {
+    try {
+      dispatch(createOrganization(formData))
       dispatch(setCreate(''))
       success(<SuccessAlert text="Организация создана" />)
-      setFormData({ organization: '', admin: '' })
-    })
+      setFormData({ name: '', admin: '' })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
-  const enabled = organization.length > 0
+  const enabled = name.length > 0
   return (
     <div>
       <div className="create_title">
@@ -35,12 +39,7 @@ function CreateOrganization() {
       <div className="create_box">
         <div className="create_form">
           <span className="create_label">Название Организаций</span>
-          <input
-            onChange={handleChange}
-            value={organization}
-            name="organization"
-            className="create_input"
-          />
+          <input onChange={handleChange} value={name} name="name" className="create_input" />
         </div>
         <div className="create_form">
           <span className="create_label">Админстратор организации</span>
@@ -51,7 +50,12 @@ function CreateOrganization() {
               name="direction"
               className="general_select create_select"
             >
-              <Option value="1">Bektemir Kudaiberdiev</Option>
+              {users.map((user) => (
+                <Option key={user.id}>
+                  {user.name}
+                  <span className="px-2">{user.surname}</span>
+                </Option>
+              ))}
             </Select>
           </Space>
         </div>

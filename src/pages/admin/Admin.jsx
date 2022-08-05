@@ -5,6 +5,7 @@ import style from './Admin.module.scss'
 import './assets/admin.css'
 import AdminHeader from './components/AdminHeader/AdminHeader'
 import withAccess from '../../hoc/withAccess'
+import withAuth from '../../hoc/withAuth'
 
 function Admin() {
   return (
@@ -18,4 +19,4 @@ function Admin() {
   )
 }
 
-export default withAccess(Admin)
+export default withAccess(withAuth(Admin))

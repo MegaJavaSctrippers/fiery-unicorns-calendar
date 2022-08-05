@@ -8,13 +8,13 @@ const roomSlice = createSlice({
     error: null,
   },
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getRooms.fulfilled, (state, action) => {
+  extraReducers: {
+    [getRooms.fulfilled.type]: (state, action) => {
       state.rooms = action.payload
-    })
-    builder.addCase(getRooms.rejected, (state, action) => {
+    },
+    [getRooms.rejected.type]: (state, action) => {
       state.error = action.payload
-    })
+    },
   },
 })
 

@@ -3,7 +3,7 @@ import api from '../../../services/api'
 
 export const getDepartments = createAsyncThunk(
   'departments/getDepartments',
-  async (d, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await api.get('/departments/')
       return data
@@ -12,3 +12,7 @@ export const getDepartments = createAsyncThunk(
     }
   },
 )
+
+export const createDepartment = createAsyncThunk('departments/createDepartments', async (data) => {
+  await api.post('/create/departments/', data)
+})

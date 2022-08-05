@@ -8,13 +8,13 @@ const positionSlice = createSlice({
     error: null,
   },
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getPositions.fulfilled, (state, action) => {
+  extraReducers: {
+    [getPositions.fulfilled.type]: (state, action) => {
       state.positions = action.payload
-    })
-    builder.addCase(getPositions.rejected, (state, action) => {
+    },
+    [getPositions.rejected.type]: (state, action) => {
       state.error = action.payload
-    })
+    },
   },
 })
 

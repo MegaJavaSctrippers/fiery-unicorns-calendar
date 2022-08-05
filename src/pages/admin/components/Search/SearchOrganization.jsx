@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Space, Select } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
-import Swal from 'sweetalert2'
 import icons from '../../../../assets/icons'
 import { getOrganizations } from '../../../../store/admin/actions/organization'
+import { remove } from '../../../../services/remove'
 
 const { Option } = Select
 
@@ -15,35 +15,8 @@ function Organization() {
   useEffect(() => {
     dispatch(getOrganizations())
   }, [])
-  const deleteOrganization = () => {
-    Swal.fire({
-      html: 'Удалить организацию Megalab ?',
-      showCloseButton: true,
-      showCancelButton: true,
-      showConfirmButton: true,
-      confirmButtonText: 'Да',
-      cancelButtonText: 'Нет',
-      buttonsStyling: false,
-      reverseButtons: true,
-      closeButtonHtml: `<img class='close-sweet' src=${icons.closeBlackSVG}/>`,
-      customClass: {
-        popup: 'sweet-delete',
-        confirmButton: 'confirm-btn',
-        cancelButton: 'cancel-btn',
-        closeButton: 'close-btn',
-        actions: 'btn-group-sweet',
-      },
-      showClass: {
-        popup: 'animate__animated animate__slideInDown',
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOutUp',
-      },
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log('yes')
-      }
-    })
+  const deleteOrganization = (organization) => {
+    remove(organization.name)
   }
 
   return (
@@ -97,7 +70,7 @@ function Organization() {
               {edit ? <img src={icons.editBlackSVG} alt="" /> : <img src={icons.editSVG} alt="" />}
             </button>
 
-            <button onClick={deleteOrganization} type="button" className="delete_icon">
+            <button onClick={() => deleteOrganization(item)} type="button" className="delete_icon">
               <img src={icons.deleteSVG} alt="" />
             </button>
           </div>

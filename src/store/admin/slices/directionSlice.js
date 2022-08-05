@@ -8,13 +8,13 @@ const directionsSlice = createSlice({
     error: null,
   },
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getDirections.fulfilled, (state, action) => {
+  extraReducers: {
+    [getDirections.fulfilled.type]: (state, action) => {
       state.directions = action.payload
-    })
-    builder.addCase(getDirections.rejected, (state, action) => {
+    },
+    [getDirections.rejected.type]: (state, action) => {
       state.error = action.payload
-    })
+    },
   },
 })
 

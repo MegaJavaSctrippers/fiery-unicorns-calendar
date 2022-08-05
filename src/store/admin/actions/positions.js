@@ -3,7 +3,7 @@ import api from '../../../services/api'
 
 export const getPositions = createAsyncThunk(
   'positions/getPositions',
-  async (positions, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const { data } = await api.get('/positions/')
       return data
@@ -12,3 +12,7 @@ export const getPositions = createAsyncThunk(
     }
   },
 )
+
+export const createPosition = createAsyncThunk('position/createPosition', async (data) => {
+  await api.post('/create/positions/', data)
+})

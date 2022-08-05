@@ -8,13 +8,13 @@ const departmentSlice = createSlice({
     error: null,
   },
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getDepartments.fulfilled, (state, action) => {
+  extraReducers: {
+    [getDepartments.fulfilled.type]: (state, action) => {
       state.departments = action.payload
-    })
-    builder.addCase(getDepartments.rejected, (state, action) => {
+    },
+    [getDepartments.rejected.type]: (state, action) => {
       state.error = action.payload
-    })
+    },
   },
 })
 

@@ -8,13 +8,13 @@ const organizationSlice = createSlice({
     error: null,
   },
   reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(getOrganizations.fulfilled, (state, action) => {
+  extraReducers: {
+    [getOrganizations.fulfilled.type]: (state, action) => {
       state.organizations = action.payload
-    })
-    builder.addCase(getOrganizations.rejected, (state, action) => {
+    },
+    [getOrganizations.rejected.type]: (state, action) => {
       state.error = action.payload
-    })
+    },
   },
 })
 

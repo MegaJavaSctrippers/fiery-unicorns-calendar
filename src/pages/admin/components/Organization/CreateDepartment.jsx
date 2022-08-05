@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
+import { createDepartment } from '../../../../store/admin/actions/departments'
 
 const { Option } = Select
 
@@ -16,30 +16,27 @@ function CreateDepartment() {
   const [formData, setFormData] = useState({
     name: '',
     direction: '',
-    head: '',
+    manager: '',
   })
-  const { direction, name, head } = formData
-  const enabled = name.length > 0 && direction.toString().length > 0 && head.toString().length > 0
+  const { direction, name, manager } = formData
+  const enable = name.length > 0 && direction.toString().length > 0 && manager.toString().length > 0
 
   const handleChange = (e) => {
     setFormData({ ...formData, name: e.target.value })
   }
-  const onSubmit = async () => {
-    await api
-      .post('/create/departments/', {
-        name,
-        direction,
-        manager: head,
+  const onSubmit = () => {
+    try {
+      dispatch(createDepartment(formData))
+      dispatch(setCreate(''))
+      success(<SuccessAlert text="Отдел успешно создан" />)
+      setFormData({
+        name: '',
+        direction: '',
+        manager: '',
       })
-      .then(() => {
-        dispatch(setCreate(''))
-        success(<SuccessAlert text="Отдел успешно создан" />)
-        setFormData({
-          name: '',
-          direction: '',
-          head: '',
-        })
-      })
+    } catch (e) {
+      console.log(e.message)
+    }
   }
   return (
     <div>
@@ -56,8 +53,8 @@ function CreateDepartment() {
           <span className="create_label">Руководитель отдела</span>
           <Space>
             <Select
-              onChange={(value) => setFormData({ ...formData, head: value })}
-              value={head}
+              onChange={(value) => setFormData({ ...formData, manager: value })}
+              value={manager}
               name="head"
               className="general_select create_select"
             >
@@ -86,7 +83,7 @@ function CreateDepartment() {
             </Select>
           </Space>
         </div>
-        <button disabled={!enabled} onClick={onSubmit} className="create_btn" type="button">
+        <button disabled={!enable} onClick={onSubmit} className="create_btn" type="button">
           Сохранить
         </button>
       </div>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
-import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
+import { createDirections } from '../../../../store/admin/actions/directions'
 
 const { Option } = Select
 
@@ -15,30 +15,27 @@ function CreateDirection() {
   const [formData, setFormData] = useState({
     name: '',
     director: '',
-    org: '',
+    organization: '',
   })
-  const { name, director, org } = formData
+  const { name, director, organization } = formData
   const handleChange = (e) => {
     setFormData({ ...formData, name: e.target.value })
   }
 
-  const enabled = name.length > 0 && director.toString().length > 0 && org.toString().length > 0
-  const onSubmit = async () => {
-    await api
-      .post('/create/directions/', {
-        name,
-        organization: org,
-        director,
+  const e = name.length > 0 && director.toString().length > 0 && organization.toString().length > 0
+  const onSubmit = () => {
+    try {
+      dispatch(createDirections(formData))
+      setFormData({
+        name: '',
+        director: '',
+        organization: '',
       })
-      .then(() => {
-        setFormData({
-          name: '',
-          director: '',
-          org: '',
-        })
-        dispatch(setCreate(''))
-        success(<SuccessAlert text="Дирекция успешна создана" />)
-      })
+      dispatch(setCreate(''))
+      success(<SuccessAlert text="Дирекция успешна создана" />)
+    } catch (e) {
+      console.log(e.message)
+    }
   }
   return (
     <div>
@@ -72,8 +69,8 @@ function CreateDirection() {
           <span className="create_label">Организация</span>
           <Space>
             <Select
-              onChange={(value) => setFormData({ ...formData, org: value })}
-              value={org}
+              onChange={(value) => setFormData({ ...formData, organization: value })}
+              value={organization}
               name="organization"
               className="general_select create_select"
             >
@@ -85,7 +82,7 @@ function CreateDirection() {
             </Select>
           </Space>
         </div>
-        <button disabled={!enabled} onClick={onSubmit} className="create_btn" type="button">
+        <button disabled={!e} onClick={onSubmit} className="create_btn" type="button">
           Сохранить
         </button>
       </div>
