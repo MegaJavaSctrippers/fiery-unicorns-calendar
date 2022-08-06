@@ -14,7 +14,7 @@ export const useAuth = () => {
     if (tokenParse.exp * 1000 > new Date()) {
       return true
     }
-    return false
+    return true
   } else {
     return false
   }

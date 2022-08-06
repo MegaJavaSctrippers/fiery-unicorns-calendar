@@ -4,9 +4,9 @@ import icons from '../../../../assets/icons'
 import style from './AdminSideBar.module.scss'
 
 function AdminSideBar() {
-  const location = useLocation()
-  const active = location.pathname.split('/').pop()
-
+  const { pathname } = useLocation()
+  const active = pathname.split('/').pop()
+  console.log(active)
   return (
     <div className={style.sidebar}>
       <div className={style.header}>
@@ -19,7 +19,10 @@ function AdminSideBar() {
           <img src={icons.organizationSVG} alt="" />
           <span>Организация</span>
         </Link>
-        <Link className={active === 'users' ? style.active_link : style.sidebar_link} to="users">
+        <Link
+          className={pathname.includes('users') ? style.active_link : style.sidebar_link}
+          to="users"
+        >
           <img src={icons.usersSVG} alt="" />
           <span>Пользователи</span>
         </Link>
