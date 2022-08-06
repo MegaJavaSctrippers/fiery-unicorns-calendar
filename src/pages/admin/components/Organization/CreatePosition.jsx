@@ -22,17 +22,14 @@ function CreatePosition() {
     setFormData({ ...formData, name: e.target.value })
   }
   const onSubmit = () => {
-    try {
-      dispatch(createPosition(formData))
+    dispatch(createPosition(formData)).then(() => {
       setFormData({
         name: '',
         department: '',
       })
       dispatch(setCreate(''))
       success(<SuccessAlert text="Должность успешна создана" />)
-    } catch (e) {
-      console.log(e.message)
-    }
+    })
   }
   return (
     <div>

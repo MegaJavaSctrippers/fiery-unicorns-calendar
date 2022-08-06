@@ -1,40 +1,35 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreateRoom } from '../../../../store/adminSlice'
+import { createRoom } from '../../../../store/admin/actions/rooms'
 
 function CreateRoom() {
   const dispatch = useDispatch()
-  const [room, setRoom] = useState({
+  const roomDefault = {
     name: '',
     capacity: '',
     location: '',
     hasProjector: true,
     hasAc: true,
-  })
+  }
+  const [room, setRoom] = useState(roomDefault)
   const { name, capacity, location, hasAc, hasProjector } = room
-  const submitRoom = async () => {
-    await api
-      .post('/room/', {
+  const submitRoom = () => {
+    dispatch(
+      createRoom({
         name,
         capacity,
         description: location,
         has_ac: hasAc,
         has_projector: hasProjector,
-      })
-      .then(() => {
-        dispatch(setCreateRoom(false))
-        setRoom({
-          name: '',
-          capacity: '',
-          location: '',
-          hasProjector: true,
-          hasAc: true,
-        })
-        success(<SuccessAlert text="Помещение создано" />)
-      })
+      }),
+    ).then(() => {
+      dispatch(setCreateRoom(false))
+      setRoom(roomDefault)
+      success(<SuccessAlert text="Помещение создано" />)
+    })
   }
   const handleChange = (e) => {
     setRoom({ ...room, [e.target.name]: e.target.value })

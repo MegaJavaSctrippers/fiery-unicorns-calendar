@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { success } from '../../../../services/success'
-import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { setInviteUser } from '../../../../store/adminSlice'
+import { inviteUsers } from '../../../../store/admin/actions/users'
 
 function InviteUser() {
   const [user, setUser] = useState('')
@@ -11,12 +11,16 @@ function InviteUser() {
   const handleChange = (e) => {
     setUser(e.target.value)
   }
-  const inviteUser = async () => {
-    await api.post('/sendinvitation/', { email: user }).then(() => {
-      setUser('')
-      dispatch(setInviteUser(false))
-      success(<SuccessAlert text="Приглашение отправлено" />)
-    })
+  const onSubmit = () => {
+    dispatch(inviteUsers({ email: user }))
+      .then(() => {
+        setUser('')
+        dispatch(setInviteUser(false))
+        success(<SuccessAlert text="Приглашение отправлено" />)
+      })
+      .catch((e) => {
+        console.log(e.message)
+      })
   }
   return (
     <div>
@@ -34,12 +38,7 @@ function InviteUser() {
             className="create_input"
           />
         </div>
-        <button
-          onClick={inviteUser}
-          disabled={!user.length > 0}
-          className="create_btn"
-          type="button"
-        >
+        <button onClick={onSubmit} disabled={!user.length > 0} className="create_btn" type="button">
           Отправить
         </button>
       </div>
