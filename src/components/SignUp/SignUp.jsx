@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Space, Select } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -10,24 +13,29 @@ import { getDepartments } from '../../store/admin/actions/departments'
 import { getPositions } from '../../store/admin/actions/positions'
 
 const { Option } = Select
-
+const schema = yup.object().shape({
+  email: yup.string().email().required('Введите правильный email'),
+  password: yup.string().min(8, 'Пароль должен быть минимум 8 символов').max(32).required(),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Введенные пароли не совпадают'),
+})
 function SignUp() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const departments = useSelector((state) => state.departments.departments)
   const positions = useSelector((state) => state.positions.positions)
-  const [validation, setValidation] = useState({
-    passwordLength: false,
-    passwordConfirm: false,
-    validEmail: false,
-    emailExist: false,
-  })
-  const [formData, setFormData] = useState({
+  const [emailExist, setEmailExist] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) })
+
+  const [data, setFormData] = useState({
     name: '',
     surname: '',
-    lastname: '',
+    middlename: '',
     department: '',
-    job: '',
+    position: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -39,58 +47,31 @@ function SignUp() {
   useEffect(() => {
     dispatch(getDepartments())
     dispatch(getPositions())
-  })
+  }, [dispatch])
 
-  const { name, department, job, email, password, confirmPassword, surname, lastname } = formData
+  const { name, department, position, email, password, confirmPassword, surname, middlename } = data
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    setFormData({ ...data, [e.target.name]: e.target.value })
   }
-  const register = async (e) => {
-    e.preventDefault()
-    const reg = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i
-    if (password !== confirmPassword) {
-      setValidation({ ...validation, passwordConfirm: true })
-    } else if (password.length < 8) {
-      setValidation({ ...validation, passwordLength: true })
-    } else if (reg.test(email) === false) {
-      setValidation({
-        ...validation,
-        passwordConfirm: false,
-        passwordLength: false,
-        validEmail: true,
+  const onSubmit = async () => {
+    await axios
+      .post('https://checkit24.herokuapp.com/api/users/reg/', { user: data })
+      .then(() => {
+        navigate('/signin')
       })
-    } else {
-      await axios
-        .post('https://checkit24.herokuapp.com/api/users/reg/', {
-          user: {
-            name,
-            surname,
-            password,
-            email,
-            middlename: lastname,
-            position: job,
-            department,
-          },
-        })
-        .then((res) => {
-          console.log(res)
-          navigate('/signin')
-        })
-        .catch((e) => {
-          console.log(e)
-          if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
-            setValidation({ emailExist: true })
-          }
-        })
-    }
+      .catch((e) => {
+        if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
+          setEmailExist(true)
+        }
+      })
   }
-  const prwd = 'Пароль должен содержать минимум 8 символов'
-  const enabled = Object.values(formData).every((item) => item.toString().length > 0)
+  const enabled = Object.values(data).every((item) => item.toString().length > 0)
   return (
     <div className="container-fluid pl-0">
       <div className="row">
         <div className="col-lg-6 d-flex">
-          <form onSubmit={register} className={classNames(style.register)}>
+          <form onSubmit={handleSubmit(onSubmit)} className={classNames(style.register)}>
             <h2>Добро пожаловать!</h2>
             <div className="d-flex align-items-center mb-2">
               <label htmlFor="avatar" className={style.logo_box}>
@@ -99,27 +80,27 @@ function SignUp() {
               </label>
               <span className={style.user_text}>Добавьте фото профиля</span>
             </div>
-            {validation.passwordConfirm ? (
+            {errors.password ? (
               <div
                 className={classNames(
                   style.password_confirm,
                   'd-flex align-items-center justify-content-between',
                 )}
               >
-                Введенные пароли не совпадают
+                {errors.password.message}
               </div>
             ) : null}
-            {validation.validEmail ? (
+            {errors.confirmPassword ? (
               <div
                 className={classNames(
                   style.password_confirm,
                   'd-flex align-items-center justify-content-between',
                 )}
               >
-                Введите правильный email
+                {errors.confirmPassword.message}
               </div>
             ) : null}
-            {validation.emailExist ? (
+            {emailExist ? (
               <div
                 className={classNames(
                   style.password_confirm,
@@ -146,9 +127,9 @@ function SignUp() {
                   Отчество
                   <input
                     type="text"
-                    id="lastname"
-                    name="lastname"
-                    value={lastname}
+                    id="middlename"
+                    name="middlename"
+                    value={middlename}
                     onChange={handleChange}
                   />
                 </label>
@@ -161,7 +142,7 @@ function SignUp() {
                       showArrow={false}
                       className="general_select auth_select"
                       value={department}
-                      onChange={(value) => setFormData({ ...formData, department: value })}
+                      onChange={(value) => setFormData({ ...data, department: value })}
                     >
                       {departments.map((department) => (
                         <Option value={department.id} key={department.id}>
@@ -179,7 +160,7 @@ function SignUp() {
                       value={password}
                       type={type.password ? 'text' : 'password'}
                       id="password"
-                      name="password"
+                      {...register('password')}
                       onChange={handleChange}
                     />
                     <button
@@ -208,7 +189,7 @@ function SignUp() {
                     value={email}
                     type="email"
                     id="email"
-                    name="email"
+                    {...register('email')}
                     onChange={handleChange}
                   />
                 </label>
@@ -220,8 +201,8 @@ function SignUp() {
                       showArrow={false}
                       defaultValue="Frontend разработчик"
                       className="general_select auth_select"
-                      value={job}
-                      onChange={(value) => setFormData({ ...formData, job: value })}
+                      value={position}
+                      onChange={(value) => setFormData({ ...data, position: value })}
                     >
                       {positions.map((pos) => (
                         <Option key={pos.id} value={pos.id}>
@@ -239,7 +220,7 @@ function SignUp() {
                       value={confirmPassword}
                       type={type.confirmPassword ? 'text' : 'password'}
                       id="confirm-password"
-                      name="confirmPassword"
+                      {...register('confirmPassword')}
                       onChange={handleChange}
                     />
                     <button
@@ -255,11 +236,8 @@ function SignUp() {
                   </div>
                 </label>
               </div>
-              {validation.passwordLength ? (
-                <span className={style.password_length}>{prwd}</span>
-              ) : null}
               <div className="col-lg-12">
-                <button disabled={!enabled} onClick={register} type="submit" className={style.save}>
+                <button disabled={!enabled} type="submit" className={style.save}>
                   Сохранить
                 </button>
               </div>
