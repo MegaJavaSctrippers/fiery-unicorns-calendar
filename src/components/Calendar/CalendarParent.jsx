@@ -7,7 +7,7 @@ import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 import CalendarChild from './CalendarChild'
 
 function CalendarParent({ value }) {
-  const data = useSelector((state) => state.date.events)
+  const data = useSelector((state) => state.event.events)
 
   const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -43,13 +43,17 @@ function CalendarParent({ value }) {
         id={id}
         open={open}
         anchorEl={anchorEl}
+        anchorReference={anchorEl}
         onClose={handleClose}
         transitionDuration="auto"
-        marginThreshold={60}
         className="material_popover"
         anchorOrigin={{
           vertical: 'center',
           horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'left',
         }}
       >
         <CreateEvent handleClose={handleClose} />

@@ -6,7 +6,6 @@ import moment from 'moment'
 import locale from 'antd/es/date-picker/locale/ru_RU'
 import { useSelector } from 'react-redux'
 import style from './CreateEvent.module.scss'
-import icons from '../../assets/icons'
 import Users from './Users'
 
 const { Option } = Select
@@ -82,11 +81,20 @@ function CreateEvent({ handleClose }) {
                 </Select>
               </Space>
             </div>
+            <label htmlFor="user">
+              Добавить участников
+              <input type="text" id="user" name="user" />
+              <div className={style.add_user}>
+                <div>Bektemir Kudaiberdiev</div>
+                <div>Bektemir Kudaiberdiev</div>
+                <div>Bektemir Kudaiberdiev</div>
+              </div>
+            </label>
             <div className="d-flex align-items-center justify-content-between">
               <span className={style.label_span}>Участники (1)</span>
-              <div data-bs-toggle="modal" data-bs-target="#invitation" className={style.invite_btn}>
+              {/* <div className={style.invite_btn}>
                 <img src={icons.whitePlusSVG} alt="" />
-              </div>
+              </div> */}
             </div>
             <Users />
             <span className={style.label_span}>Помещение</span>

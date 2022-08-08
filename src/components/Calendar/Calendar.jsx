@@ -29,6 +29,7 @@ function CalendarPage() {
       <CalendarHeader day={selectedDate} />
     </div>
   )
+  //  calendar schedule for days and week
 
   const calendarContent = hours.map((hour) => (
     <div className="d-flex align-items-center" key={hour}>
@@ -37,6 +38,7 @@ function CalendarPage() {
     </div>
   ))
 
+  // Calendar schedule for month
   const dateCellRender = (value) => <CalendarParent value={value} />
 
   return (

@@ -35,11 +35,14 @@ function CalendarWeek({ value }) {
         anchorEl={anchorEl}
         onClose={handleClose}
         transitionDuration="auto"
-        marginThreshold={60}
         className="material_popover"
         anchorOrigin={{
           vertical: 'center',
           horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'left',
         }}
       >
         <CreateEvent handleClose={handleClose} />

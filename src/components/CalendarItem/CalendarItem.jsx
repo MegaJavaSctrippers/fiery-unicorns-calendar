@@ -1,21 +1,26 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import { Popover } from 'antd'
 import icons from '../../assets/icons'
 import style from './CalendarItem.module.scss'
 import CalendarWeek from './CalendarWeek'
+import { getEvents } from '../../store/event/eventAction'
 
 function CalendarItem(props) {
   const week = useSelector((state) => state.date.week)
   const dateType = useSelector((state) => state.date.dateType)
-  const data = useSelector((state) => state.date.events)
+  const events = useSelector((state) => state.event.events)
   const selectedDate = useSelector((state) => state.date.selectedDate)
-
+  const dispatch = useDispatch()
   const { hour } = props
 
-  const handleHover = (data) => {
+  useEffect(() => {
+    dispatch(getEvents())
+  }, [])
+
+  const handleHover = (data, days) => {
     if (data) {
       return (
         <div className={style.event_popover}>
@@ -23,14 +28,17 @@ function CalendarItem(props) {
           <div className="d-flex align-items-start">
             <img alt="" src={icons.blueClockSVG} />
             <p className="m-0 mx-2">
-              <span>{moment(data.date).format('YYYY-MM-DD dddd')}</span>
+              <span>{moment(days).format('YYYY-MM-DD dddd')}</span>
               <br />
-              <span>{data.hours}</span>
+              <span>
+                {`${data.start}  -  `}
+                {data.end}
+              </span>
             </p>
           </div>
           <div>
             <img src={icons.locationSVG} alt="" />
-            <span> 1 этаж, 4 кабинет</span>
+            <span>{data.room}</span>
           </div>
         </div>
       )
@@ -41,32 +49,35 @@ function CalendarItem(props) {
 
   const calendarWeek = week.map((days) => (
     <div className={style.days} key={days}>
-      {data.map((item) => {
-        if (item.date === dateFormat(days) && item.hours === hour) {
+      {events.map((item) => {
+        if (item.event_date.includes(dateFormat(days)) && item.start === hour) {
           return (
             <Popover
               key={item.id}
               trigger="hover"
               placement="rightTop"
               overlayClassName="event_popup"
-              content={handleHover(item)}
+              content={handleHover(item, days)}
             >
               <div className={style.week_data}>
                 <span className={style.label} />
                 <span className={style.event_name}>{item.name}</span>
-                <span className={style.event_time}>{item.hours}</span>
+                <span className={style.event_time}>
+                  {`${item.start}  -  `}
+                  {item.end}
+                </span>
               </div>
             </Popover>
           )
         }
         return null
       })}
-      {data.find((item) => item.date === dateFormat(days) && item.hours === hour) ? null : (
+      {events.find((e) => e.event_date.includes(dateFormat(days)) && e.start === hour) ? null : (
         <CalendarWeek value={dateFormat(days)} />
       )}
     </div>
   ))
-  const calendarDay = data.map((item) => {
+  const calendarDay = events.map((item) => {
     if (item.date === moment(selectedDate).format('YYYY-MM-DD') && item.hours === hour) {
       return (
         <div key={item.id}>

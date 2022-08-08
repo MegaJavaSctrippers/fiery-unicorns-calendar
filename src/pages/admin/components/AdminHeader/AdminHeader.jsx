@@ -21,8 +21,8 @@ function AdminHeader() {
   const directions = useSelector((state) => state.directions.directions)
   const users = useSelector((state) => state.users.users)
   const rooms = useSelector((state) => state.rooms.rooms)
-  const location = useLocation()
-  const active = location.pathname.split('/').pop()
+  const { pathname } = useLocation()
+  const active = pathname.split('/').pop()
   const dispatch = useDispatch()
 
   const [search, setSearch] = useState(searchDefault)

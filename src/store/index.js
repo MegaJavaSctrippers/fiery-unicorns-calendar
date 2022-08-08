@@ -8,6 +8,7 @@ import userReducer from './admin/slices/usersSlice'
 import directionReducer from './admin/slices/directionSlice'
 import organizationReducer from './admin/slices/organizationSlice'
 import roomReducer from './admin/slices/roomSlice'
+import eventReducer from './event/eventSlice'
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     directions: directionReducer,
     organizations: organizationReducer,
     rooms: roomReducer,
+    event: eventReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 })

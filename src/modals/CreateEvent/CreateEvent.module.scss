@@ -16,6 +16,16 @@
       }
     }
     .create_body{
+      .add_user{
+        position: absolute;
+        width: 100%;
+        max-height:200px;
+        background: #fff;
+        z-index: 1060;
+        box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        border-radius:10px;
+      }
     .save{
       background: #4B84F4;
       border-radius: 10px;
@@ -83,7 +93,7 @@
       font-weight: 300;
       font-size: 14px;
       margin-bottom: 10px;
-      
+      position: relative;
       input{
         border: 1px solid rgba(46, 46, 46, 0.2);
         border-radius: 8px;
