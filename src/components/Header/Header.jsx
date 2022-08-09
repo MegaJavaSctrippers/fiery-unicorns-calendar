@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
+import classNames from 'classnames'
 import { Select, Space, Popover } from 'antd'
 import api from '../../services/api'
 import Notification from '../../modals/Notification/Notification'
@@ -13,6 +14,7 @@ import { ReactComponent as FolderIcon } from '../../assets/icons/folder.svg'
 import { ReactComponent as ClockIcon } from '../../assets/icons/clock.svg'
 import { ReactComponent as ProfileIcon } from '../../assets/icons/profile.svg'
 import { ReactComponent as JobIcon } from '../../assets/icons/job.svg'
+import EditProfile from '../../modals/EditProfile/EditProfile'
 import { setDateType, setSelectedDate, addDate, subrtactDate } from '../../store/date/dateSlice'
 
 const { Option } = Select
@@ -124,16 +126,19 @@ function Header() {
           <PushIcon className={style.push_icon} />
         </div>
         <Notification />
-        <Popover
-          className="header_popover"
-          placement="bottomRight"
-          content={<UserDropdown user={user} />}
-          trigger="click"
-        >
-          <div className={style.user_box}>
+        <div className="dropdown">
+          <div
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            className={classNames(style.user_box, 'dropdown-toggle')}
+          >
             <img src={icons.avatar} alt="" />
           </div>
-        </Popover>
+          <ul className="dropdown-menu">
+            <UserDropdown user={user} />
+          </ul>
+        </div>
+        <EditProfile user={user} />
       </div>
     </div>
   )
