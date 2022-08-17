@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getUsers } from '../actions/users'
+import { getUsers, getUser } from '../actions/users'
 
 const userSlice = createSlice({
   name: 'user/userSlice',
   initialState: {
     users: [],
     error: null,
+    user: {},
   },
   reducers: {},
   extraReducers: {
@@ -14,6 +15,9 @@ const userSlice = createSlice({
     },
     [getUsers.rejected.type]: (state, action) => {
       state.error = action.payload
+    },
+    [getUser.fulfilled.type]: (state, action) => {
+      state.user = action.payload
     },
   },
 })

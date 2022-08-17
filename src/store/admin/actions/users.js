@@ -10,6 +10,17 @@ export const getUsers = createAsyncThunk('users/getUsers', async (_, { rejectWit
   }
 })
 
+export const getUser = createAsyncThunk('users/getUser', async (_, { rejectWithValue }) => {
+  try {
+    const id = JSON.parse(localStorage.getItem('user'))
+    const { data } = await api.get(`/users/${id}/`)
+    console.log(data)
+    return data
+  } catch (e) {
+    return rejectWithValue(e.message)
+  }
+})
+
 // export const inviteUsers = createAsyncThunk('users/inviteUsers', async (data) => {
 //   await api.post('/sendinvitation/', data)
 // })

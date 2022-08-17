@@ -17,6 +17,7 @@ import { ReactComponent as JobIcon } from '../../assets/icons/job.svg'
 import EditProfile from '../../modals/EditProfile/EditProfile'
 import { setDateType, setSelectedDate, addDate, subrtactDate } from '../../store/date/dateSlice'
 import { getNotifications } from '../../store/notification/notificationActions'
+import { getUser } from '../../store/admin/actions/users'
 
 const { Option } = Select
 
@@ -52,17 +53,12 @@ const content = (
 
 function Header() {
   const dispatch = useDispatch()
-  const [user, setUser] = useState({})
   useEffect(() => {
-    const getUser = async () => {
-      const id = JSON.parse(localStorage.getItem('user'))
-      await api.get(`/users/${id}/`).then((res) => {
-        setUser(res.data)
-      })
-    }
+    dispatch(getUser())
     dispatch(getNotifications())
-    getUser()
   }, [])
+  const user = useSelector((state) => state.users.user)
+  console.log(user, 'jjjj')
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   return (
