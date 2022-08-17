@@ -8,7 +8,6 @@ import Room from './pages/admin/components/Room/Room'
 import Users from './pages/admin/components/Users/Users'
 import './assets/styles/main.css'
 import Admin from './pages/admin/Admin'
-import UsersDetail from './pages/admin/components/Users/UsersDetail'
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path="/admin" element={<Admin />}>
           <Route index element={<Organization />} />
           <Route path="users" element={<Users />} />
-          <Route path="users/:id" element={<UsersDetail />} />
           <Route path="rooms" element={<Room />} />
         </Route>
         <Route path="/signup" element={<SignUp />} />

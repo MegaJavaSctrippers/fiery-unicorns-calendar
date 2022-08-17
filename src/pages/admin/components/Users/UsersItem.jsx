@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../../assets/icons'
 import { getUsers } from '../../../../store/admin/actions/users'
@@ -10,8 +9,6 @@ function Position() {
   const dep = useSelector((state) => state.admin.search.department)
   const users = useSelector((state) => state.users.users)
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
   useEffect(() => {
     dispatch(getUsers())
   }, [])
@@ -41,11 +38,7 @@ function Position() {
               <span className="create_label">Email</span>
               <div className="create_div">{item.email}</div>
             </div>
-            <button
-              onClick={() => navigate(`${pathname}/${item.id}`)}
-              type="button"
-              className="edit_icon"
-            >
+            <button type="button" className="edit_icon">
               <img src={icons.editSVG} alt="" />
             </button>
             <button type="button" className="delete_icon">
