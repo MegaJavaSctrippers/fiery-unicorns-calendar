@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import React from 'react'
+import classNames from 'classnames'
 import icons from '../../../../assets/icons'
 import style from './AdminSideBar.module.scss'
 
@@ -29,6 +30,9 @@ function AdminSideBar() {
         <Link className={active === 'rooms' ? style.active_link : style.sidebar_link} to="rooms">
           <img src={icons.roomSVG} alt="" />
           <span>Помещение</span>
+        </Link>
+        <Link className={classNames(style.sidebar_link, style.home)} to="/">
+          <span>Перейти на сайт</span>
         </Link>
       </div>
     </div>

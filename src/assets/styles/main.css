@@ -239,6 +239,10 @@ button{
 .select_full_width, .ant-space-item, .select_full_width .ant-space-item .general_select{
   width: 100% !important;
 }
+.general_select .ant-select-selection-item{
+  display: flex !important;
+  align-items: center !important;
+}
 .margin_right .ant-space-item{
   margin-right:10px !important
 }
@@ -252,11 +256,11 @@ button{
   border-radius: 8px;
   right: 0;
   border:none;
-  width: 240px;
+  width: 260px;
   transition: .3s;
   transform: translate(0px, 50px);
   margin-top: 6px !important;
-  padding-bottom: 20px;
+  z-index:1060;
   
 }
 
@@ -311,7 +315,19 @@ button{
   padding: 16px !important;
   width: 328px;
 } 
-
+/* antd tabs style */
+.ant-tabs-nav-wrap{
+  padding-left: 15px !important;
+}
+.ant-tabs-tab-btn {
+  font-size: 18px;
+}
+.ant-tabs-top>.ant-tabs-nav:before, .ant-tabs-top>div>.ant-tabs-nav:before{
+  border-bottom: none;
+}
+.ant-tabs-tab{
+  padding-bottom: 0 !important;
+}
 /* modal bootstrap */
 
 .modal-content{

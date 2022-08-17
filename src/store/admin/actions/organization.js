@@ -13,9 +13,9 @@ export const getOrganizations = createAsyncThunk(
   },
 )
 
-export const createOrganization = createAsyncThunk(
-  'organization/createOrganization',
-  async (data) => {
-    await api.post('/organizations/', data)
-  },
-)
+// export const createOrganization = createAsyncThunk(
+//   'organization/createOrganization',
+//   async (data) => {
+//     await api.post('/organizations/', data)
+//   },
+// )

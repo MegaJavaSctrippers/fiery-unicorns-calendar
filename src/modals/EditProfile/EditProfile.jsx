@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Space, Select } from 'antd'
@@ -8,10 +8,17 @@ import style from './EditProfile.module.scss'
 const { Option } = Select
 
 function EditProfile({ user }) {
+  const [data, setData] = useState(user)
+  useEffect(() => {
+    setData(user)
+  }, [user])
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value })
+  }
   return (
     <div
       className={classNames('modal fade', style.edit_profile)}
-      id="edit-profile"
+      id="editProfile"
       tabIndex="-1"
       aria-hidden="true"
     >
@@ -35,18 +42,23 @@ function EditProfile({ user }) {
               <div style={{ width: '50%', marginRight: '16px' }} className={style.edit_input}>
                 <label htmlFor="#surname">
                   Фамилия
-                  <input id="surname" value={user.surname} />
+                  <input onChange={handleChange} id="surname" name="surname" value={data.surname} />
                 </label>
                 <label htmlFor="#middlename">
                   Отчество
-                  <input id="middlename" value={user.middlename} />
+                  <input
+                    onChange={handleChange}
+                    id="middlename"
+                    name="middlename"
+                    value={data.middlename}
+                  />
                 </label>
                 <label htmlFor="job">
                   <span className={style.span}>Отдел</span>
                   <input className="d-none" />
                   <Space id="job" className="select_full_width mt-1">
                     <Select
-                      value={user.positions ? user.positions[0].department.name : null}
+                      value={data.positions ? data.positions[0]?.department.name : ''}
                       className="general_select profile_select"
                     >
                       <Option>Frontend developer</Option>
@@ -57,24 +69,24 @@ function EditProfile({ user }) {
                 </label>
                 <label htmlFor="#password">
                   Пароль
-                  <input type="password" id="password" />
+                  <input onChange={handleChange} type="password" name="password" id="password" />
                 </label>
               </div>
               <div style={{ width: '50%' }} className={style.edit_input}>
                 <label htmlFor="#name">
                   Имя
-                  <input id="name" value={user.name} />
+                  <input onChange={handleChange} id="name" name="name" value={data.name} />
                 </label>
                 <label htmlFor="#email">
                   Email
-                  <input id="email" value={user.email} />
+                  <input onChange={handleChange} id="email" name="email" value={data.email} />
                 </label>
                 <label htmlFor="job">
                   <span className={style.span}>Должность</span>
                   <input className="d-none" />
                   <Space id="job" className="select_full_width mt-1">
                     <Select
-                      value={user.positions ? user.positions[0].position.name : null}
+                      value={data.positions ? data.positions[0]?.position.name : ''}
                       className="general_select profile_select"
                     >
                       <Option>Frontend developer</Option>
@@ -91,7 +103,12 @@ function EditProfile({ user }) {
             </div>
           </form>
           <div className="d-flex justify-content-end">
-            <button className={style.popup_btns} type="button">
+            <button
+              data-bs-toggle="modal"
+              data-bs-target="#editProfile"
+              className={style.popup_btns}
+              type="button"
+            >
               Сохранить
             </button>
           </div>

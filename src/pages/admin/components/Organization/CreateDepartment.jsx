@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
-import { createDepartment } from '../../../../store/admin/actions/departments'
+import { getDepartments } from '../../../../store/admin/actions/departments'
 
 const { Option } = Select
 
@@ -24,19 +25,17 @@ function CreateDepartment() {
   const handleChange = (e) => {
     setFormData({ ...formData, name: e.target.value })
   }
-  const onSubmit = () => {
-    try {
-      dispatch(createDepartment(formData))
+  const onSubmit = async () => {
+    await api.post('/create/departments/', formData).then(() => {
       dispatch(setCreate(''))
       success(<SuccessAlert text="Отдел успешно создан" />)
+      dispatch(getDepartments())
       setFormData({
         name: '',
         direction: '',
         manager: '',
       })
-    } catch (e) {
-      console.log(e.message)
-    }
+    })
   }
   return (
     <div>

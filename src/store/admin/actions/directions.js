@@ -13,6 +13,6 @@ export const getDirections = createAsyncThunk(
   },
 )
 
-export const createDirections = createAsyncThunk('position/createPosition', async (data) => {
-  await api.post('/create/directions/', data)
-})
+// export const createDirections = createAsyncThunk('position/createPosition', async (data) => {
+//   await api.post('/create/directions/', data)
+// })

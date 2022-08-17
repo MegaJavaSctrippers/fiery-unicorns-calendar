@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../../assets/icons'
 import { getRooms } from '../../../../store/admin/actions/rooms'
 
 function SearchRoom() {
-  const [edit] = useState(false)
   const rooms = useSelector((state) => state.rooms.rooms)
   const dispatch = useDispatch()
 
@@ -14,10 +13,6 @@ function SearchRoom() {
 
   return (
     <>
-      <div className="create_title">
-        {edit ? 'Редактровать :' : 'Поиск :'}
-        <span>1 этаж, 4 кабинет</span>
-      </div>
       {rooms.map((room) => (
         <div key={room.id} className="create_box">
           <div className="create_form">

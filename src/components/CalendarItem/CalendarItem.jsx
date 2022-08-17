@@ -1,24 +1,18 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import moment from 'moment'
 import PropTypes from 'prop-types'
 import { Popover } from 'antd'
 import icons from '../../assets/icons'
 import style from './CalendarItem.module.scss'
 import CalendarWeek from './CalendarWeek'
-import { getEvents } from '../../store/event/eventAction'
 
 function CalendarItem(props) {
   const week = useSelector((state) => state.date.week)
   const dateType = useSelector((state) => state.date.dateType)
-  const events = useSelector((state) => state.event.events)
   const selectedDate = useSelector((state) => state.date.selectedDate)
-  const dispatch = useDispatch()
-  const { hour } = props
-
-  useEffect(() => {
-    dispatch(getEvents())
-  }, [])
+  const label = useSelector((state) => state.event.label)
+  const { hour, events } = props
 
   const handleHover = (data, days) => {
     if (data) {
@@ -49,46 +43,53 @@ function CalendarItem(props) {
 
   const calendarWeek = week.map((days) => (
     <div className={style.days} key={days}>
-      {events.map((item) => {
-        if (item.event_date.includes(dateFormat(days)) && item.start === hour) {
-          return (
-            <Popover
-              key={item.id}
-              trigger="hover"
-              placement="rightTop"
-              overlayClassName="event_popup"
-              content={handleHover(item, days)}
-            >
-              <div className={style.week_data}>
-                <span className={style.label} />
-                <span className={style.event_name}>{item.name}</span>
-                <span className={style.event_time}>
-                  {`${item.start}  -  `}
-                  {item.end}
-                </span>
-              </div>
-            </Popover>
-          )
-        }
-        return null
-      })}
+      {events
+        .filter((item) => item.mark?.color.includes(label))
+        .map((item) => {
+          if (item.event_date.includes(dateFormat(days)) && item.start === hour) {
+            return (
+              <Popover
+                key={item.id}
+                trigger="hover"
+                placement="rightTop"
+                overlayClassName="event_popup"
+                content={handleHover(item, days)}
+              >
+                <div className={style.week_data}>
+                  <span className={style.label} style={{ background: item.mark?.color }} />
+                  <span className={style.event_name}>{item.name}</span>
+                  <span className={style.event_time}>
+                    {`${item.start}  -  `}
+                    {item.end}
+                  </span>
+                </div>
+              </Popover>
+            )
+          }
+          return null
+        })}
       {events.find((e) => e.event_date.includes(dateFormat(days)) && e.start === hour) ? null : (
         <CalendarWeek value={dateFormat(days)} />
       )}
     </div>
   ))
-  const calendarDay = events.map((item) => {
-    if (item.date === moment(selectedDate).format('YYYY-MM-DD') && item.hours === hour) {
-      return (
-        <div key={item.id}>
-          <span className={style.label} />
-          <span className={style.event_name_single}>{item.name}</span>
-          <span className={style.event_time}>{item.hours}</span>
-        </div>
-      )
-    }
-    return null
-  })
+  const calendarDay = events
+    .filter((item) => item.mark?.color.includes(label))
+    .map((item) => {
+      if (item.event_date[0] === moment(selectedDate).format('YYYY-MM-DD') && item.start === hour) {
+        return (
+          <div key={item.id}>
+            <span className={style.label} style={{ background: item.mark?.color }} />
+            <span className={style.event_name_single}>{item.name}</span>
+            <span className={style.event_time}>
+              {`${item.start} - `}
+              {item.end}
+            </span>
+          </div>
+        )
+      }
+      return null
+    })
 
   return (
     <>
@@ -98,5 +99,6 @@ function CalendarItem(props) {
 }
 CalendarItem.propTypes = {
   hour: PropTypes.string.isRequired,
+  events: PropTypes.array,
 }
 export default CalendarItem

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DatePicker, Space } from 'antd'
 import { Popover } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
@@ -11,6 +11,8 @@ import 'moment/locale/ru'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 import Labels from '../Labels/Labels'
 import Invitation from '../../modals/Invitation/Inivitation'
+import CreateLabel from '../../modals/CreateLabel/CreateLabel'
+import { getLabels } from '../../store/label/labelAction'
 
 function SideBar() {
   const selectedDate = useSelector((state) => state.date.selectedDate)
@@ -31,7 +33,10 @@ function SideBar() {
 
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
-
+  const labels = useSelector((state) => state.labels.labels)
+  useEffect(() => {
+    dispatch(getLabels())
+  }, [])
   return (
     <div className={style.sidebar}>
       <div className={style.header}>
@@ -86,7 +91,8 @@ function SideBar() {
             onChange={(value) => selectDate(value)}
           />
         </Space>
-        <Labels />
+        <Labels labels={labels} />
+        <CreateLabel />
       </div>
     </div>
   )

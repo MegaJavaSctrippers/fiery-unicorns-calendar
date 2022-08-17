@@ -13,6 +13,6 @@ export const getPositions = createAsyncThunk(
   },
 )
 
-export const createPosition = createAsyncThunk('position/createPosition', async (data) => {
-  await api.post('/create/positions/', data)
-})
+// export const createPosition = createAsyncThunk('position/createPosition', async (data) => {
+//   await api.post('/create/positions/', data)
+// })

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Space, Select } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
+import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
-import { createOrganization } from '../../../../store/admin/actions/organization'
+import { getOrganizations } from '../../../../store/admin/actions/organization'
 
 const { Option } = Select
 
@@ -19,15 +20,13 @@ function CreateOrganization() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-  const onSubmit = () => {
-    try {
-      dispatch(createOrganization(formData))
+  const onSubmit = async () => {
+    await api.post('/organizations/', formData).then(() => {
       dispatch(setCreate(''))
+      dispatch(getOrganizations())
       success(<SuccessAlert text="Организация создана" />)
       setFormData({ name: '', admin: '' })
-    } catch (e) {
-      console.log(e.message)
-    }
+    })
   }
   const enabled = name.length > 0
   return (

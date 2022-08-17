@@ -14,9 +14,12 @@ function CalendarChild({ item }) {
           <div className="d-flex align-items-start">
             <img alt="" src={icons.blueClockSVG} />
             <p className="m-0 mx-2">
-              <span>{moment(data.date).format('YYYY-MM-DD dddd')}</span>
+              <span>{moment(data.event_date[0]).format('YYYY-MM-DD dddd')}</span>
               <br />
-              <span>{data.hours}</span>
+              <span>
+                {`${data.start} - `}
+                {data.end}
+              </span>
             </p>
           </div>
           <div>
@@ -36,7 +39,7 @@ function CalendarChild({ item }) {
       content={handleHover(item)}
     >
       <div className={style.event_name} key={item.name}>
-        <span className={style.label} />
+        <span className={style.label} style={{ background: item.mark?.color }} />
         <span className={style.hour}>{item.hours}</span>
         {item.name}
       </div>

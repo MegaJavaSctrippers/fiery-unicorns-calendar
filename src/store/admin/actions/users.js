@@ -10,6 +10,6 @@ export const getUsers = createAsyncThunk('users/getUsers', async (_, { rejectWit
   }
 })
 
-export const inviteUsers = createAsyncThunk('users/inviteUsers', async (data) => {
-  await api.post('/sendinvitation/', data)
-})
+// export const inviteUsers = createAsyncThunk('users/inviteUsers', async (data) => {
+//   await api.post('/sendinvitation/', data)
+// })

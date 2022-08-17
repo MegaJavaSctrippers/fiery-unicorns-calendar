@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Select, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
+import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
-import { createDirections } from '../../../../store/admin/actions/directions'
+import { getDirections } from '../../../../store/admin/actions/directions'
 
 const { Option } = Select
 
@@ -21,21 +22,18 @@ function CreateDirection() {
   const handleChange = (e) => {
     setFormData({ ...formData, name: e.target.value })
   }
-
   const e = name.length > 0 && director.toString().length > 0 && organization.toString().length > 0
-  const onSubmit = () => {
-    try {
-      dispatch(createDirections(formData))
+  const onSubmit = async () => {
+    await api.post('/create/directions/', formData).then(() => {
       setFormData({
         name: '',
         director: '',
         organization: '',
       })
+      dispatch(getDirections())
       dispatch(setCreate(''))
       success(<SuccessAlert text="Дирекция успешна создана" />)
-    } catch (e) {
-      console.log(e.message)
-    }
+    })
   }
   return (
     <div>

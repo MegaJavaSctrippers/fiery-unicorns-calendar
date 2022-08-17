@@ -1,40 +1,34 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreateRoom } from '../../../../store/adminSlice'
-import { createRoom } from '../../../../store/admin/actions/rooms'
+import { getRooms } from '../../../../store/admin/actions/rooms'
 
 function CreateRoom() {
   const dispatch = useDispatch()
   const roomDefault = {
     name: '',
     capacity: '',
-    location: '',
-    hasProjector: true,
-    hasAc: true,
+    description: '',
+    has_projector: true,
+    has_ac: true,
   }
   const [room, setRoom] = useState(roomDefault)
-  const { name, capacity, location, hasAc, hasProjector } = room
-  const submitRoom = () => {
-    dispatch(
-      createRoom({
-        name,
-        capacity,
-        description: location,
-        has_ac: hasAc,
-        has_projector: hasProjector,
-      }),
-    ).then(() => {
+  const { name, capacity, description } = room
+  const submitRoom = async () => {
+    await api.post('/room/', roomDefault).then(() => {
       dispatch(setCreateRoom(false))
       setRoom(roomDefault)
+      dispatch(getRooms())
       success(<SuccessAlert text="Помещение создано" />)
     })
   }
   const handleChange = (e) => {
     setRoom({ ...room, [e.target.name]: e.target.value })
   }
-  const enabled = name.length > 0 && capacity.length > 0 && location.length > 0
+  const enabled = name.length > 0 && capacity.length > 0 && description.length > 0
   return (
     <div>
       <div className="create_title">
@@ -59,7 +53,7 @@ function CreateRoom() {
           <span className="create_label">Описание</span>
           <input
             onChange={handleChange}
-            value={location}
+            value={description}
             name="location"
             className="create_input"
           />

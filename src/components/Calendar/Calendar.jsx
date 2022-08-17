@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Calendar } from 'antd'
 import locale from 'antd/es/date-picker/locale/ru_RU'
@@ -10,14 +10,20 @@ import CalendarItem from '../CalendarItem/CalendarItem'
 import { setSelectedDate } from '../../store/date/dateSlice'
 import Invitation from '../../modals/Invitation/Inivitation'
 import CalendarParent from './CalendarParent'
+import { getEvents } from '../../store/event/eventAction'
 
 function CalendarPage() {
   const week = useSelector((state) => state.date.week)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   const dateType = useSelector((state) => state.date.dateType)
   const hours = useSelector((state) => state.date.hours)
+  const events = useSelector((state) => state.event.events)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getEvents())
+  }, [])
 
   const weekHeader = week.map((item) => (
     <div key={item} className={style.week}>
@@ -34,7 +40,7 @@ function CalendarPage() {
   const calendarContent = hours.map((hour) => (
     <div className="d-flex align-items-center" key={hour}>
       <div className={style.hours}>{hour}</div>
-      <CalendarItem hour={hour} />
+      <CalendarItem events={events} hour={hour} />
     </div>
   ))
 

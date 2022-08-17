@@ -182,7 +182,9 @@ function AdminHeader() {
                 value={roomName || undefined}
               >
                 {rooms.map((item) => (
-                  <Option key={item.id}>{item.name}</Option>
+                  <Option key={item.id} value={item.name}>
+                    {item.name}
+                  </Option>
                 ))}
               </Select>
             </Space>
@@ -196,7 +198,9 @@ function AdminHeader() {
                 className="general_select admin_select"
               >
                 {rooms.map((item) => (
-                  <Option key={item.id}>{item.capacity}</Option>
+                  <Option key={item.id} value={item.capacity}>
+                    {item.capacity}
+                  </Option>
                 ))}
               </Select>
             </Space>
@@ -207,10 +211,12 @@ function AdminHeader() {
                 placeholder="Описание"
                 onChange={(value) => setSearch({ ...search, description: value })}
                 className="general_select admin_select"
-                value={searchDefault.description || undefined}
+                value={search.description || undefined}
               >
                 {rooms.map((item) => (
-                  <Option key={item.id}>{item.description}</Option>
+                  <Option key={item.id} value={item?.description}>
+                    {item?.description}
+                  </Option>
                 ))}
               </Select>
             </Space>

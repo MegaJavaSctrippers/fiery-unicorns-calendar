@@ -27,6 +27,7 @@ function SignIn() {
         password: formData.password,
       })
       .then((res) => {
+        console.log(res, 'response')
         if (res.data.is_staff) {
           navigate('/admin')
         } else {

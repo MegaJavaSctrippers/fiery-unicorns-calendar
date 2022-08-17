@@ -10,6 +10,6 @@ export const getRooms = createAsyncThunk('rooms/getRooms', async (_, { rejectWit
   }
 })
 
-export const createRoom = createAsyncThunk('rooms/createRoom', async (data) => {
-  await api.post('/room/', data)
-})
+// export const createRoom = createAsyncThunk('rooms/createRoom', async (data) => {
+//   await api.post('/room/', data)
+// })

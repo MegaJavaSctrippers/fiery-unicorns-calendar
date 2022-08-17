@@ -9,6 +9,14 @@
     .active_link{
       background: rgba(0, 47, 97, 0.12);
     }
+    .home{
+      &:hover{
+        background: none !important;
+        span{
+          color:#4B84F4 !important;
+        }
+      }
+    }
     .sidebar_link,.active_link{
       width:100%;
       display: block;

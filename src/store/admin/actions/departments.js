@@ -12,7 +12,3 @@ export const getDepartments = createAsyncThunk(
     }
   },
 )
-
-export const createDepartment = createAsyncThunk('departments/createDepartments', async (data) => {
-  await api.post('/create/departments/', data)
-})

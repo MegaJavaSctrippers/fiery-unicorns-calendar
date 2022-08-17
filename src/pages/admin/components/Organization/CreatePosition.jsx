@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
 import { setCreate } from '../../../../store/adminSlice'
-import { createPosition } from '../../../../store/admin/actions/positions'
+import api from '../../../../services/api'
+import { getPositions } from '../../../../store/admin/actions/positions'
 
 const { Option } = Select
 
@@ -20,12 +21,13 @@ function CreatePosition() {
   const handleChange = (e) => {
     setFormData({ ...formData, name: e.target.value })
   }
-  const onSubmit = () => {
-    dispatch(createPosition(formData)).then(() => {
+  const onSubmit = async () => {
+    await api.post('/create/positions/', formData).then(() => {
       setFormData({
         name: '',
         department: '',
       })
+      dispatch(getPositions())
       dispatch(setCreate(''))
       success(<SuccessAlert text="Должность успешна создана" />)
     })
