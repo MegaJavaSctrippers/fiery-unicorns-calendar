@@ -1,17 +1,27 @@
 .notification{
   padding: 16px;
+  .notif_scroll{
+    height:70vh;
+    overflow-y: auto;
+    padding-bottom: 20px;
+  }
   .notification_header{
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 10px;
-
+    button{
+      position: absolute;
+      right: 24px;
+      top: 24px;
+    }
     h3{
       font-size:18px;
     }
   }
   .notification_menu{
     display: flex;
+    padding-left: 15px;
     span{
       color: rgba(75, 132, 244, 0.8);
       font-size: 13px;
@@ -22,11 +32,24 @@
     display: flex;
     justify-content: space-between;
     align-items:center;
+    position: relative;
+    padding-left: 15px;
     border-bottom: 1px solid rgba(46, 46, 46, 0.08);
+    .status{
+      display: inline-block;
+      background: #4B84F4;
+      width:10px;
+      height: 10px;
+      border-radius:10px;
+      position: absolute;
+      top: 16px;
+      left: 0;
+      z-index:1055;
+    }
     .content_img{
       display: flex;
       
-      div{
+      button{
         background: #FFFFFF;
         box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
         border-radius: 6px;
