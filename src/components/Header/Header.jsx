@@ -16,39 +16,42 @@ import { ReactComponent as ProfileIcon } from '../../assets/icons/profile.svg'
 import { ReactComponent as JobIcon } from '../../assets/icons/job.svg'
 import EditProfile from '../../modals/EditProfile/EditProfile'
 import { setDateType, setSelectedDate, addDate, subrtactDate } from '../../store/date/dateSlice'
+import { getNotifications } from '../../store/notification/notificationActions'
 
 const { Option } = Select
 
-function Header() {
-  const content = (
-    <div className={style.search_dropdown}>
-      <div className={style.search_header}>
-        <img src={icons.searchSVG} alt="" />
-        <input placeholder="Поиск" />
-        <img src={icons.clearSVG} alt="" />
-      </div>
-
-      <ul className={style.search_menu}>
-        <li>Все</li>
-        <li>
-          <FolderIcon className={style.search_svg} />
-          Название
-        </li>
-        <li>
-          <ClockIcon className={style.search_svg} />
-          Дата
-        </li>
-        <li>
-          <ProfileIcon className={style.search_svg} />
-          Сотрудник
-        </li>
-        <li>
-          <JobIcon className={style.search_svg} />
-          Должность
-        </li>
-      </ul>
+const content = (
+  <div className={style.search_dropdown}>
+    <div className={style.search_header}>
+      <img src={icons.searchSVG} alt="" />
+      <input placeholder="Поиск" />
+      <img src={icons.clearSVG} alt="" />
     </div>
-  )
+
+    <ul className={style.search_menu}>
+      <li>Все</li>
+      <li>
+        <FolderIcon className={style.search_svg} />
+        Название
+      </li>
+      <li>
+        <ClockIcon className={style.search_svg} />
+        Дата
+      </li>
+      <li>
+        <ProfileIcon className={style.search_svg} />
+        Сотрудник
+      </li>
+      <li>
+        <JobIcon className={style.search_svg} />
+        Должность
+      </li>
+    </ul>
+  </div>
+)
+
+function Header() {
+  const dispatch = useDispatch()
   const [user, setUser] = useState({})
   useEffect(() => {
     const getUser = async () => {
@@ -57,9 +60,9 @@ function Header() {
         setUser(res.data)
       })
     }
+    dispatch(getNotifications())
     getUser()
   }, [])
-  const dispatch = useDispatch()
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   return (

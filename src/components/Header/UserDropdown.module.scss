@@ -1,7 +1,25 @@
 .user_dropdown{
   text-align: center;
   padding: 5px 18px;
-
+  overflow: hidden;
+  .admin{
+    cursor:pointer;
+    &:hover{
+      color:#4B84F4 !important;
+    }
+    img{
+      transform: rotate(-90deg);
+    }
+  }
+  .logout{
+    color:#e94a4a;
+    cursor:pointer;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    &:hover{
+      color: #bd1010;
+    }
+  }
   .user_avatar {
     width: 56px;
     height: 56px;
