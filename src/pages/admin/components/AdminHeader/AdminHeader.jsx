@@ -13,7 +13,24 @@ import {
 } from '../../../../store/adminSlice'
 
 const { Option } = Select
-
+const menuItems = [
+  {
+    label: <span>Организация</span>,
+    key: 'organization',
+  },
+  {
+    label: <span>Дирекций</span>,
+    key: 'direction',
+  },
+  {
+    label: <span>Отдел</span>,
+    key: 'department',
+  },
+  {
+    label: <span>Должность</span>,
+    key: 'position',
+  },
+]
 function AdminHeader() {
   const organizations = useSelector((state) => state.organizations.organizations)
   const departments = useSelector((state) => state.departments.departments)
@@ -42,29 +59,7 @@ function AdminHeader() {
     dispatch(setCreate(e.key))
   }
 
-  const menu = (
-    <Menu
-      onClick={handleClick}
-      items={[
-        {
-          label: <span>Организация</span>,
-          key: 'organization',
-        },
-        {
-          label: <span>Дирекций</span>,
-          key: 'direction',
-        },
-        {
-          label: <span>Отдел</span>,
-          key: 'department',
-        },
-        {
-          label: <span>Должность</span>,
-          key: 'position',
-        },
-      ]}
-    />
-  )
+  const menu = <Menu onClick={handleClick} items={menuItems} />
   return (
     <div className={style.header}>
       {active !== 'rooms' ? (
