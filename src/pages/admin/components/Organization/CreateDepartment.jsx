@@ -26,7 +26,7 @@ function CreateDepartment() {
     setFormData({ ...formData, name: e.target.value })
   }
   const onSubmit = async () => {
-    await api.post('/create/departments/', formData).then(() => {
+    await api.post('/departments/', formData).then(() => {
       dispatch(setCreate(''))
       success(<SuccessAlert text="Отдел успешно создан" />)
       dispatch(getDepartments())

@@ -24,7 +24,7 @@ function CreateDirection() {
   }
   const e = name.length > 0 && director.toString().length > 0 && organization.toString().length > 0
   const onSubmit = async () => {
-    await api.post('/create/directions/', formData).then(() => {
+    await api.post('/directions/', formData).then(() => {
       setFormData({
         name: '',
         director: '',

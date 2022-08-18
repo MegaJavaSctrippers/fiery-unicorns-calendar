@@ -22,7 +22,7 @@ function CreatePosition() {
     setFormData({ ...formData, name: e.target.value })
   }
   const onSubmit = async () => {
-    await api.post('/create/positions/', formData).then(() => {
+    await api.post('/positions/', formData).then(() => {
       setFormData({
         name: '',
         department: '',
