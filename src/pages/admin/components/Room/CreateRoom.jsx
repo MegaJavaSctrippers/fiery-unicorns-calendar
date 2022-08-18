@@ -51,12 +51,7 @@ function CreateRoom() {
         </div>
         <div className="create_form">
           <span className="create_label">Описание</span>
-          <input
-            onChange={handleChange}
-            value={description || undefined}
-            name="location"
-            className="create_input"
-          />
+          <input onChange={handleChange} name="description" className="create_input" />
         </div>
         <button
           onClick={() => submitRoom()}
