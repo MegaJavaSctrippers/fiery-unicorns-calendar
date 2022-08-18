@@ -53,7 +53,7 @@ function CreateRoom() {
           <span className="create_label">Описание</span>
           <input
             onChange={handleChange}
-            value={description}
+            value={description || undefined}
             name="location"
             className="create_input"
           />
