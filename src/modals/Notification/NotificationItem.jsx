@@ -1,18 +1,18 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
-import { Popover, Tooltip } from 'antd'
+import { Tooltip } from 'antd'
 import api from '../../services/api'
 import { getNotifications } from '../../store/notification/notificationActions'
 import icons from '../../assets/icons'
 import style from './Notification.module.scss'
 import Invitation from '../Invitation/Inivitation'
 import { getEvents } from '../../store/event/eventAction'
+import { setDelegate } from '../../store/notification/notificationSlice'
 
-const content = <Invitation />
 function NotificationItem() {
   const notifications = useSelector((state) => state.notifications.notifications)
-  console.log(notifications, 'nnnnnnnnnnnn')
+  const delegate = useSelector((state) => state.notifications.delegate)
   const dispatch = useDispatch()
   const submitNot = async (item, id) => {
     await api.patch(`/invitation/${id}/`, { invitation_status: item }).then(() => {
@@ -29,6 +29,7 @@ function NotificationItem() {
       <span>{user.department[0]}</span>
     </>
   )
+
   return (
     <div>
       <div className={style.notification_menu}>
@@ -72,11 +73,9 @@ function NotificationItem() {
                     <button onClick={() => submitNot('A', item.event.id)} type="button">
                       <img src={icons.acceptSVG} alt="" />
                     </button>
-                    <Popover content={content} placement="Left" trigger="click">
-                      <button type="button">
-                        <img src={icons.resendSVG} alt="" />
-                      </button>
-                    </Popover>
+                    <button onClick={() => dispatch(setDelegate(item))} type="button">
+                      <img src={icons.resendSVG} alt="" />
+                    </button>
                     <button onClick={() => submitNot('D', item.event.id)} type="button">
                       <img src={icons.cancelSVG} alt="" />
                     </button>
@@ -98,6 +97,7 @@ function NotificationItem() {
           ))
           .reverse()}
       </div>
+      {delegate ? <Invitation /> : null}
     </div>
   )
 }

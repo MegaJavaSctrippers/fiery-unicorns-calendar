@@ -1,15 +1,23 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import icons from '../../assets/icons'
 import style from './Invitation.module.scss'
 import InivitationItem from './InvitationItem'
+import { setDelegate } from '../../store/notification/notificationSlice'
 
 function Invitation() {
+  const dispatch = useDispatch()
   return (
     <div className={style.popup_modal}>
+      <div className={style.popup_backdrop} onClick={() => dispatch(setDelegate(''))} />
       <div className="modal-content">
         <div className={style.popup_header}>
-          <h5>Пригласить</h5>
-          <button type="button">X</button>
+          <h5>Делегировать</h5>
+          <button onClick={() => dispatch(setDelegate(''))} type="button">
+            <img src={icons.closeBlackSVG} alt="" />
+          </button>
         </div>
         <div className={style.popup_search}>
           <img alt="" src={icons.searchSVG} />
@@ -22,21 +30,6 @@ function Invitation() {
           <InivitationItem />
           <InivitationItem />
           <InivitationItem />
-        </div>
-        <div className="d-flex align-items-center">
-          <div className={style.added_users}>
-            <img className={style.avatar} src={icons.avatar} alt="" />
-            <img className={style.close} src={icons.circleCloseSVG} alt="" />
-          </div>
-          <div className={style.added_users}>
-            <img className={style.avatar} src={icons.avatar} alt="" />
-            <img className={style.close} src={icons.circleCloseSVG} alt="" />
-          </div>
-        </div>
-        <div className="d-flex justify-content-end">
-          <button className={style.popup_btns} type="button">
-            Пригласить
-          </button>
         </div>
       </div>
     </div>

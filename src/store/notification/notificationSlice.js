@@ -6,6 +6,12 @@ export const notificationSlice = createSlice({
   initialState: {
     notifications: [],
     error: false,
+    delegate: '',
+  },
+  reducers: {
+    setDelegate: (state, action) => {
+      state.delegate = action.payload
+    },
   },
   extraReducers: {
     [getNotifications.fulfilled.type]: (state, action) => {
@@ -16,4 +22,5 @@ export const notificationSlice = createSlice({
     },
   },
 })
+export const { setDelegate } = notificationSlice.actions
 export default notificationSlice.reducer

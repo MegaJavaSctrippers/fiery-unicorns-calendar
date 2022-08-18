@@ -58,7 +58,6 @@ function Header() {
     dispatch(getNotifications())
   }, [])
   const user = useSelector((state) => state.users.user)
-  console.log(user, 'jjjj')
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
   return (

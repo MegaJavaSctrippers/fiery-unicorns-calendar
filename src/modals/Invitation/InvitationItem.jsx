@@ -16,6 +16,9 @@ function InivitationItem() {
       </div>
       <span>Проект-менеджер</span>
       <span>Отдел разработок</span>
+      <button className={style.delegate_btn} type="button">
+        Делегировать
+      </button>
     </div>
   )
 }

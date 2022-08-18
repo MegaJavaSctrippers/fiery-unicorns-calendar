@@ -274,7 +274,7 @@ button{
 /* Material popover */
 
 .material_popover{
-  z-index:1050 !important;
+  z-index:1060 !important;
 }
 
 /*  popover  antd */
