@@ -10,7 +10,6 @@ import { setSelectedDate } from '../../store/date/dateSlice'
 import 'moment/locale/ru'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 import Labels from '../Labels/Labels'
-import Invitation from '../../modals/Invitation/Inivitation'
 import CreateLabel from '../../modals/CreateLabel/CreateLabel'
 import { getLabels } from '../../store/label/labelAction'
 
@@ -75,7 +74,6 @@ function SideBar() {
         >
           <CreateEvent handleClose={handleClose} />
         </Popover>
-        <Invitation />
         <Space direction="vertical">
           <DatePicker
             open="true"

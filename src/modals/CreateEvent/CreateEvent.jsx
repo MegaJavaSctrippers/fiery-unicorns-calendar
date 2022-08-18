@@ -191,7 +191,7 @@ function CreateEvent({ handleClose }) {
                             {`${item.name} `}
                             {item.surname}
                           </h3>
-                          <span>{item.positions[0]}</span>
+                          <span>{item.department[0]}</span>
                         </div>
                       </div>
                     ))}

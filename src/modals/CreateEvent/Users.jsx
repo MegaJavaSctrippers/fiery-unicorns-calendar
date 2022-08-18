@@ -14,7 +14,7 @@ function Users({ invitees }) {
               {`${user.name} `}
               {user.surname}
             </h4>
-            <span>{user.positions[0]}</span>
+            <span>{user.department[0]}</span>
           </div>
         </div>
       ))}

@@ -14,7 +14,6 @@ export const getUser = createAsyncThunk('users/getUser', async (_, { rejectWithV
   try {
     const id = JSON.parse(localStorage.getItem('user'))
     const { data } = await api.get(`/users/${id}/`)
-    console.log(data)
     return data
   } catch (e) {
     return rejectWithValue(e.message)
