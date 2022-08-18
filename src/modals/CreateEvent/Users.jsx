@@ -8,7 +8,15 @@ function Users({ invitees }) {
     <div className={style.invite_box}>
       {invitees.map((user) => (
         <div key={user.id} className={style.invite_user}>
-          <img src={icons.avatar} alt="" />
+          <div
+            style={{
+              border: user.status ? '2.5px solid #80DEA0' : '2.5px solid #E03230',
+              borderRadius: '50%',
+              marginRight: '10px',
+            }}
+          >
+            <img src={icons.avatar} alt="" />
+          </div>
           <div>
             <h4>
               {`${user.name} `}

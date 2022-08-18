@@ -185,7 +185,15 @@ function CreateEvent({ handleClose }) {
                         key={item.id}
                         className="d-flex align-items-center mb-2"
                       >
-                        <img alt="" src={icons.avatar} />
+                        <div
+                          style={{
+                            border: item.status ? '2.5px solid #80DEA0' : '2.5px solid #E03230',
+                            borderRadius: '50%',
+                            marginLeft: '10px',
+                          }}
+                        >
+                          <img src={icons.avatar} alt="" style={{ marginRight: 0 }} />
+                        </div>
                         <div>
                           <h3>
                             {`${item.name} `}
