@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import classNames from 'classnames'
 import { Select, Space, Popover } from 'antd'
-import api from '../../services/api'
 import Notification from '../../modals/Notification/Notification'
 import style from './Header.module.scss'
 import icons from '../../assets/icons'
@@ -60,6 +59,8 @@ function Header() {
   const user = useSelector((state) => state.users.user)
   const dateType = useSelector((state) => state.date.dateType)
   const selectedDate = useSelector((state) => state.date.selectedDate)
+  const notifications = useSelector((state) => state.notifications.notifications)
+  const newNotification = notifications.filter((item) => item.invitations_status === 'P')
   return (
     <div className={style.header}>
       <div className="d-flex align-items-center">
@@ -122,6 +123,7 @@ function Header() {
         </Popover>
         <div className={style.push_box} data-bs-toggle="modal" data-bs-target="#notification">
           <PushIcon className={style.push_icon} />
+          {newNotification.length ? <img src={icons.notificationSVG} alt="" /> : null}
         </div>
         <Notification />
         <div className="dropdown">
