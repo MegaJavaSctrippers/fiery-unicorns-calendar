@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../assets/icons'
 import { setLabel } from '../../store/event/eventSlice'
 import style from './Labels.module.scss'
+import { getEvents } from '../../store/event/eventAction'
 
 function Labels({ labels }) {
   const label = useSelector((state) => state.event.label)
@@ -22,7 +23,10 @@ function Labels({ labels }) {
       <div
         style={{ background: label ? '' : '#4B84F4', color: label ? '' : '#fff' }}
         className={classNames('d-flex align-items-center mb-2', style.labels_body)}
-        onClick={() => dispatch(setLabel(''))}
+        onClick={() => {
+          dispatch(getEvents())
+          dispatch(setLabel(''))
+        }}
       >
         <span className={style.label_all} />
         Все
@@ -30,7 +34,10 @@ function Labels({ labels }) {
       {labels.map((item) => (
         <div
           key={item.id}
-          onClick={() => dispatch(setLabel(item.color))}
+          onClick={() => {
+            dispatch(getEvents(item.id))
+            dispatch(setLabel(item.color))
+          }}
           className={classNames('d-flex align-items-center mb-2', style.labels_body)}
           style={{
             background: label === item.color ? item.color : null,

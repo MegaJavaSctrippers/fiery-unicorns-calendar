@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import api from '../../services/api'
 
-export const getEvents = createAsyncThunk('events/getEvents', async (_, { rejectWithValue }) => {
+export const getEvents = createAsyncThunk('events/getEvents', async (label) => {
   try {
-    const { data } = await api.get('/event/')
+    const { data } = await api.get(`/event/${label ? `?mark=${label}` : ''}`)
     return data
   } catch (e) {
-    return rejectWithValue(e.message)
+    return e.message
   }
 })
 
