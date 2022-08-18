@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
-import { Popover } from 'antd'
+import { Popover, Tooltip } from 'antd'
 import api from '../../services/api'
 import { getNotifications } from '../../store/notification/notificationActions'
 import icons from '../../assets/icons'
@@ -20,6 +20,15 @@ function NotificationItem() {
       dispatch(getEvents())
     })
   }
+  const title = (user) => (
+    <>
+      <div>
+        {`${user.name} `}
+        {user.surname}
+      </div>
+      <span>{user.department[0]}</span>
+    </>
+  )
   return (
     <div>
       <div className={style.notification_menu}>
@@ -76,7 +85,15 @@ function NotificationItem() {
                   <>{item.invitations_status === 'A' ? 'Принят' : 'Отклонен'}</>
                 )}
               </div>
-              <div style={{ width: '16%' }}>Bektemir Kudaiberdiev</div>
+              <div style={{ width: '16%' }}>
+                <div className={style.participants}>
+                  {item.event.participants.map((user) => (
+                    <Tooltip key={user.id} placement="bottom" title={title(user)}>
+                      <img src={icons.avatar} alt="" />
+                    </Tooltip>
+                  ))}
+                </div>
+              </div>
             </div>
           ))
           .reverse()}
