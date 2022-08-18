@@ -44,7 +44,7 @@ function CalendarItem(props) {
   const calendarWeek = week.map((days) => (
     <div className={style.days} key={days}>
       {events
-        .filter((item) => item.mark?.color.includes(label))
+        .filter((item) => item.mark?.color?.includes(label))
         .map((item) => {
           if (item.event_date.includes(dateFormat(days)) && item.start === hour) {
             return (
@@ -74,7 +74,7 @@ function CalendarItem(props) {
     </div>
   ))
   const calendarDay = events
-    .filter((item) => item.mark?.color.includes(label))
+    .filter((item) => item.mark?.color?.includes(label))
     .map((item) => {
       if (item.event_date[0] === moment(selectedDate).format('YYYY-MM-DD') && item.start === hour) {
         return (

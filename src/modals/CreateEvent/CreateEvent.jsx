@@ -190,6 +190,7 @@ function CreateEvent({ handleClose }) {
                             border: item.status ? '2.5px solid #80DEA0' : '2.5px solid #E03230',
                             borderRadius: '50%',
                             marginLeft: '10px',
+                            marginRight: '10px',
                           }}
                         >
                           <img src={icons.avatar} alt="" style={{ marginRight: 0 }} />

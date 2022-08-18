@@ -18,7 +18,7 @@ function CreateRoom() {
   const [room, setRoom] = useState(roomDefault)
   const { name, capacity, description } = room
   const submitRoom = async () => {
-    await api.post('/room/', roomDefault).then(() => {
+    await api.post('/room/', room).then(() => {
       dispatch(setCreateRoom(false))
       setRoom(roomDefault)
       dispatch(getRooms())
