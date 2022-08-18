@@ -7,7 +7,6 @@ import icons from '../../assets/icons'
 import style from './UserDropdown.module.scss'
 
 function UserDropdown({ user }) {
-  const admin = JSON.parse(localStorage.getItem('is_staff'))
   const navigate = useNavigate()
   const logout = () => {
     localStorage.setItem('token', null)
