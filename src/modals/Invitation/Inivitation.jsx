@@ -18,7 +18,6 @@ function Invitation({ id }) {
     const getUserToDelegate = async () => {
       await api.get(`delegation-users/?event=${id}`).then((res) => {
         setUsers(res.data)
-        console.log(res.data)
       })
     }
     getUserToDelegate()

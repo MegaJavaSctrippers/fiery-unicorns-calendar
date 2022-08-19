@@ -97,7 +97,6 @@ function Department() {
             <button onClick={() => deleteDepartment(item)} type="button" className="delete_icon">
               <img src={icons.deleteSVG} alt="" />
             </button>
-            <Invitation />
           </div>
         ))}
     </>
