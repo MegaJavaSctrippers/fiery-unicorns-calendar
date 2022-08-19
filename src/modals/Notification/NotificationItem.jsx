@@ -80,13 +80,10 @@ function NotificationItem() {
               </div>
               <div className={style.content_item} style={{ width: '12%' }}>
                 {item.delegated_from ? (
-                  <>
-                    <span>
-                      {`${item.delegated_from.name} - `}
-                      {item.delegated_from.surname}
-                    </span>
-                    <div>{item.delegated_from?.positions[0]}</div>
-                  </>
+                  <span>
+                    {`${item.delegated_from.name} - `}
+                    {item.delegated_from.surname}
+                  </span>
                 ) : (
                   '-'
                 )}

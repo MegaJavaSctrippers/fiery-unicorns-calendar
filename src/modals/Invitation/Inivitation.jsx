@@ -12,6 +12,7 @@ import api from '../../services/api'
 
 function Invitation({ id }) {
   const dispatch = useDispatch()
+  const [search, setSearch] = useState('')
   const [users, setUsers] = useState([])
   useEffect(() => {
     const getUserToDelegate = async () => {
@@ -34,12 +35,14 @@ function Invitation({ id }) {
         </div>
         <div className={style.popup_search}>
           <img alt="" src={icons.searchSVG} />
-          <input type="text" />
+          <input onChange={(e) => setSearch(e.target.value)} type="text" />
         </div>
         <div className={style.popup_body}>
-          {users.map((user) => (
-            <InivitationItem eventId={id} key={user.id} user={user} />
-          ))}
+          {users
+            .filter((item) => item.name.toLowerCase().includes(search.toLowerCase()))
+            .map((user) => (
+              <InivitationItem eventId={id} key={user.id} user={user} />
+            ))}
         </div>
       </div>
     </div>
