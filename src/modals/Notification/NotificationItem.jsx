@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import { Tooltip } from 'antd'
@@ -11,6 +11,7 @@ import { getEvents } from '../../store/event/eventAction'
 import { setDelegate } from '../../store/notification/notificationSlice'
 
 function NotificationItem() {
+  const [event, setEvent] = useState(0)
   const notifications = useSelector((state) => state.notifications.notifications)
   const delegate = useSelector((state) => state.notifications.delegate)
   const dispatch = useDispatch()
@@ -29,7 +30,16 @@ function NotificationItem() {
       <span>{user.positions[0]}</span>
     </>
   )
-
+  const statusText = (status) => {
+    switch (status) {
+      case 'A':
+        return 'Принят'
+      case 'D':
+        return 'Отклонен'
+      default:
+        return 'Делегирован'
+    }
+  }
   return (
     <div>
       <div className={style.notification_menu}>
@@ -73,15 +83,23 @@ function NotificationItem() {
                     <button onClick={() => submitNot('A', item.event.id)} type="button">
                       <img src={icons.acceptSVG} alt="" />
                     </button>
-                    <button onClick={() => dispatch(setDelegate(item))} type="button">
-                      <img src={icons.resendSVG} alt="" />
-                    </button>
+                    {item.delegated_from ? null : (
+                      <button
+                        onClick={() => {
+                          setEvent(item.event.id)
+                          dispatch(setDelegate(item))
+                        }}
+                        type="button"
+                      >
+                        <img src={icons.resendSVG} alt="" />
+                      </button>
+                    )}
                     <button onClick={() => submitNot('D', item.event.id)} type="button">
                       <img src={icons.cancelSVG} alt="" />
                     </button>
                   </>
                 ) : (
-                  <>{item.invitations_status === 'A' ? 'Принят' : 'Отклонен'}</>
+                  statusText(item.invitations_status)
                 )}
               </div>
               <div style={{ width: '16%' }}>
@@ -97,7 +115,7 @@ function NotificationItem() {
           ))
           .reverse()}
       </div>
-      {delegate ? <Invitation /> : null}
+      {delegate ? <Invitation id={event} /> : null}
     </div>
   )
 }

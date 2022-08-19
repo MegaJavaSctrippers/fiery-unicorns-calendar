@@ -1,14 +1,27 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 import icons from '../../assets/icons'
 import style from './Invitation.module.scss'
 import InivitationItem from './InvitationItem'
 import { setDelegate } from '../../store/notification/notificationSlice'
+import api from '../../services/api'
 
-function Invitation() {
+function Invitation({ id }) {
   const dispatch = useDispatch()
+  const [users, setUsers] = useState([])
+  useEffect(() => {
+    const getUserToDelegate = async () => {
+      await api.get(`delegation-users/?event=${id}`).then((res) => {
+        setUsers(res.data)
+        console.log(res.data)
+      })
+    }
+    getUserToDelegate()
+  }, [])
   return (
     <div className={style.popup_modal}>
       <div className={style.popup_backdrop} onClick={() => dispatch(setDelegate(''))} />
@@ -24,15 +37,15 @@ function Invitation() {
           <input type="text" />
         </div>
         <div className={style.popup_body}>
-          <InivitationItem />
-          <InivitationItem />
-          <InivitationItem />
-          <InivitationItem />
-          <InivitationItem />
-          <InivitationItem />
+          {users.map((user) => (
+            <InivitationItem eventId={id} key={user.id} user={user} />
+          ))}
         </div>
       </div>
     </div>
   )
+}
+Invitation.propTypes = {
+  id: PropTypes.number,
 }
 export default Invitation
