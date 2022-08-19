@@ -33,11 +33,11 @@ function NotificationItem() {
   const statusText = (status) => {
     switch (status) {
       case 'A':
-        return 'Принят'
+        return <span style={{ color: '#6DD349' }}>Принят</span>
       case 'D':
-        return 'Отклонен'
+        return <span style={{ color: '#E26C6C' }}>Отклонен</span>
       default:
-        return 'Делегирован'
+        return <span style={{ color: 'orange' }}>Делегирован</span>
     }
   }
   return (
