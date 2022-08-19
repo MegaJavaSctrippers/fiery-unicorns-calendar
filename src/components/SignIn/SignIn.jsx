@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import style from './SignIn.module.scss'
 import icons from '../../assets/icons'
@@ -73,12 +73,6 @@ function SignIn() {
             <button disabled={!enabled} type="submit" className={style.save}>
               Войти
             </button>
-            <p>
-              <span>У вас нет аккаунта?</span>
-              <Link to="/signup" className={style.auth_link}>
-                Регистрация
-              </Link>
-            </p>
           </form>
         </div>
 

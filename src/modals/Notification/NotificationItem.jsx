@@ -26,7 +26,7 @@ function NotificationItem() {
         {`${user.name} `}
         {user.surname}
       </div>
-      <span>{user.department[0]}</span>
+      <span>{user.positions[0]}</span>
     </>
   )
 
