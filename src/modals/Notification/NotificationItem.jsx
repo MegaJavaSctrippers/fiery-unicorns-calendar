@@ -47,7 +47,8 @@ function NotificationItem() {
         <span style={{ width: '11%' }}>Дата встречи</span>
         <span style={{ width: '13%' }}>Время встречи</span>
         <span style={{ width: '16%' }}>Место встречи</span>
-        <span style={{ width: '18%' }}>Повтор</span>
+        <span style={{ width: '14%' }}>Повтор</span>
+        <span style={{ width: '12%' }}>Делегирован от</span>
         <span style={{ width: '12%' }}>Статус</span>
         <span style={{ width: '16%' }}>Участники</span>
       </div>
@@ -74,8 +75,21 @@ function NotificationItem() {
               <div className={style.content_item} style={{ width: '16%' }}>
                 {item.event.room}
               </div>
-              <div className={style.content_item} style={{ width: '18%' }}>
+              <div className={style.content_item} style={{ width: '14%' }}>
                 {item.event.repetition}
+              </div>
+              <div className={style.content_item} style={{ width: '12%' }}>
+                {item.delegated_from ? (
+                  <>
+                    <span>
+                      {`${item.delegated_from.name} - `}
+                      {item.delegated_from.surname}
+                    </span>
+                    <div>{item.delegated_from?.positions[0]}</div>
+                  </>
+                ) : (
+                  '-'
+                )}
               </div>
               <div style={{ width: '12%' }} className={style.content_img}>
                 {item.invitations_status === 'P' ? (
