@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
-import { setCreate } from '../../../../store/adminSlice'
-import { getOrganizations } from '../../../../store/admin/actions/organization'
+import { setCreate } from '../../../../store/slices/adminSlice'
+import { getOrganizations } from '../../../../store/actions/organizationAction'
 
 const { Option } = Select
 

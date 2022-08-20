@@ -3,7 +3,7 @@ import { Select, Space } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../../assets/icons'
 import Invitation from '../../../../modals/Invitation/Inivitation'
-import { getDirections } from '../../../../store/admin/actions/directions'
+import { getDirections } from '../../../../store/actions/directionAction'
 import { remove } from '../../../../services/remove'
 
 const { Option } = Select

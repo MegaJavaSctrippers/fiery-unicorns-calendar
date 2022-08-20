@@ -3,12 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 import moment from 'moment'
 import { Tooltip } from 'antd'
 import api from '../../services/api'
-import { getNotifications } from '../../store/notification/notificationActions'
+import { getNotifications } from '../../store/actions/notificationActions'
 import icons from '../../assets/icons'
 import style from './Notification.module.scss'
 import Invitation from '../Invitation/Inivitation'
-import { getEvents } from '../../store/event/eventAction'
-import { setDelegate } from '../../store/notification/notificationSlice'
+import { getEvents } from '../../store/actions/eventAction'
+import { setDelegate } from '../../store/slices/notificationSlice'
 
 function NotificationItem() {
   const [event, setEvent] = useState(0)

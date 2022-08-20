@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getOrganizations } from '../actions/organization'
+import { getOrganizations } from '../actions/organizationAction'
 
 const organizationSlice = createSlice({
   name: 'organization/organizationSlice',

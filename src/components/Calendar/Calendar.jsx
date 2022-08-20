@@ -8,9 +8,8 @@ import icons from '../../assets/icons'
 import CalendarHeader from '../CalendarHeader/CalendarHeader'
 import CalendarItem from '../CalendarItem/CalendarItem'
 import { setSelectedDate } from '../../store/date/dateSlice'
-import Invitation from '../../modals/Invitation/Inivitation'
 import CalendarParent from './CalendarParent'
-import { getEvents } from '../../store/event/eventAction'
+import { getEvents } from '../../store/actions/eventAction'
 
 function CalendarPage() {
   const week = useSelector((state) => state.date.week)
@@ -74,7 +73,6 @@ function CalendarPage() {
               dispatch(setSelectedDate(moment(value).format()))
             }}
           />
-          <Invitation />
         </div>
       ) : null}
     </div>

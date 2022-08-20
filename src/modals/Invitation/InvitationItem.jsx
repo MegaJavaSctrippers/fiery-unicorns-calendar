@@ -5,8 +5,8 @@ import PropTypes from 'prop-types'
 import icons from '../../assets/icons'
 import api from '../../services/api'
 import style from './Invitation.module.scss'
-import { setDelegate } from '../../store/notification/notificationSlice'
-import { getNotifications } from '../../store/notification/notificationActions'
+import { setDelegate } from '../../store/slices/notificationSlice'
+import { getNotifications } from '../../store/actions/notificationActions'
 
 function InivitationItem({ user, eventId }) {
   const dispatch = useDispatch()

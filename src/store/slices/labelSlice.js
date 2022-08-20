@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getLabels } from './labelAction'
+import { getLabels } from '../actions/labelAction'
 
 export const labelSlice = createSlice({
   name: 'labelSlice',

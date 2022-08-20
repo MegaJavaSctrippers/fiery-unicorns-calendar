@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getNotifications } from './notificationActions'
+import { getNotifications } from '../actions/notificationActions'
 
 export const notificationSlice = createSlice({
   name: 'notificationSlice',

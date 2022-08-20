@@ -9,8 +9,8 @@ import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
-import { getDepartments } from '../../store/admin/actions/departments'
-import { getPositions } from '../../store/admin/actions/positions'
+import { getDepartments } from '../../store/actions/departmentAction'
+import { getPositions } from '../../store/actions/positionAction'
 
 const { Option } = Select
 const schema = yup.object().shape({

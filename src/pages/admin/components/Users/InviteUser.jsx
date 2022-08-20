@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { success } from '../../../../services/success'
 import SuccessAlert from '../Alerts/SuccessAlert'
-import { setInviteUser } from '../../../../store/adminSlice'
+import { setInviteUser } from '../../../../store/slices/adminSlice'
 import api from '../../../../services/api'
 
 function InviteUser() {

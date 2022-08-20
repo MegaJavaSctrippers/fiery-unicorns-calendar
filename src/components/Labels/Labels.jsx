@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../assets/icons'
-import { setLabel } from '../../store/event/eventSlice'
+import { setLabel } from '../../store/slices/eventSlice'
 import style from './Labels.module.scss'
-import { getEvents } from '../../store/event/eventAction'
+import { getEvents } from '../../store/actions/eventAction'
 
 function Labels({ labels }) {
   const label = useSelector((state) => state.event.label)

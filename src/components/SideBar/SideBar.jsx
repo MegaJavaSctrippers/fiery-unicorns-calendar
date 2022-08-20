@@ -11,7 +11,7 @@ import 'moment/locale/ru'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 import Labels from '../Labels/Labels'
 import CreateLabel from '../../modals/CreateLabel/CreateLabel'
-import { getLabels } from '../../store/label/labelAction'
+import { getLabels } from '../../store/actions/labelAction'
 
 function SideBar() {
   const selectedDate = useSelector((state) => state.date.selectedDate)

@@ -15,8 +15,8 @@ import { ReactComponent as ProfileIcon } from '../../assets/icons/profile.svg'
 import { ReactComponent as JobIcon } from '../../assets/icons/job.svg'
 import EditProfile from '../../modals/EditProfile/EditProfile'
 import { setDateType, setSelectedDate, addDate, subrtactDate } from '../../store/date/dateSlice'
-import { getNotifications } from '../../store/notification/notificationActions'
-import { getUser } from '../../store/admin/actions/users'
+import { getNotifications } from '../../store/actions/notificationActions'
+import { getUser } from '../../store/actions/userAction'
 
 const { Option } = Select
 

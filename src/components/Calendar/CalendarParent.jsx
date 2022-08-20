@@ -24,7 +24,7 @@ function CalendarParent({ value }) {
   const id = open ? 'simple-popover' : undefined
 
   const calendarChild = events
-    .filter((item) => item.mark?.color.includes(label))
+    .filter((item) => item.mark?.color?.includes(label))
     .map((item) => {
       if (item.event_date[0] === moment(value).format('YYYY-MM-DD')) {
         return <CalendarChild key={item.name} item={item} />

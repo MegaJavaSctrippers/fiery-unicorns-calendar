@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getEvents, getFreeRoomAndUsers } from './eventAction'
+import { getEvents, getFreeRoomAndUsers } from '../actions/eventAction'
 
 export const eventSlice = createSlice({
   name: 'eventSlice',

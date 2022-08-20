@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../../assets/icons'
-import { getUsers } from '../../../../store/admin/actions/users'
+import { getUsers } from '../../../../store/actions/userAction'
 
 function Position() {
   const user = useSelector((state) => state.admin.search.user)

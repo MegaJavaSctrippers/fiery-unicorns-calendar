@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import icons from '../../assets/icons'
 import style from './Invitation.module.scss'
 import InivitationItem from './InvitationItem'
-import { setDelegate } from '../../store/notification/notificationSlice'
+import { setDelegate } from '../../store/slices/notificationSlice'
 import api from '../../services/api'
 
 function Invitation({ id }) {

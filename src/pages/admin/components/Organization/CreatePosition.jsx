@@ -3,9 +3,9 @@ import { Select, Space } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
-import { setCreate } from '../../../../store/adminSlice'
+import { setCreate } from '../../../../store/slices/adminSlice'
 import api from '../../../../services/api'
-import { getPositions } from '../../../../store/admin/actions/positions'
+import { getPositions } from '../../../../store/actions/positionAction'
 
 const { Option } = Select
 

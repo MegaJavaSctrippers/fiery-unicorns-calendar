@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getRooms } from '../actions/rooms'
+import { getRooms } from '../actions/roomAction'
 
 const roomSlice = createSlice({
   name: 'user/userSlice',

@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import api from '../../../../services/api'
 import SuccessAlert from '../Alerts/SuccessAlert'
 import { success } from '../../../../services/success'
-import { setCreateRoom } from '../../../../store/adminSlice'
-import { getRooms } from '../../../../store/admin/actions/rooms'
+import { setCreateRoom } from '../../../../store/slices/adminSlice'
+import { getRooms } from '../../../../store/actions/roomAction'
 
 function CreateRoom() {
   const dispatch = useDispatch()

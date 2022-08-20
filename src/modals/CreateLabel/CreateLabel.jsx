@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { getLabels } from '../../store/label/labelAction'
+import { getLabels } from '../../store/actions/labelAction'
 import api from '../../services/api'
 import colors from './colors'
 import icons from '../../assets/icons'

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getPositions } from '../actions/positions'
+import { getPositions } from '../actions/positionAction'
 
 const positionSlice = createSlice({
   name: 'position/positionSlice',

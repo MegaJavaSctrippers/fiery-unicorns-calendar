@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { getDirections } from '../actions/directions'
+import { getDirections } from '../actions/directionAction'
 
 const directionsSlice = createSlice({
   name: 'directions/directionsSlice',

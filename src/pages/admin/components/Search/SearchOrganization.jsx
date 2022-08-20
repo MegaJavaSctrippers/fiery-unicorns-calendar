@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Space, Select } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import icons from '../../../../assets/icons'
-import { getOrganizations } from '../../../../store/admin/actions/organization'
+import { getOrganizations } from '../../../../store/actions/organizationAction'
 import { remove } from '../../../../services/remove'
 
 const { Option } = Select

@@ -13,8 +13,8 @@ import style from './CreateEvent.module.scss'
 import Users from './Users'
 import eventDefault from './eventDefault'
 import api from '../../services/api'
-import { getEvents, getFreeRoomAndUsers } from '../../store/event/eventAction'
-import { setFreeRoom } from '../../store/event/eventSlice'
+import { getEvents, getFreeRoomAndUsers } from '../../store/actions/eventAction'
+import { setFreeRoom } from '../../store/slices/eventSlice'
 
 const { Option } = Select
 

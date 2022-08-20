@@ -10,7 +10,7 @@ import {
   setCreate,
   setInviteUser,
   setCreateRoom,
-} from '../../../../store/adminSlice'
+} from '../../../../store/slices/adminSlice'
 
 const { Option } = Select
 const menuItems = [

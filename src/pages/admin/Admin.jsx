@@ -7,11 +7,11 @@ import './assets/admin.css'
 import AdminHeader from './components/AdminHeader/AdminHeader'
 import withAccess from '../../hoc/withAccess'
 import withAuth from '../../hoc/withAuth'
-import { getPositions } from '../../store/admin/actions/positions'
-import { getDepartments } from '../../store/admin/actions/departments'
-import { getOrganizations } from '../../store/admin/actions/organization'
-import { getUsers } from '../../store/admin/actions/users'
-import { getDirections } from '../../store/admin/actions/directions'
+import { getPositions } from '../../store/actions/positionAction'
+import { getDepartments } from '../../store/actions/departmentAction'
+import { getOrganizations } from '../../store/actions/organizationAction'
+import { getUsers } from '../../store/actions/userAction'
+import { getDirections } from '../../store/actions/directionAction'
 
 function Admin() {
   const dispatch = useDispatch()
