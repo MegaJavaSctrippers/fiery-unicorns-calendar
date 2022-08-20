@@ -26,27 +26,20 @@
     }
     
   }
-  .labels_color{
+  .labels_body{
+    border-radius:4px;
+    cursor: pointer;
+    height:18px;
+  }
+  .label_all{
+    background: #4B84F4;
+  }
+  .label_all,.labels_color{
     display: inline-block;
     border-radius: 4px;
-    width: 15px;
-    height: 15px;
+    width: 18px;
+    height: 18px;
     margin-right: 10px;
     
-
-
   }
-  .labels_private{
-    background: #E37DAC;
-  }
-  .labels_work{
-    background-color: #80DEA0;
-  }
-  .labels_project{
-    background: #F4BB4B;
-  }
-  .labels_party{
-    background: #664BF4;
-  }
-  
 }

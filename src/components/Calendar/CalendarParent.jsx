@@ -7,7 +7,8 @@ import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 import CalendarChild from './CalendarChild'
 
 function CalendarParent({ value }) {
-  const data = useSelector((state) => state.date.events)
+  const events = useSelector((state) => state.event.events)
+  const label = useSelector((state) => state.event.label)
 
   const [anchorEl, setAnchorEl] = React.useState(null)
 
@@ -22,12 +23,14 @@ function CalendarParent({ value }) {
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
 
-  const calendarChild = data.map((item) => {
-    if (item.date === moment(value).format('YYYY-MM-DD')) {
-      return <CalendarChild key={item.name} item={item} />
-    }
-    return null
-  })
+  const calendarChild = events
+    .filter((item) => item.mark?.color?.includes(label))
+    .map((item) => {
+      if (item.event_date[0] === moment(value).format('YYYY-MM-DD')) {
+        return <CalendarChild key={item.name} item={item} />
+      }
+      return null
+    })
   return (
     <div>
       <div
@@ -43,13 +46,17 @@ function CalendarParent({ value }) {
         id={id}
         open={open}
         anchorEl={anchorEl}
+        anchorReference={anchorEl}
         onClose={handleClose}
         transitionDuration="auto"
-        marginThreshold={60}
         className="material_popover"
         anchorOrigin={{
           vertical: 'center',
           horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'center',
+          horizontal: 'left',
         }}
       >
         <CreateEvent handleClose={handleClose} />

@@ -1,0 +1,35 @@
+.delete_department{
+  input[type="radio"]:checked label {
+    background:blue;
+  }
+  h3{
+    font-size: 16px;
+    margin-bottom: 16px !important;
+  }
+  div{
+    text-align: left;
+    display: flex;
+    align-items: flex-start;
+    font-size: 14px;
+    margin-top: 10px;
+    label{
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border: 1px solid rgba(46, 46, 46, 0.6);
+      border-radius: 4px;
+      margin-right: 10px;
+      input{
+        display: none;
+      }
+    }
+    span{
+      display: block;
+      width: 90%;
+    }
+    
+  }
+}

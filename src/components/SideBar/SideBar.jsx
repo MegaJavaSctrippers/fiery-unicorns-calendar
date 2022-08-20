@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { DatePicker, Space } from 'antd'
 import { Popover } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,11 +6,12 @@ import locale from 'antd/es/date-picker/locale/ru_RU'
 import moment from 'moment'
 import style from './SideBar.module.scss'
 import icons from '../../assets/icons'
-import { setSelectedDate } from '../../redux-toolkit/dateReducer'
+import { setSelectedDate } from '../../store/date/dateSlice'
 import 'moment/locale/ru'
 import CreateEvent from '../../modals/CreateEvent/CreateEvent'
 import Labels from '../Labels/Labels'
-import Invitation from '../../modals/Invitation/Inivitation'
+import CreateLabel from '../../modals/CreateLabel/CreateLabel'
+import { getLabels } from '../../store/actions/labelAction'
 
 function SideBar() {
   const selectedDate = useSelector((state) => state.date.selectedDate)
@@ -31,7 +32,10 @@ function SideBar() {
 
   const open = Boolean(anchorEl)
   const id = open ? 'simple-popover' : undefined
-
+  const labels = useSelector((state) => state.labels.labels)
+  useEffect(() => {
+    dispatch(getLabels())
+  }, [])
   return (
     <div className={style.sidebar}>
       <div className={style.header}>
@@ -59,8 +63,8 @@ function SideBar() {
           transitionDuration="auto"
           className="material_popover"
           anchorPosition={{
-            left: 380,
-            top: 50,
+            left: 450,
+            top: 80,
           }}
           anchorReference="anchorPosition"
           anchorOrigin={{
@@ -70,7 +74,6 @@ function SideBar() {
         >
           <CreateEvent handleClose={handleClose} />
         </Popover>
-        <Invitation />
         <Space direction="vertical">
           <DatePicker
             open="true"
@@ -86,7 +89,8 @@ function SideBar() {
             onChange={(value) => selectDate(value)}
           />
         </Space>
-        <Labels />
+        <Labels labels={labels} />
+        <CreateLabel />
       </div>
     </div>
   )

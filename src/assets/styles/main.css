@@ -7,7 +7,6 @@ body{
   font-size: 14px;
   scrollbar-width:none !important;
   -webkit-scrollbar-width:none !important;
-  font-family: 'Roboto' !important;
   
 }
 body::-webkit-scrollbar{
@@ -103,12 +102,6 @@ button{
 }
 /* Calendar ant design */
 
- 
-.calendar_table .ant-picker-content thead{
-  background-color: #4B84F4;
-  
-}
-
 .calendar_table .ant-picker-content thead tr th {
   color: rgba(255, 255, 255, 0.8) !important;
   font-weight: 400 !important;
@@ -118,6 +111,10 @@ button{
   padding-right: 0 !important;
   height: 30px !important;
   border-right: 1px solid rgba(35, 35, 35, 0.1) !important;
+  background-color: #4B84F4;
+  position: sticky;
+  top:0;
+  z-index:1050;
 }
 
 .calendar_table .ant-picker-cell-in-view{
@@ -196,9 +193,11 @@ button{
   
 
 }
+
 .general_select.hour{
   margin: 0 5px;
 }
+
 .general_select .ant-select-selector{
   border: 1px solid rgba(46, 46, 46, 0.2) !important;
   border-radius: 8px !important;
@@ -214,7 +213,20 @@ button{
 .auth_select .ant-select-selector{
   border-color:rgba(46,46,46,0.1) !important;
 }
+.profile_select .ant-select-selector{
+  height:40px !important;
+  border-color:rgba(46,46,46,0.1) !important;
+}
 
+.create_select{
+  margin-right: 10px;
+}
+.create_select .ant-select-selector{
+  border:none !important;
+  box-shadow: 0px 1px 6px rgba(55, 55, 55, 0.2) !important;
+  width: 224px !important;
+  height: 40px !important;
+}
 .ant-select-selector:focus-visible{
   box-shadow: none !important;
 }
@@ -226,6 +238,10 @@ button{
 }
 .select_full_width, .ant-space-item, .select_full_width .ant-space-item .general_select{
   width: 100% !important;
+}
+.general_select .ant-select-selection-item{
+  display: flex !important;
+  align-items: center !important;
 }
 .margin_right .ant-space-item{
   margin-right:10px !important
@@ -239,12 +255,12 @@ button{
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
   right: 0;
-  width: 464px;
   border:none;
-  height: 300px;
+  width: 260px;
   transition: .3s;
   transform: translate(0px, 50px);
   margin-top: 6px !important;
+  z-index:1060;
   
 }
 
@@ -258,13 +274,14 @@ button{
 /* Material popover */
 
 .material_popover{
-  z-index:1050 !important;
+  z-index:1060 !important;
 }
 
 /*  popover  antd */
 
 .ant-popover-placement-bottomRight{
   top:33px !important;
+  z-index:1050 !important;
 }
 
 .ant-popover-placement-rightTop{
@@ -298,7 +315,19 @@ button{
   padding: 16px !important;
   width: 328px;
 } 
-
+/* antd tabs style */
+.ant-tabs-nav-wrap{
+  padding-left: 15px !important;
+}
+.ant-tabs-tab-btn {
+  font-size: 18px;
+}
+.ant-tabs-top>.ant-tabs-nav:before, .ant-tabs-top>div>.ant-tabs-nav:before{
+  border-bottom: none;
+}
+.ant-tabs-tab{
+  padding-bottom: 0 !important;
+}
 /* modal bootstrap */
 
 .modal-content{
@@ -309,7 +338,9 @@ button{
   padding-bottom: 12px;
   padding-bottom: 24px;
 }
-
+.profile-content{
+  padding: 24px 32px;
+}
 
 button[disabled=disabled], button:disabled {
   background: #0A253F !important;
@@ -332,4 +363,114 @@ button[disabled=disabled], button:disabled {
  
 ::-webkit-scrollbar-thumb {
   background: #888; 
+}
+
+
+
+/*  libraries style in admin */
+
+.admin_select .ant-select-selector{
+  height:32px !important;
+  padding: 0 10px !important;
+}
+
+/* antd dropdown */
+
+.calendar_dropdown .ant-dropdown-menu{
+  border-radius:12px !important;
+}
+
+/*  Sweet alert styles */
+.swal2-container.swal2-backdrop-show{
+  background:none;
+}
+.success-sweet{
+  background: #404040 !important;
+  box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 8px !important;
+  width: auto !important;
+  height: 40px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  color:#fff !important;
+  font-weight: 500 !important;
+  font-family: "Inter" !important;
+}
+.success_img{
+  margin-right:10px !important;
+  display: block !important;
+
+}
+.success-sweet .swal2-html-container{
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 14px !important;
+  display: flex !important;
+  align-items: center !important;
+  margin: 0 20px !important;
+}
+.sweet-delete{
+  box-shadow: 0px 2px 25px rgba(136, 136, 136, 0.35);
+  border-radius: 12px;
+  width: 368px !important;
+}
+
+.sweet-delete .swal2-html-container {
+  font-size: 16px;
+  text-align: center;
+  color: #2e2e2e;
+  margin-top: 40px;
+}
+
+.confirm-btn, .cancel-btn{  
+  border-radius: 10px;
+  height:40px;
+  width: 120px;
+  color:#fff;
+}
+.confirm-btn{
+  background: #4B84F4;
+}
+.cancel-btn{
+  background: #E0E6EC;
+  color:#000;
+  margin-right: 8px;
+}
+.close-btn{
+  margin-top: 16px;
+  margin-right: 16px;
+  height: 16px;
+  width: 16px;
+}
+.close-btn:focus{
+  box-shadow: none;
+}
+.close-sweet{
+  width: 16px;
+}
+.btn-group-sweet{
+  margin-top:16px;
+}
+.btn-group-sweet.delete{
+  margin-right: 16px;
+}
+.swal2-popup.warning-popup{
+  width: 50%;
+  background: #FDB62E;
+  color:#fff;
+  padding-bottom: 15px;
+}
+.swal2-popup.warning-popup .swal2-html-container{
+  margin-bottom: 0 !important;
+  font-size: 14px;
+}
+
+.del_all {
+  background: #4B84F4 !important;
+  border:none !important;
+}
+/* animate css styles */
+
+.animate__slideInDown, .animate__fadeOutUp{
+  animation-duration: 0.8s;
 }

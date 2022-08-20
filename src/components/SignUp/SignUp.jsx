@@ -1,20 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
+import { useForm } from 'react-hook-form'
+import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { Space, Select } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import axios from 'axios'
 import { useNavigate, Link } from 'react-router-dom'
 import style from './SignUp.module.scss'
 import icons from '../../assets/icons'
+import { getDepartments } from '../../store/actions/departmentAction'
+import { getPositions } from '../../store/actions/positionAction'
 
 const { Option } = Select
-
+const schema = yup.object().shape({
+  email: yup.string().email().required('Введите правильный email'),
+  password: yup.string().min(8, 'Пароль должен быть минимум 8 символов').max(32).required(),
+  confirmPassword: yup.string().oneOf([yup.ref('password'), null], 'Введенные пароли не совпадают'),
+})
 function SignUp() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({
+  const dispatch = useDispatch()
+  const departments = useSelector((state) => state.departments.departments)
+  const positions = useSelector((state) => state.positions.positions)
+  const [emailExist, setEmailExist] = useState(false)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) })
+
+  const [data, setFormData] = useState({
     name: '',
     surname: '',
-    lastname: '',
+    middlename: '',
     department: '',
-    job: '',
+    position: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -23,26 +44,34 @@ function SignUp() {
     password: false,
     confirmPassword: false,
   })
+  useEffect(() => {
+    dispatch(getDepartments())
+    dispatch(getPositions())
+  }, [dispatch])
 
-  const { name, department, job, email, password, confirmPassword, surname, lastname } = formData
+  const { name, department, position, email, password, confirmPassword, surname, middlename } = data
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    setFormData({ ...data, [e.target.name]: e.target.value })
   }
-  const register = (e) => {
-    e.preventDefault()
-    if (password !== confirmPassword) {
-      console.log('password are not same')
-    } else {
-      navigate('/')
-    }
+  const onSubmit = async () => {
+    await axios
+      .post('https://checkit24.herokuapp.com/api/users/reg/', { user: data })
+      .then(() => {
+        navigate('/signin')
+      })
+      .catch((e) => {
+        if (e.response.data.email[0] === 'user with this Электронная почта already exists.') {
+          setEmailExist(true)
+        }
+      })
   }
-  const enabled = Object.values(formData).every((item) => item.length > 0)
-
+  const enabled = Object.values(data).every((item) => item.toString().length > 0)
   return (
     <div className="container-fluid pl-0">
       <div className="row">
         <div className="col-lg-6 d-flex">
-          <form onSubmit={register} className={classNames(style.register)}>
+          <form onSubmit={handleSubmit(onSubmit)} className={classNames(style.register)}>
             <h2>Добро пожаловать!</h2>
             <div className="d-flex align-items-center mb-2">
               <label htmlFor="avatar" className={style.logo_box}>
@@ -51,7 +80,36 @@ function SignUp() {
               </label>
               <span className={style.user_text}>Добавьте фото профиля</span>
             </div>
-
+            {errors.password ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                {errors.password.message}
+              </div>
+            ) : null}
+            {errors.confirmPassword ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                {errors.confirmPassword.message}
+              </div>
+            ) : null}
+            {emailExist ? (
+              <div
+                className={classNames(
+                  style.password_confirm,
+                  'd-flex align-items-center justify-content-between',
+                )}
+              >
+                Введенный email уже существует
+              </div>
+            ) : null}
             <div className="row">
               <div className="col-lg-6">
                 <label htmlFor="surname">
@@ -69,9 +127,9 @@ function SignUp() {
                   Отчество
                   <input
                     type="text"
-                    id="lastname"
-                    name="lastname"
-                    value={lastname}
+                    id="middlename"
+                    name="middlename"
+                    value={middlename}
                     onChange={handleChange}
                   />
                 </label>
@@ -82,14 +140,15 @@ function SignUp() {
                   <Space className="select_full_width mt-1">
                     <Select
                       showArrow={false}
-                      defaultValue="Отдел разработка"
                       className="general_select auth_select"
                       value={department}
-                      onChange={(value) => setFormData({ ...formData, department: value })}
+                      onChange={(value) => setFormData({ ...data, department: value })}
                     >
-                      <Option value="1">Отдел разработка</Option>
-                      <Option value="2">Отдел продаж</Option>
-                      <Option value="3">Отдел по работе с клиентами</Option>
+                      {departments.map((department) => (
+                        <Option value={department.id} key={department.id}>
+                          {department.name}
+                        </Option>
+                      ))}
                     </Select>
                   </Space>
                 </label>
@@ -101,7 +160,7 @@ function SignUp() {
                       value={password}
                       type={type.password ? 'text' : 'password'}
                       id="password"
-                      name="password"
+                      {...register('password')}
                       onChange={handleChange}
                     />
                     <button
@@ -128,9 +187,9 @@ function SignUp() {
                   Почта
                   <input
                     value={email}
-                    type="text"
+                    type="email"
                     id="email"
-                    name="email"
+                    {...register('email')}
                     onChange={handleChange}
                   />
                 </label>
@@ -142,12 +201,14 @@ function SignUp() {
                       showArrow={false}
                       defaultValue="Frontend разработчик"
                       className="general_select auth_select"
-                      value={job}
-                      onChange={(value) => setFormData({ ...formData, job: value })}
+                      value={position}
+                      onChange={(value) => setFormData({ ...data, position: value })}
                     >
-                      <Option value="1">Frontend разработчик</Option>
-                      <Option value="2">Backend разработчик</Option>
-                      <Option value="3">Android разработчик</Option>
+                      {positions.map((pos) => (
+                        <Option key={pos.id} value={pos.id}>
+                          {pos.name}
+                        </Option>
+                      ))}
                     </Select>
                   </Space>
                 </label>
@@ -159,7 +220,7 @@ function SignUp() {
                       value={confirmPassword}
                       type={type.confirmPassword ? 'text' : 'password'}
                       id="confirm-password"
-                      name="confirmPassword"
+                      {...register('confirmPassword')}
                       onChange={handleChange}
                     />
                     <button

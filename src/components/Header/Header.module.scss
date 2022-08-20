@@ -6,6 +6,8 @@
   align-items: center;
   padding: 0 24px;
 
+  font-family: 'Roboto' !important;
+
   .date{
     font-size: 16px;
     color:#2E2E2E;
@@ -61,7 +63,12 @@
     .push_box{
       margin-left:8px;
       margin-right: 16px;
-
+      position: relative;
+      img{
+        position: absolute;
+        top: -5px;
+        right: -5px;
+      }
       &:hover{
         border-color: #4B84F499;
 

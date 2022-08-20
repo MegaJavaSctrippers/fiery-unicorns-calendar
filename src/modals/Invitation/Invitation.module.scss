@@ -1,12 +1,28 @@
 .popup_modal{
+  width: 800px;
+  position: absolute;
+  top: 5vh;
+  left: calc(50% - 400px);
+  .popup_backdrop{
+    position: fixed;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
   .popup_header{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-top: 5px;
+    margin-bottom: 16px;
 
     h5{
       font-size: 18px;
+      margin-bottom: 0;
+    }
+    img{
+      width: 14px;
     }
   }
   .popup_search{
@@ -37,52 +53,27 @@
       .avatar_border{
         width: 40px;
         height: 40px;
-        border: 2px solid #80DEA0;
         border-radius:30px;
         
 
         img{
           height:100%;
           width: 100%;
-          object-fit: contain;
+          object-fit: cover;
         }
       }
       h2{
         margin-left: 5px;
         font-size: 14px;
       }
-    }
-  }
-  .popup_btns{
-    background: #4B84F4;
-    border-radius: 10px;
-    padding:3px 10px;
-    color:#fff;
-    width: 128px;
-  }
-  .added_users{
-    width: 30px;
-    height: 30px;
-    position: relative;
-    margin-right: 10px;
-
-    &:hover .close{
-      opacity: 1;
-      
-    }
-    .close{
-      position: absolute;
-      right: -7px;
-      top:0;
-      opacity: 0;
-      cursor:pointer;
-
-    transition: .3s;
-    }
-    .avatar{
-      width:100%;
-      height:100%;
-      object-fit: contain;
+      .delegate_btn{
+        color: #6DD349;
+        background: #FFFFFF;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
+        border-radius: 10px;
+        padding:5px 20px;
+        margin-right: 5px;
+      }
     }
   }
 }
